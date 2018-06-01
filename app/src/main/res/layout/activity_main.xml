@@ -5,7 +5,90 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.south.worker.ui.main.MainActivity">
+    tools:context="com.south.worker.ui.main.MainActivity"
+    android:orientation="vertical">
+
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    </FrameLayout>
+
+    <View
+        style="@style/deviderLine"/>
+
+
+    <RadioGroup
+        android:id="@+id/rgMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp">
+
+
+        <RadioButton
+            android:id="@+id/rbtnHome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:drawablePadding="3dp"
+            android:textSize="@dimen/font_small"
+            android:textColor="@drawable/selector_text_color_red_grey_dark"
+            android:drawableTop="@drawable/selector_rbtn_home"
+            android:text="@string/main_tab_home"
+            tools:checked="true"
+            />
+
+
+        <RadioButton
+            android:id="@+id/rbtnOnlineRead"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:drawablePadding="3dp"
+            android:textSize="@dimen/font_small"
+            android:textColor="@drawable/selector_text_color_red_grey_dark"
+            android:drawableTop="@drawable/selector_rbtn_online_read"
+            android:text="@string/main_tab_online_read"
+            />
+
+        <RadioButton
+            android:id="@+id/rbtnMyPart"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:drawablePadding="3dp"
+            android:textSize="@dimen/font_small"
+            android:textColor="@drawable/selector_text_color_red_grey_dark"
+            android:drawableTop="@drawable/selector_rbtn_my_part"
+            android:text="@string/main_tab_my_part"
+            />
+
+        <RadioButton
+            android:id="@+id/rbtnUserInfo"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:drawablePadding="3dp"
+            android:textSize="@dimen/font_small"
+            android:textColor="@drawable/selector_text_color_red_grey_dark"
+            android:drawableTop="@drawable/selector_rbtn_user_info"
+            android:text="@string/main_tab_user_info"
+            />
+
+    </RadioGroup>
+
 
 
 

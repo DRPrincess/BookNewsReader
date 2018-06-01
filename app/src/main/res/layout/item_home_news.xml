@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:orientation="vertical">
+    
+    <ImageView
+        android:id="@+id/ivNewsImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        tools:src="@drawable/img_login_header"/>
+    
+    <TextView
+        android:id="@+id/tvNewsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/black_transpart"
+        android:textSize="@dimen/font_small"
+        android:textColor="@color/white"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:padding="3dp"
+        tools:text="4月27日，中央和国家机关工委召开中央和国家机关各单位机关党
+委主要负责人会议，学习贯彻习近平总书记关于深化党和国家机……"/>
+
+
+
+</RelativeLayout>

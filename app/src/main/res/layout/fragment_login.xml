@@ -1,9 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fillViewport="true"
+    >
 
-</LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="216dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="fitXY"
+            android:src="@drawable/img_login_header"/>
+
+
+        <LinearLayout
+            android:id="@+id/layoutLogin"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_below="@+id/imageView"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_rectangle_stroke1_grey_corner5"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/icon_login_mobile"
+                    />
+
+                <com.baseres.ClearableEditText
+                    android:id="@+id/edtUserName"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/button_height_normal"
+                    android:layout_marginLeft="18dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:digits="@string/login_name_digits"
+                    android:drawablePadding="10dp"
+                    android:hint="@string/login_username_tint"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:maxLines="1"
+                    android:textColor="@color/black_light"
+                    android:textColorHint="@color/grey_dark"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textSize="@dimen/font_normal"
+                    tools:text="123456"/>
+
+
+            </LinearLayout>
+
+            <View
+                style="@style/deviderLine"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/icon_login_passwod"
+                    />
+
+                <com.baseres.ClearableEditText
+                    android:id="@+id/edtPassword"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="18dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:drawablePadding="10dp"
+                    android:hint="@string/login_password_tint"
+                    android:inputType="numberPassword"
+                    android:maxLines="1"
+                    android:textColor="@color/black_light"
+                    android:textColorHint="@color/grey_dark"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textSize="@dimen/font_normal"
+                    tools:text="123456"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <CheckBox
+            android:id="@+id/checkboxRememberPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/layoutLogin"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="13dp"
+            android:drawablePadding="3dp"
+            android:text="@string/login_remember_password"
+            android:textColor="@color/grey_primary"
+            android:textSize="@dimen/font_small"
+            tools:checked="true"/>
+
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/checkboxRememberPassword"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/bg_rectangle_solid_red_corner5"
+            android:text="@string/login_title"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_normal"/>
+
+
+        <TextView
+            android:id="@+id/tvContactManager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:paddingBottom="16dp"
+            android:text="联系管理员15888888888"
+            android:textColor="@color/grey_primary"
+            android:textSize="@dimen/font_small"/>
+
+
+    </RelativeLayout>
+</ScrollView>

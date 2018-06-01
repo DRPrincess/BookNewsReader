@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_rectangle_solid_grey_light_corner100"
+            android:layout_toLeftOf="@+id/btnSearch"
+            android:layout_toRightOf="@+id/llLeft"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:focusableInTouchMode="true">
+
+            <ImageView
+                android:id="@+id/ivSearch"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:src="@drawable/icon_search_inside"
+                android:layout_centerVertical="true"
+                />
+
+            <EditText
+                android:id="@+id/edtSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:hint="@string/home_search_hint"
+                android:textSize="@dimen/font_normal"
+                android:textColorHint="@color/grey"
+                android:textColor="@color/black_primary"
+                android:background="@null"
+                android:layout_toRightOf="@+id/ivSearch"
+                android:layout_marginLeft="5dp"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:singleLine="true"
+                android:imeOptions="actionSearch"
+                />
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/btnSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="@string/action_search"
+            android:textSize="@dimen/font_small"
+            android:background="@drawable/bg_rectangle_solid_red_corner100"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="6dp"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            />
+
+    </LinearLayout>
+
+    <View
+        style="@style/deviderLine"/>
+
+    <RadioGroup
+        android:id="@+id/rgMyPart"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbtnNews"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/font_large"
+            android:textColor="@drawable/selector_text_color_red_grey_dark"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/part_news"
+            android:background="@drawable/selector_underline_red"
+            tools:checked="true"
+            />
+        <RadioButton
+            android:id="@+id/rbtnMonthlyNews"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/font_large"
+            android:textColor="@drawable/selector_text_color_red_grey_dark"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/part_monthy_news"
+            android:background="@drawable/selector_underline_red"
+            />
+
+        <RadioButton
+            android:id="@+id/rbtnPartStar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/font_large"
+            android:textColor="@drawable/selector_text_color_red_grey_dark"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/part_good_idols"
+            android:background="@drawable/selector_underline_red"
+            />
+    </RadioGroup>
+    
+    <com.youth.banner.Banner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"></com.youth.banner.Banner>
+
+
+    <com.github.jdsjlzx.recyclerview.LRecyclerView
+        android:id="@+id/recyclerViewContents"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grey_light"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:visibility="visible">
+    </com.github.jdsjlzx.recyclerview.LRecyclerView>
+
+
+</LinearLayout>

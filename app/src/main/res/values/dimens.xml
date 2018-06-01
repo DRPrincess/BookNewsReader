@@ -1,0 +1,56 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="statusbar_view_height">25dp</dimen>
+
+
+    <!-- 字体大小规范-->
+    <dimen name="font_tiny">4sp</dimen>
+    <dimen name="font_mini">8sp</dimen>
+    <dimen name="font_smaller">10sp</dimen>
+    <dimen name="font_small">12sp</dimen>
+    <dimen name="font_normal">14sp</dimen>
+    <dimen name="font_large">16sp</dimen>
+    <dimen name="font_larger">17sp</dimen>
+    <dimen name="font_huge">20sp</dimen>
+
+
+    <!-- typical spacing between two views -->
+    <dimen name="spacing_huge">40dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_normal">14dp</dimen>
+    <dimen name="spacing_small">10dp</dimen>
+    <dimen name="spacing_tiny">4dp</dimen>
+
+
+    <!--margin-->
+    <dimen name="margin_huge">40dp</dimen>
+    <dimen name="margin_large">27dp</dimen>
+    <dimen name="margin_normal">14dp</dimen>
+    <dimen name="margin_small">10dp</dimen>
+    <dimen name="margin_smaller">8dp</dimen>
+    <dimen name="margin_tiny">4dp</dimen>
+
+
+    <!-- typical sizes of views -->
+    <dimen name="button_height_tall">60dp</dimen>
+    <dimen name="button_height_normal">44dp</dimen>
+    <dimen name="button_height_short">32dp</dimen>
+    <dimen name="rbtn_radius_out">15dp</dimen>
+    <dimen name="rbtn_radius_in">6dp</dimen>
+    <dimen name="rbtn_small_radius_out">10dp</dimen>
+    <dimen name="rbtn_small_radius_in">5dp</dimen>
+    <dimen name="checkbox_width">13dp</dimen>
+
+
+    <dimen name="list_item_height">44dp</dimen>
+    <dimen name="toolbar_height">44dp</dimen>
+    <dimen name="item_height_normal">40dp</dimen>
+
+    <!--图片-->
+    <dimen name="image_width">70dp</dimen>
+    <dimen name="image_height">50dp</dimen>
+
+</resources>
