@@ -1,3 +1,73 @@
 <resources>
-    <string name="app_name">BookNewsReader</string>
+    <string name="app_name">南工党建</string>
+
+    <!--通用模块-->
+
+    <!--提示语-->
+    <string name="msg_not_yet_open">暂未开通</string>
+    <string name="msg_loading">加载中...</string>
+    <string name="msg_ondoing">正在操作</string>
+    <string name="msg_saving">正在保存</string>
+    <string name="msg_uploading">正在上传</string>
+    <string name="msg_permission_camera_denied">拍照权限被拒绝</string>
+    <string name="msg_permission_write_denied">存储权限被拒绝</string>
+    <string name="msg_exit_app_tips">再按一次退出程序</string>
+    <string name="msg_please_input">请输入</string>
+    <string name="msg_please_select">请选择</string>
+    <string name="msg_please_upload">请上传</string>
+    <string name="msg_image_not_exist">很抱歉，您要查看的图片不存在</string>
+    <string name="msg_image_uploading">图片上传中</string>
+    <string name="msg_ensure_submit">是否确认提交？</string>
+    <string name="msg_update_content">更新内容：</string>
+    <string name="msg_no_more_data">没有更多数据了</string>
+    <string name="msg_no_result">暂无记录</string>
+    <!--错误提示-->
+    <string name="error_"></string>
+    <string name="error_net_failed">接口访问失败，请检查网络链接情况</string>
+    <!--标题提示，例如对话框-->
+    <string name="title_"></string>
+    <string name="title_tip">提示</string>
+    <string name="title_webview_uploadPic">请选择图片上传方式</string>
+    <string name="title_new_version">发现新版本</string>
+    <!--动作-->
+    <string name="action_allow">允许</string>
+    <string name="action_deny">拒绝</string>
+    <string name="action_camera">拍照上传</string>
+    <string name="action_album">从相册选取</string>
+    <string name="action_ensure">确认</string>
+    <string name="action_sure">确定</string>
+    <string name="action_cancel">取消</string>
+    <string name="action_delete">删除</string>
+    <string name="action_update">更新</string>
+    <string name="action_upload">上传</string>
+    <string name="action_search">搜索</string>
+    <string name="action_yes">是</string>
+    <string name="action_no">否</string>
+    <string name="action_tele">致电</string>
+    <string name="action_edit">编辑</string>
+
+
+    <!--常用-->
+    <string name="common_yuan">元</string>
+    <string name="common_wan">万</string>
+    <string name="common_limit_vin">0123456789ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghijklmnpqrstuvwxyz</string>
+    <string name="common_no_car">暂无车辆</string>
+    <string name="common_no_data">暂无数据</string>
+
+    <!--下面是以页面／模块区分-->
+
+
+    <!--登录页面-->
+    <string name="login_title">登录</string>
+    <string name="login_mobile_tint">请输入手机号码</string>
+    <string name="login_password_tint">请输入密码</string>
+    <string name="login_action_login">登录</string>
+    <string name="login_password_verify_digits">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLIMNOPQRSTUVWXYZ</string>
+    <string name="login_name_digits">0123456789</string>
+    <string name="login_logining">正在登录</string>
+    <string name="login_mobile_limit">请输入合法11位手机号码</string>
+    <string name="login_vertify_code_limit">请输入验证码</string>
+    <string name="login_tips">真容检测</string>
+    <string name="login_token_out">登陆超时，请重新验证!</string>
+
 </resources>

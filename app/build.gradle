@@ -1,14 +1,39 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
     defaultConfig {
         applicationId "com.south.worker"
-        minSdkVersion 17
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath true
+            }
+        }
+
+    }
+
+
+
+    signingConfigs {
+        config {
+            storeFile file(project.property('southworker.keystore'))
+            storePassword 'southworker666666'
+            keyAlias 'southworker'
+            keyPassword 'southworker666666'
+            v2SigningEnabled false
+        }
     }
     buildTypes {
         release {
@@ -19,10 +44,24 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //测试
+    implementation project(':baselib')
+    implementation project(':baseres')
+
+    //UI
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.youth.banner:banner:1.4.9'
+    implementation 'com.jaeger.statusbarutil:library:1.4.0'
+
+    //工具类
+    implementation 'com.jakewharton:butterknife:8.8.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    compile("com.github.hotchemi:permissionsdispatcher:3.2.0") {
+        exclude module: "support-v13"
+    }
+    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:3.2.0"
+
+
 }
