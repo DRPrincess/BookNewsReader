@@ -135,11 +135,7 @@
             />
 
     </RadioGroup>
-    
-    <com.youth.banner.Banner
-        android:id="@+id/banner"
-        android:layout_width="match_parent"
-        android:layout_height="140dp"></com.youth.banner.Banner>
+
 
 
     <com.github.jdsjlzx.recyclerview.LRecyclerView
@@ -147,10 +143,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/grey_light"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:visibility="visible">
     </com.github.jdsjlzx.recyclerview.LRecyclerView>
 
+    <include
+        android:id="@+id/emptyView"
+        layout="@layout/layout_no_data"/>
 
 </LinearLayout>

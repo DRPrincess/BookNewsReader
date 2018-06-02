@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.baselib.utils.SharedPreferencesUtil;
+import com.jaeger.library.StatusBarUtil;
 import com.south.worker.R;
 import com.south.worker.constant.SharedPreferencesConfig;
 import com.south.worker.ui.BaseActivity;
@@ -14,6 +15,7 @@ import com.south.worker.ui.main.MainActivity;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 
 
@@ -24,10 +26,10 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        Observable.timer(2, TimeUnit.SECONDS)
-                .doOnNext(new Consumer<Long>() {
+        Observable.timer(1, TimeUnit.SECONDS)
+                .doOnComplete(new Action() {
                     @Override
-                    public void accept(Long aLong) throws Exception {
+                    public void run() throws Exception {
                         String userId = SharedPreferencesUtil.getString(getBaseContext(), SharedPreferencesConfig.SHARED_KEY_USER_ID,"");
 
                         if(TextUtils.isEmpty(userId)){
@@ -35,12 +37,9 @@ public class SplashActivity extends BaseActivity {
                         }else{
                             goMain();
                         }
-
                     }
                 })
                 .subscribe();
-
-        goLogin();
 
 
     }
@@ -58,4 +57,8 @@ public class SplashActivity extends BaseActivity {
         finish();
     }
 
+    @Override
+    public void setStatusBar() {
+        StatusBarUtil.setTransparent(this);
+    }
 }

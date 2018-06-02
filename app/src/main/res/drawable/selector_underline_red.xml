@@ -12,9 +12,10 @@
             </item>
 
             <item
-                android:top="39dp"
-                android:left="20dp"
-                android:right="20dp"
+                android:top="35dp"
+                android:left="30dp"
+                android:right="30dp"
+                android:bottom="4dp"
                 >
                 <shape android:shape="rectangle">
                     <solid android:color="@color/red"/>
@@ -26,9 +27,26 @@
     </item>
 
     <item android:state_checked="false">
-        <shape>
-            <solid  android:color="@color/white"/>
-        </shape>
+        <layer-list>
+            <item>
+
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/white"/>
+                </shape>
+            </item>
+
+            <item
+                android:top="35dp"
+                android:left="30dp"
+                android:right="30dp"
+                android:bottom="4dp"
+                >
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/grey_dark"/>
+                </shape>
+            </item>
+
+        </layer-list>
     </item>
 
 </selector>

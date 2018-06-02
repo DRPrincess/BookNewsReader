@@ -6,7 +6,7 @@
     <include layout="@layout/title_common"/>
 
     <EditText
-        android:id="@+id/edtSign"
+        android:id="@+id/edtContent"
         style="@style/EditTextBgStroke"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
 
 
     <Button
-        android:id="@+id/btnEditSign"
+        android:id="@+id/btnSubmit"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_below="@+id/checkboxRememberPassword"
@@ -26,7 +26,7 @@
         android:layout_marginRight="25dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/bg_rectangle_solid_red_corner5"
-        android:text="确认修改"
+        android:text="提交"
         android:textColor="@color/white"
         android:textSize="@dimen/font_normal"/>
 

@@ -85,15 +85,25 @@
     <string name="home_activities">党内活动</string>
     <string name="home_classes">在线党课</string>
 
-    <!--首页-->
+    <!--我的支部-->
     <string name="part_news">组织动态</string>
     <string name="part_monthy_news">月度写实</string>
     <string name="part_good_idols">先进典型</string>
 
+    <!--在线阅读-->
     <string name="read_my_book">我的书目</string>
     <string name="read_my_thinking">读书心得</string>
     <string name="read_all_books">大众读书</string>
     <string name="read_time_list">阅读排行</string>
+
+    <!--读书排行-->
+    <string name="ranking_list_title">读书排行</string>
+    <string name="ranking_list_people">个人排行</string>
+    <string name="ranking_list_part">支部排行</string>
+    <string name="ranking_list_weekly">周排行</string>
+    <string name="ranking_list_monthly">月排行</string>
+    <string name="ranking_list_quarterly">季度排行</string>
+    <string name="title_activity_ranking_list">RankingListActivity</string>
 
 
 </resources>

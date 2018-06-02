@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginTop="3dp">
     
     <ImageView
         android:id="@+id/ivNewsImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
-        tools:src="@drawable/img_login_header"/>
+        tools:src="@drawable/user_show_data5"/>
     
     <TextView
         android:id="@+id/tvNewsTitle"

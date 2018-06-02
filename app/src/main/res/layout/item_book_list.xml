@@ -3,43 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="10dp">
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@color/white">
 
     <ImageView
         android:id="@+id/ivBooks"
         android:layout_width="50dp"
         android:layout_height="50dp"
         tools:src="@mipmap/ic_launcher"
-        android:layout_centerVertical="true"/>
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/ivBooks"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp">
-
-        <TextView
-            android:id="@+id/tvNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black_secondary"
-            android:textSize="@dimen/font_normal"
-            tools:text="已读三次"/>
-
-        <TextView
-            android:id="@+id/tvTimes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black_secondary"
-            android:textSize="@dimen/font_normal"
-            tools:text="260分钟"
-            android:layout_below="@+id/tvNumber"
-            android:layout_marginTop="5dp"/>
-
-    </RelativeLayout>
+        android:layout_centerInParent="true"/>
 
 
 

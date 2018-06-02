@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.baselib.utils.ActivityUtils;
+import com.jaeger.library.StatusBarUtil;
 import com.south.worker.App;
 import com.south.worker.R;
+import com.south.worker.ui.BaseActivity;
 
 
 /**
@@ -16,7 +18,7 @@ import com.south.worker.R;
  *作者   ：Created by DuanRui on 2018/6/1.
  */
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     long mCurrentTime = 0;
     @Override
@@ -38,5 +40,10 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, getResources().getString(R.string.msg_exit_app_tips), Toast.LENGTH_SHORT).show();
             mCurrentTime = System.currentTimeMillis();
         }
+    }
+
+    @Override
+    public void setStatusBar() {
+        StatusBarUtil.setTransparentForImageViewInFragment(this,null);
     }
 }

@@ -8,6 +8,7 @@
     <color name="grey_light">#f2f2f2</color>
     <color name="grey">#aaaaaa</color>
     <color name="grey_primary">#9c9c9c</color>
+    <color name="grey_second">#bfbfbf</color>
     <color name="grey_dark">#8b8b8b</color>
 
 
@@ -17,15 +18,19 @@
     <color name="black_light">#252525</color>
     <color name="black_primary">#595959</color>
     <color name="black_secondary">#4a4a4a</color>
-    <color name="black_third">#656565</color>
+    <color name="black_third">#6e6e6e</color>
     <color name="black_forth">#333333</color>
     <color name="black_transpart">#88000000</color>
-    <color name="black_fourth">#585858</color>
 
     <!--白色-->
     <color name="white">#ffffff</color>
 
     <!--红色-->
     <color name="red">#f53737</color>
+    <color name="red_dark">#c50000</color>
+
+
+    <!--黄色-->
+    <color name="yellow">#fff600</color>
 
 </resources>

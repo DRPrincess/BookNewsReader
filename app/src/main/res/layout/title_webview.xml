@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/toolbar_height"
+    android:background="@color/red">
+
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_back"
+        android:clickable="true"
+        android:gravity="center"
+        android:paddingLeft="8dp"
+        android:paddingRight="5dp"
+        android:layout_centerVertical="true"/>
+
+
+
+    <TextView
+        android:id="@+id/tvClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/ivBack"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_large"
+        android:text="关闭"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:ellipsize="end"
+        android:maxEms="10"
+        android:maxLines="1"
+        android:textSize="@dimen/font_larger"
+        android:textColor="@color/white"
+        tools:text="页面标题"/>
+
+    <TextView
+        android:id="@+id/tvRight"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:clickable="true"
+        android:gravity="center"
+        android:maxEms="5"
+        android:paddingLeft="4dp"
+        android:paddingRight="12dp"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        tools:text="点击"
+        tools:visibility="visible"/>
+
+    <ImageView
+        android:id="@+id/ivRight"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/tvRight"
+        android:paddingLeft="12dp"
+        android:paddingRight="4dp"
+        android:scaleType="centerInside"
+        tools:visibility="visible"/>
+
+
+</RelativeLayout>

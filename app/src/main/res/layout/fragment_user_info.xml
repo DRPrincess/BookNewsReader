@@ -9,8 +9,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:background="@color/red"
+        android:layout_height="180dp"
+        android:background="@drawable/infoback"
         android:orientation="vertical"
         android:gravity="center">
 
@@ -55,15 +55,10 @@
 
     </LinearLayout>
 
-
-
-
     <LinearLayout
         android:id="@+id/llEditInfo"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginBottom="6dp"
-        android:layout_marginTop="6dp"
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -81,21 +76,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="修 改 资 料"
+            android:text="修改资料"
             android:textColor="@color/black_primary"
             android:textSize="@dimen/font_large"/>
 
     </LinearLayout>
 
-
-
-
     <LinearLayout
         android:id="@+id/llCheckUpdate"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginBottom="6dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="1dp"
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -113,20 +104,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="检 查 更 新"
+            android:text="检查更新"
             android:textColor="@color/black_primary"
             android:textSize="@dimen/font_large"/>
 
     </LinearLayout>
 
-
-
     <LinearLayout
         android:id="@+id/llSuggestion"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginBottom="6dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="1dp"
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -144,20 +132,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="意 见 反 馈"
+            android:text="意见反馈"
             android:textColor="@color/black_primary"
             android:textSize="@dimen/font_large"/>
 
     </LinearLayout>
 
-
-
     <LinearLayout
         android:id="@+id/llLogout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginBottom="6dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="1dp"
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -175,7 +160,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="退 出 登 录"
+            android:text="退出登录"
             android:textColor="@color/black_primary"
             android:textSize="@dimen/font_large"/>
 

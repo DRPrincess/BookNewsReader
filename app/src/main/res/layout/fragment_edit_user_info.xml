@@ -18,6 +18,8 @@
         android:layout_marginRight="25dp"
         android:layout_marginTop="30dp"
         android:background="@color/grey_light"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         >
 
         <TableRow
@@ -330,7 +332,7 @@
 
 
     <Button
-        android:id="@+id/btnEditSign"
+        android:id="@+id/btnSubmit"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_below="@+id/checkboxRememberPassword"

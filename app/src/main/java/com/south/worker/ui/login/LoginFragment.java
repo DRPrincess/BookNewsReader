@@ -78,11 +78,11 @@ public class LoginFragment extends BaseFragment implements LoginContact.View {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.checkboxRememberPassword:
-                KeyBoardUtils.openKeybord(edtPassword,getContext());
+                KeyBoardUtils.closeKeybord(edtPassword,getContext());
                 break;
             case R.id.btnLogin:
 
-                KeyBoardUtils.openKeybord(edtPassword,getContext());
+                KeyBoardUtils.closeKeybord(edtPassword,getContext());
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
                 getActivity().finish();

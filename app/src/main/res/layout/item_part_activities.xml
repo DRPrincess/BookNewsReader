@@ -3,17 +3,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="10dp"
+    android:paddingTop="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    tools:layout_height="100dp"
     >
+    <View
+        style="@style/deviderLine"
+        android:layout_alignParentBottom="true"/>
     
     <ImageView
         android:id="@+id/ivImage"
         android:layout_width="80dp"
         android:layout_height="40dp"
         android:scaleType="fitXY"
-        tools:src="@drawable/img_login_header"
+        tools:src="@drawable/user_show_data8"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"/>
@@ -25,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/font_normal"
-        android:textColor="@color/black_secondary"
+        android:textColor="@color/black_forth"
         android:ellipsize="end"
         android:maxLines="2"
         android:padding="3dp"
@@ -47,6 +53,10 @@
         android:layout_below="@+id/tvTitle"
         android:layout_alignParentLeft="true"
         android:layout_toLeftOf="@+id/ivImage"
-        android:layout_marginTop="6dp"/>
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="16dp"/>
+
+
+
 
 </RelativeLayout>
