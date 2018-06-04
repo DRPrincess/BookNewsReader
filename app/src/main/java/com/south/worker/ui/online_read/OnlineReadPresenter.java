@@ -24,15 +24,25 @@ public class OnlineReadPresenter implements OnlineReadContact.Presenter {
     Context mContext;
     OnlineReadContact.View mView;
 
-    int[] imageIds = {R.drawable.user_show_data1,
-            R.drawable.user_show_data2,
-            R.drawable.user_show_data3,
-            R.drawable.user_show_data4};
+    int[] imageIds = {R.drawable.show_data_book1,
+            R.drawable.show_data_book2,
+            R.drawable.show_data_book3,
+            R.drawable.show_data_book4,
+            R.drawable.show_data_book5,
+            R.drawable.show_data_book6,
+            R.drawable.show_data_book7,
+            R.drawable.show_data_book8};
 
-    String[] urls = {"http://www.12371.cn/special/blqs/xjpzsjxlzyjhdb2016/",
+
+    String[] urls = {
+            "http://www.12371.cn/special/blqs/39zyzgm/",
+            "http://www.12371.cn/special/blqs/xjpsd/",
+            "http://www.12371.cn/special/blqs/dssj/30pyjr/",
+            "http://www.12371.cn/special/blqs/xjpfxzg/",
+            "http://www.12371.cn/special/blqs/xjpzsjxlzyjhdb2016/",
+            "http://www.12371.cn/special/blqs/xjpfxzg/",
             "http://www.12371.cn/special/blqs/xjptzglz/",
-            "http://www.12371.cn/special/blqs/xjptzglz/",
-            "http://book.theorychina.org/upload/meqj2-01/html5/index.html?opf=tablet/mnqj2-01.xml&launchpage=http://book.theorychina.org/upload/meqj2-02/"};
+            "http://www.12371.cn/special/blqs/xjpsd/"};
 
     String[] names = {"马格斯读后感",
             "党员十项读后感",
@@ -57,8 +67,8 @@ public class OnlineReadPresenter implements OnlineReadContact.Presenter {
 
 
 
-        for (int i = 0; i < 10; i++) {
-            OnlineBookBean bookBean = new OnlineBookBean(imageIds[new Random().nextInt(3)],urls[new Random().nextInt(3)]);
+        for (int i = 0; i < 8; i++) {
+            OnlineBookBean bookBean = new OnlineBookBean(imageIds[i],urls[i]);
             OnlineReadBean onlineReadBean = new OnlineReadBean("0",bookBean);
             data.add(onlineReadBean);
         }
@@ -73,7 +83,7 @@ public class OnlineReadPresenter implements OnlineReadContact.Presenter {
 
 
         for (int i = 0; i < 4; i++) {
-            OnlineBookBean bookBean = new OnlineBookBean(imageIds[new Random().nextInt(3)],urls[new Random().nextInt(3)]);
+            OnlineBookBean bookBean = new OnlineBookBean(imageIds[i],urls[i]);
             OnlineReadBean onlineReadBean = new OnlineReadBean("0",bookBean);
             data.add(onlineReadBean);
         }
@@ -88,7 +98,7 @@ public class OnlineReadPresenter implements OnlineReadContact.Presenter {
 
 
         for (int i = 0; i < 4; i++) {
-            MyBookBean bookBean = new MyBookBean(imageIds[new Random().nextInt(3)],String.valueOf(new Random().nextInt(6)+1),String.valueOf(new Random().nextInt(200)+80),urls[new Random().nextInt(3)]);
+            MyBookBean bookBean = new MyBookBean(imageIds[i],String.valueOf(new Random().nextInt(6)+1),String.valueOf(new Random().nextInt(200)+80),urls[i]);
             OnlineReadBean onlineReadBean = new OnlineReadBean("1",bookBean);
             data.add(onlineReadBean);
         }

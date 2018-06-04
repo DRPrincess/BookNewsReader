@@ -13,6 +13,7 @@ import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
@@ -126,6 +127,10 @@ public class CommonWebActivity extends BaseActivity {
 
     private void initWebView() {
 
+
+        webview.getSettings().setJavaScriptEnabled(true);
+        webview.getSettings().setAllowFileAccess(true);
+        webview.getSettings().setPluginState(WebSettings.PluginState.ON);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setDomStorageEnabled(true);
         webview.setWebViewClient(new WebViewClient() {

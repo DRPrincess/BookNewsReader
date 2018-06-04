@@ -166,16 +166,16 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
         banner.setImageLoader(new ImageLoader() {
             @Override
             public void displayImage(Context context, Object path, ImageView imageView) {
-                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 Glide.with(context).load(path).into(imageView);
             }
         });
 
         //本地图片数据（资源文件）
         List<Integer> images = new ArrayList<>();
-        images.add(R.drawable.user_show_data5);
-        images.add(R.drawable.user_show_data6);
-        images.add(R.drawable.user_show_data7);
+        images.add(R.drawable.show_data_news5);
+        images.add(R.drawable.show_data_news6);
+        images.add(R.drawable.show_data_news7);
 
         //设置图片集合
         banner.setImages(images);
@@ -215,7 +215,7 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
         recyclerViewContents.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerViewContents.setAdapter(mAdapter);
         recyclerViewContents.setPullRefreshEnabled(true);
-        recyclerViewContents.setLoadMoreEnabled(true);
+        recyclerViewContents.setLoadMoreEnabled(false);
 
         mAdapter.addHeaderView(headView);
 

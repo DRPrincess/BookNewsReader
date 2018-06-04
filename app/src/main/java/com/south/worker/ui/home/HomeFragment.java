@@ -182,16 +182,16 @@ public class HomeFragment extends BaseFragment implements HomeContact.View {
         banner.setImageLoader(new ImageLoader() {
             @Override
             public void displayImage(Context context, Object path, ImageView imageView) {
-                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 Glide.with(context).load(path).into(imageView);
             }
         });
 
         //本地图片数据（资源文件）
         List<Integer> images = new ArrayList<>();
-        images.add(R.drawable.user_show_data5);
-        images.add(R.drawable.user_show_data6);
-        images.add(R.drawable.user_show_data7);
+        images.add(R.drawable.show_data_news8);
+        images.add(R.drawable.show_data_news9);
+        images.add(R.drawable.show_data_news10);
 
         //设置图片集合
         banner.setImages(images);
@@ -206,7 +206,7 @@ public class HomeFragment extends BaseFragment implements HomeContact.View {
 
                 //跳转链接为空时，不跳转
 //                if(!TextUtils.isEmpty(linkUrls.get(position))){
-                    CommonWebActivity.startWebActivity(getContext(),"人民党建云","http://news.12371.cn/2018/05/28/ARTI1527511342851253.shtml");
+                CommonWebActivity.startWebActivity(getContext(),"人民党建云","http://news.12371.cn/2018/05/28/ARTI1527511342851253.shtml");
 //                }
 
             }
@@ -231,7 +231,7 @@ public class HomeFragment extends BaseFragment implements HomeContact.View {
         recyclerViewContents.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerViewContents.setAdapter(mAdapter);
         recyclerViewContents.setPullRefreshEnabled(true);
-        recyclerViewContents.setLoadMoreEnabled(true);
+        recyclerViewContents.setLoadMoreEnabled(false);
 
         mAdapter.addHeaderView(headView);
 
