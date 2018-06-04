@@ -54,7 +54,8 @@ public class UserInfoFragment extends BaseFragment implements UserInfoContact.Vi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_user_info, container, false);
         unbinder = ButterKnife.bind(this, rootView);
-        StatusBarUtil.setTransparentForImageViewInFragment(getActivity(),null);
+//        StatusBarUtil.setTransparentForImageViewInFragment(getActivity(),ivHeadImg);
+        StatusBarUtil.setColor(getActivity(), getResources().getColor(R.color.red));
 
 
         return rootView;

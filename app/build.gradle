@@ -39,9 +39,33 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+            //混淆
+            minifyEnabled true
+            //Zipalign优化
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+        }
+    }
+    applicationVariants.all { variant ->
+
+        //修改生成的apk名字 “advisor-release-1.7.0(43)-20151212”
+        variant.outputs.each { output ->
+            def appName = 'nangong'
+            def releaseApkName
+            releaseApkName = appName + "-" + variant.buildType.name + "-${defaultConfig.versionName}(${defaultConfig.versionCode})-" + getDate() + ".apk"
+            output.outputFileName = releaseApkName
         }
     }
 }
+    //获取时间戳
+    def getDate() {
+        def date = new Date()
+        def formattedDate = date.format('yyyyMMdd')
+        return formattedDate
+    }
+
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')

@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.baselib.utils.KeyBoardUtils;
 import com.bumptech.glide.Glide;
+import com.github.jdsjlzx.interfaces.OnItemClickListener;
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
 import com.github.jdsjlzx.interfaces.OnRefreshListener;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
@@ -254,6 +255,17 @@ public class HomeFragment extends BaseFragment implements HomeContact.View {
             public void onLoadMore() {
                 page++;
                 mPresenter.getData(page, pageNum, type,edtSearch.getText().toString());
+            }
+        });
+
+        mAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                NewsBean bean = mDatas.get(position);
+
+                if(bean != null){
+                    CommonWebActivity.startWebActivity(getContext(),getString(R.string.app_name),bean.url);
+                }
             }
         });
 

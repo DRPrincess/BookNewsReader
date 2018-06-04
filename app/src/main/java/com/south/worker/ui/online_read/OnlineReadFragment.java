@@ -187,8 +187,8 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
             case "2":
                 recyclerViewContents.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
                 recyclerViewContents.setAdapter(mAdapter);
-                recyclerViewContents.setPullRefreshEnabled(true);
-                recyclerViewContents.setLoadMoreEnabled(true);
+                recyclerViewContents.setPullRefreshEnabled(false);
+                recyclerViewContents.setLoadMoreEnabled(false);
                 break;
         }
 

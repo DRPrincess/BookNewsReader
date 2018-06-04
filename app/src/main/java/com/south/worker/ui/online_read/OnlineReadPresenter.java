@@ -11,6 +11,7 @@ import com.south.worker.data.bean.ReadThinkingBean;
 import com.south.worker.ui.user_info.UserInfoContact;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * 描述   ：
@@ -23,6 +24,26 @@ public class OnlineReadPresenter implements OnlineReadContact.Presenter {
     Context mContext;
     OnlineReadContact.View mView;
 
+    int[] imageIds = {R.drawable.user_show_data1,
+            R.drawable.user_show_data2,
+            R.drawable.user_show_data3,
+            R.drawable.user_show_data4};
+
+    String[] urls = {"http://www.12371.cn/special/blqs/xjpzsjxlzyjhdb2016/",
+            "http://www.12371.cn/special/blqs/xjptzglz/",
+            "http://www.12371.cn/special/blqs/xjptzglz/",
+            "http://book.theorychina.org/upload/meqj2-01/html5/index.html?opf=tablet/mnqj2-01.xml&launchpage=http://book.theorychina.org/upload/meqj2-02/"};
+
+    String[] names = {"马格斯读后感",
+            "党员十项读后感",
+            "正能量读后感",
+            "廉政十讲读后感"};
+
+    String[] thinks = {"习近平作为中国党和国家的最高领导人，围绕治国理政发表了大量讲话，提出了许多新思想、新观点、新论断，深刻回答了新的历史条件下党和国家发展的重大理论和现实问题",
+            "马格斯真是一个伟大的思想家，政治家，一位伟大的人",
+            "做一个有正能量的党员，给组织带来正常的影响",
+            "富有进取精神，淡泊名利权位，志在事业有成。即使百尺竿头，也要更进一步"};
+
     public OnlineReadPresenter(Context context, OnlineReadContact.View view) {
         mContext = context;
         mView = view;
@@ -33,9 +54,11 @@ public class OnlineReadPresenter implements OnlineReadContact.Presenter {
 
         ArrayList<OnlineReadBean> data = new ArrayList<>();
 
-        OnlineBookBean bookBean = new OnlineBookBean(R.drawable.user_show_data1,"http://www.12371.cn/special/blqs/xjptzglz/");
+
+
 
         for (int i = 0; i < 10; i++) {
+            OnlineBookBean bookBean = new OnlineBookBean(imageIds[new Random().nextInt(3)],urls[new Random().nextInt(3)]);
             OnlineReadBean onlineReadBean = new OnlineReadBean("0",bookBean);
             data.add(onlineReadBean);
         }
@@ -48,9 +71,9 @@ public class OnlineReadPresenter implements OnlineReadContact.Presenter {
     public void getMyOnlineBook(int page, int pageNum, String searchContent) {
         ArrayList<OnlineReadBean> data = new ArrayList<>();
 
-        OnlineBookBean bookBean = new OnlineBookBean(R.drawable.user_show_data1,"http://www.12371.cn/special/blqs/xjptzglz/");
 
         for (int i = 0; i < 4; i++) {
+            OnlineBookBean bookBean = new OnlineBookBean(imageIds[new Random().nextInt(3)],urls[new Random().nextInt(3)]);
             OnlineReadBean onlineReadBean = new OnlineReadBean("0",bookBean);
             data.add(onlineReadBean);
         }
@@ -63,9 +86,9 @@ public class OnlineReadPresenter implements OnlineReadContact.Presenter {
 
         ArrayList<OnlineReadBean> data = new ArrayList<>();
 
-        MyBookBean bookBean = new MyBookBean(R.drawable.user_show_data1,"3","264","http://www.12371.cn/special/blqs/xjptzglz/");
 
         for (int i = 0; i < 4; i++) {
+            MyBookBean bookBean = new MyBookBean(imageIds[new Random().nextInt(3)],String.valueOf(new Random().nextInt(6)+1),String.valueOf(new Random().nextInt(200)+80),urls[new Random().nextInt(3)]);
             OnlineReadBean onlineReadBean = new OnlineReadBean("1",bookBean);
             data.add(onlineReadBean);
         }
@@ -77,9 +100,9 @@ public class OnlineReadPresenter implements OnlineReadContact.Presenter {
     public void getMyThinking(int page, int pageNum, String searchContent) {
         ArrayList<OnlineReadBean> data = new ArrayList<>();
 
-        ReadThinkingBean bookBean = new ReadThinkingBean("xx读后感"," 习近平作为中国党和国家的最高领导人，围绕治国理政发表了大量讲话，提出了许多新思想、新观点、新论断，深刻回答了新的历史条件下党和国家发展的重大理论和现实问题");
 
         for (int i = 0; i < 10; i++) {
+            ReadThinkingBean bookBean = new ReadThinkingBean(names[new Random().nextInt(3)],thinks[new Random().nextInt(3)]);
             OnlineReadBean onlineReadBean = new OnlineReadBean("2",bookBean);
             data.add(onlineReadBean);
         }
