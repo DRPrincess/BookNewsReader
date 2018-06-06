@@ -30,9 +30,8 @@ public class SplashActivity extends BaseActivity {
                 .doOnComplete(new Action() {
                     @Override
                     public void run() throws Exception {
-                        String userId = SharedPreferencesUtil.getString(getBaseContext(), SharedPreferencesConfig.SHARED_KEY_USER_ID,"");
-
-                        if(TextUtils.isEmpty(userId)){
+                        int userId = SharedPreferencesUtil.getInt(getBaseContext(), SharedPreferencesConfig.SHARED_KEY_USER_ID,-1);
+                        if(userId == -1){
                             goLogin();
                         }else{
                             goMain();

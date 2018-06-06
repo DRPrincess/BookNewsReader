@@ -61,10 +61,6 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
     RadioGroup rgOnlineRead;
     @BindView(R.id.recyclerViewContents)
     LRecyclerView recyclerViewContents;
-    @BindView(R.id.recyclerViewMyReadList)
-    LRecyclerView recyclerViewMyReadList;
-    @BindView(R.id.layoutMyReadList)
-    LinearLayout layoutMyReadList;
     @BindView(R.id.layoutRankingList)
     RelativeLayout layoutRankingList;
     Unbinder unbinder;
@@ -108,7 +104,6 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
 
 
         initTopListView();
-        initMyReadRecordListView();
 
         rgOnlineRead.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -119,17 +114,14 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
 
                 switch (checkedId) {
                     case R.id.rbtnAllBooks:
-                        layoutMyReadList.setVisibility(View.GONE);
                         layoutRankingList.setVisibility(View.VISIBLE);
                         type = "0";
                         break;
                     case R.id.rbtnMyBooks:
-                        layoutMyReadList.setVisibility(View.VISIBLE);
-                        layoutRankingList.setVisibility(View.GONE);
+                        layoutRankingList.setVisibility(View.VISIBLE);
                         type = "1";
                         break;
                     case R.id.rbtnMyThinkings:
-                        layoutMyReadList.setVisibility(View.GONE);
                         layoutRankingList.setVisibility(View.GONE);
                         type = "2";
 
@@ -157,7 +149,6 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
                 mPresenter.getOnlineBook(page, pageNum, edtSearch.getText().toString());
                 break;
             case "1":
-                mPresenter.getMyOnlineBook(page, pageNum, edtSearch.getText().toString());
                 mPresenter.getMyReadRecord(page, pageNum, edtSearch.getText().toString());
                 break;
             case "2":
@@ -177,8 +168,13 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
     private void switchTopListView(){
         switch (type) {
             case "0":
-            case "1":
                 recyclerViewContents.setLayoutManager(new GridLayoutManager(getContext(), 4));
+                recyclerViewContents.setAdapter(mAdapter);
+                recyclerViewContents.setPullRefreshEnabled(false);
+                recyclerViewContents.setLoadMoreEnabled(false);
+                break;
+            case "1":
+                recyclerViewContents.setLayoutManager(new GridLayoutManager(getContext(), 2));
                 recyclerViewContents.setAdapter(mAdapter);
                 recyclerViewContents.setPullRefreshEnabled(false);
                 recyclerViewContents.setLoadMoreEnabled(false);
@@ -229,7 +225,7 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
                         mPresenter.getOnlineBook(page, pageNum, edtSearch.getText().toString());
                         break;
                     case "1":
-                        mPresenter.getMyOnlineBook(page, pageNum, edtSearch.getText().toString());
+                        mPresenter.getMyReadRecord(page, pageNum, edtSearch.getText().toString());
                         break;
                     case "2":
                         mPresenter.getMyThinking(page, pageNum, edtSearch.getText().toString());
@@ -247,11 +243,12 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
 
                 switch (type) {
                     case "0":
-                        CommonWebActivity.startWebActivity(getContext(), "习近平谈治国理政", bean.mOnlineBookBean.url);
-                        break;
                     case "1":
-                        CommonWebActivity.startWebActivity(getContext(), "习近平谈治国理政", bean.mOnlineBookBean.url);
+
+                        CommonWebActivity.startWebActivity(getContext(), "实现中国梦", "http://cpc.people.com.cn/n1/2016/0420/c64094-28289029.html");
                         break;
+//                        CommonWebActivity.startWebActivity(getContext(), "习近平谈治国理政", bean.mOnlineBookBean.url);
+//                        break;
                     case "2":
                         EditActivity.startEditThinking(getContext(), bean.mReadThinkingBean.content);
                         break;
@@ -261,50 +258,6 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
     }
 
 
-    /**
-     * 初始化我的阅读排行列表
-     */
-    private void initMyReadRecordListView() {
-        OnlineReadAdapter myPartAdapter = new OnlineReadAdapter(getContext(), mMyOnlineDatas);
-        mMyBookAdapter = new LRecyclerViewAdapter(myPartAdapter);
-        recyclerViewMyReadList.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        recyclerViewMyReadList.setAdapter(mMyBookAdapter);
-        recyclerViewMyReadList.setPullRefreshEnabled(false);
-        recyclerViewMyReadList.setLoadMoreEnabled(false);
-        //设置底部加载文字提示
-        recyclerViewMyReadList.setFooterViewHint("拼命加载中", "已经全部为你呈现了", "网络不给力啊，点击再试一次吧");
-        //设置底部加载颜色
-        recyclerViewMyReadList.setFooterViewColor(R.color.grey, R.color.grey, R.color.white);
-
-        recyclerViewMyReadList.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                page = 1;
-                mPresenter.getMyReadRecord(page, pageNum, edtSearch.getText().toString());
-                KeyBoardUtils.closeKeybord(edtSearch, getContext());
-
-            }
-        });
-        recyclerViewMyReadList.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore() {
-                page++;
-                mPresenter.getMyReadRecord(page, pageNum, edtSearch.getText().toString());
-            }
-        });
-
-        mMyBookAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-
-                OnlineReadBean bean = mMyOnlineDatas.get(position);
-                CommonWebActivity.startWebActivity(getContext(), "习近平谈治国理政", bean.mMyBookBean.url);
-
-            }
-        });
-
-
-    }
 
     @Override
     public void setPresenter(OnlineReadContact.Presenter presenter) {
@@ -331,33 +284,14 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
 
     @Override
     public void showOnlineBookList(List<OnlineReadBean> datas) {
-
-        solveTopList(datas);
-
-
-    }
-
-    @Override
-    public void showMyOnlineBookList(List<OnlineReadBean> datas) {
         solveTopList(datas);
     }
+
+
 
     @Override
     public void showMyReadRecordList(List<OnlineReadBean> datas) {
-        recyclerViewMyReadList.refreshComplete(pageNum);
-
-        if ((mMyOnlineDatas == null || mMyOnlineDatas.size() <= 0) && page > 1) {
-            recyclerViewMyReadList.setNoMore(true);
-        } else {
-            if (mMyOnlineDatas == null) {
-                mMyOnlineDatas = new ArrayList<>();
-            }
-            if (page == 1) {
-                mMyOnlineDatas.clear();
-            }
-        }
-        mMyOnlineDatas.addAll(datas);
-        mMyBookAdapter.notifyDataSetChanged();
+        solveTopList(datas);
     }
 
     @Override

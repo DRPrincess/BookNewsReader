@@ -16,6 +16,7 @@ import com.south.worker.R;
 import com.south.worker.ui.BaseFragment;
 import com.south.worker.ui.EditActivity;
 import com.south.worker.ui.login.LoginActivity;
+import com.south.worker.ui.login.ResetPassordActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -67,7 +68,7 @@ public class UserInfoFragment extends BaseFragment implements UserInfoContact.Vi
         unbinder.unbind();
     }
 
-    @OnClick({R.id.llSign, R.id.llEditInfo, R.id.llCheckUpdate, R.id.llSuggestion, R.id.llLogout})
+    @OnClick({R.id.llSign, R.id.llEditInfo, R.id.llResetPassword,R.id.llCheckUpdate, R.id.llSuggestion, R.id.llLogout})
     public void onViewClicked(View view) {
 
         Intent intent ;
@@ -80,6 +81,10 @@ public class UserInfoFragment extends BaseFragment implements UserInfoContact.Vi
                 intent = new Intent(getActivity(),EditUserInfoActivity.class);
                 startActivity(intent);
 
+                break;
+            case R.id.llResetPassword:
+                intent = new Intent(getActivity(),ResetPassordActivity.class);
+                startActivity(intent);
                 break;
             case R.id.llCheckUpdate:
                 Toast.makeText(getContext(), "已经是最新版本", Toast.LENGTH_SHORT).show();

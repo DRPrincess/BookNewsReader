@@ -83,6 +83,35 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/llResetPassword"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginTop="1dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/data"
+            android:scaleType="fitXY"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="@string/reset_password_title"
+            android:textColor="@color/black_primary"
+            android:textSize="@dimen/font_large"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
         android:id="@+id/llCheckUpdate"
         android:layout_width="match_parent"
         android:layout_height="50dp"

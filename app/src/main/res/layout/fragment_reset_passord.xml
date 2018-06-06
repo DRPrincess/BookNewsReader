@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <include
+        layout="@layout/title_common"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_rectangle_stroke1_grey_corner5"
+        android:orientation="horizontal"
+        >
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/icon_login_passwod"
+            />
+        <com.baseres.ClearableEditText
+            android:id="@+id/edtOldPassword"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="18dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawablePadding="10dp"
+            android:hint="@string/reset_password_old_password_tint"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textColor="@color/black_light"
+            android:textColorHint="@color/grey_dark"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:textSize="@dimen/font_normal"
+            android:layout_marginRight="10dp"
+            tools:text="123456"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_rectangle_stroke1_grey_corner5"
+        android:orientation="horizontal"
+        >
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/icon_login_passwod"
+            />
+
+        <com.baseres.ClearableEditText
+            android:id="@+id/edtNewPassword"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="18dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawablePadding="10dp"
+            android:hint="@string/reset_password_new_password_tint"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textColor="@color/black_light"
+            android:textColorHint="@color/grey_dark"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:textSize="@dimen/font_normal"
+            android:layout_marginRight="10dp"
+            tools:text="123456"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_rectangle_stroke1_grey_corner5"
+        android:orientation="horizontal"
+        >
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/icon_login_passwod"
+            />
+
+        <com.baseres.ClearableEditText
+            android:id="@+id/edtNewPasswordAgain"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="18dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawablePadding="10dp"
+            android:hint="@string/reset_password_new_password_again_tint"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textColor="@color/black_light"
+            android:textColorHint="@color/grey_dark"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:textSize="@dimen/font_normal"
+            android:layout_marginRight="10dp"
+            tools:text="123456"/>
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/bg_rectangle_solid_red_corner5"
+        android:text="提交"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_normal"/>
+
+
+</LinearLayout>

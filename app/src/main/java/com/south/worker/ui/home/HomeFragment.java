@@ -189,25 +189,30 @@ public class HomeFragment extends BaseFragment implements HomeContact.View {
 
         //本地图片数据（资源文件）
         List<Integer> images = new ArrayList<>();
-        images.add(R.drawable.show_data_news8);
-        images.add(R.drawable.show_data_news9);
-        images.add(R.drawable.show_data_news10);
+        images.add(R.drawable.show_data_news_weixin15);
+        images.add(R.drawable.show_data_news_weixin16);
+        images.add(R.drawable.show_data_news_weixin17);
+
+        titles.add("驾驶史诗级的机车 写着新时代的传奇");
+        titles.add("为梦想不负芳华");
+        titles.add("这句话咱铁路人都知道，竟然出自这里");
+
+        linkUrls.add("https://mp.weixin.qq.com/s/OFZd9zRnQIG_wpFa7awHoA");
+        linkUrls.add("https://mp.weixin.qq.com/s/nhphJjy-LA9X3564jcKGew");
+        linkUrls.add("https://mp.weixin.qq.com/s/3QDBT7UPeVFxXRPjt-PNzA");
 
         //设置图片集合
         banner.setImages(images);
 
         //设置轮播图片间隔时间（单位毫秒，默认为2000）
-        banner.setDelayTime(5000);
+        banner.setDelayTime(3000);
 
         //点击事件
         banner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
 
-                //跳转链接为空时，不跳转
-//                if(!TextUtils.isEmpty(linkUrls.get(position))){
-                CommonWebActivity.startWebActivity(getContext(),"人民党建云","http://news.12371.cn/2018/05/28/ARTI1527511342851253.shtml");
-//                }
+                CommonWebActivity.startWebActivity(getContext(),titles.get(position),linkUrls.get(position));
 
             }
         });

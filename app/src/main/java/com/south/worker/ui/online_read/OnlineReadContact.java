@@ -17,14 +17,11 @@ public class OnlineReadContact {
 
     static interface Presenter extends BasePresenter {
         void getOnlineBook(int page, int pageNum,String searchContent);
-        void getMyOnlineBook(int page, int pageNum,String searchContent);
         void getMyReadRecord(int page, int pageNum,String searchContent);
         void getMyThinking(int page, int pageNum,String searchContent);
     }
     static interface View extends BaseView<Presenter> {
         void showOnlineBookList(List<OnlineReadBean> newsBeans);
-
-        void showMyOnlineBookList(List<OnlineReadBean> newsBeans);
 
         void showMyReadRecordList(List<OnlineReadBean> newsBeans);
 

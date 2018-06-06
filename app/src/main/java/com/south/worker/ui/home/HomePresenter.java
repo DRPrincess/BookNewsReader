@@ -19,40 +19,58 @@ public class HomePresenter implements HomeContact.Presenter {
     Context mContext;
     HomeContact.View mView;
 
-    int[] imageIds = {R.drawable.show_data_news1,
-            R.drawable.show_data_news2,
-            R.drawable.show_data_news3,
-            R.drawable.show_data_news4,
-            R.drawable.show_data_news5,
-            R.drawable.show_data_news6,
-            R.drawable.show_data_news7,
-            R.drawable.show_data_news8,
-            R.drawable.show_data_news9,
-            R.drawable.show_data_news10,};
+
+
+    int[] imageIds = {R.drawable.show_data_news_weixin1,
+            R.drawable.show_data_news_weixin2,
+            R.drawable.show_data_news_weixin3,
+            R.drawable.show_data_news_weixin4,
+            R.drawable.show_data_news_weixin5,
+            R.drawable.show_data_news_weixin6,
+            R.drawable.show_data_news_weixin7,
+            R.drawable.show_data_news_weixin8,
+            R.drawable.show_data_news_weixin9,
+            R.drawable.show_data_news_weixin10,
+            R.drawable.show_data_news_weixin11,
+            R.drawable.show_data_news_weixin12,
+            R.drawable.show_data_news_weixin13,
+            R.drawable.show_data_news_weixin14
+    };
+
 
     String[] urls = {
-            "http://www.nanyang.gov.cn/xwzx/tpxw/281681.htm",
-            "http://www.nanyang.gov.cn/xwzx/tpxw/281408.htm",
-            "http://www.nanyang.gov.cn/xwzx/tpxw/280801.htm",
-            "http://www.nanyang.gov.cn/xwzx/tpxw/280642.htm",
-            "http://www.nanyang.gov.cn/xwzx/nyyw/277593.htm",
-            "http://www.nanyang.gov.cn/xwzx/nyyw/276074.htm",
-            "http://www.nanyang.gov.cn/xwzx/nyyw/274093.htm",
-            "http://news.12371.cn/2018/05/31/ARTI1527753569766842.shtml",
-            "http://news.12371.cn/2018/05/28/ARTI1527511342851253.shtml",
-            "http://news.12371.cn/2018/05/26/ARTI1527306067114644.shtml"};
+            "https://mp.weixin.qq.com/s/zewcR8nURlXHYCtjBgBGaQ",
+            "https://mp.weixin.qq.com/s/U5g4AMf0z0U9yNIoA28QGw",
+            "https://mp.weixin.qq.com/s/mpLY4p4yrTMm5CALUkajQg",
+            "https://mp.weixin.qq.com/s/_zH6d6VwIwwabXVEQPpYgw",
+            "https://mp.weixin.qq.com/s/qlY5--XIZt9T_x46qQHzxQ",
+            "https://mp.weixin.qq.com/s/rpd0OsVs2usO0-1cL4t77A",
+            "https://mp.weixin.qq.com/s/Ca50q6yUPWRv3z62GycWFw",
+            "https://mp.weixin.qq.com/s/aXFOVBPbkt82xIPxyi_7KQ",
+            "https://mp.weixin.qq.com/s/gftEL8LYwrV5zv05lOUBaQ",
+            "https://mp.weixin.qq.com/s/XEb_YB0SbEKbopPNb3sa2Q",
+            "https://mp.weixin.qq.com/s/MeZpX-3X-wr4gokRDVOW8g",
+            "https://mp.weixin.qq.com/s/xMP3u9ETfiGE3EgvMhKIrw",
+            "https://mp.weixin.qq.com/s/8PFEc7QD15zz8Gm-aap14A",
+            "https://mp.weixin.qq.com/s/MmKP9EWPA8lhEvGUaKotew"
+    };
 
     String[] titles = {
-            "城市建设 日新月异",
-            "处处景观 颜值高高",
-            "环库公路 穿珠成链 带动旅游 脱贫致富",
-            "我市发布暴雨橙色预警",
-            "省长陈润儿深入我市调研脱贫攻坚工作 市领导张文深、霍好胜参加调研",
-            "邓州编外雷锋团获评全国最佳志愿服务组织",
-            "我市“3·15”现场投诉咨询火爆",
-            "[基层]紧跟新时代  打造好班子",
-            "[发布]人民网·中国共产党新闻网推出升级版“人民党建云”平台",
-            "[中央]赵乐际：坚决维护习近平总书记核心地位 维护党中央权威和集中统一领导"};
+            "【一线风采】夏夜施工忙",
+            "【南工故事】高铁时代即将来临 人员提前介入保安全",
+            " 安全生产月丨一组漫画送给你，轻松接受安全知识",
+            "【六一“铁娃”说爸妈】“六一”啦！铁爸铁妈们，这里有一群“铁娃”的留言，请注意查收！",
+            "【南工故事】你的平安，我的责任",
+            "【企业文化三年工程·传统传承】一声汽笛 鸣奏百年交响",
+            "【一线风采】风里雨里 线路上等你",
+            "【干部课堂】党员干部应知名词100解",
+            "【聚焦媒体】南阳工务段：“集中修”紧张进行时",
+            "【集中修特刊】穿行在深山的集中修“战车”",
+            "【集中修特刊】天气很“任性”，他们从不“Care”",
+            "【集中修特刊】穿行在深山的集中修“战车”",
+            "新时代·铁路榜样｜徐前凯：5秒钟的决定，拯救一条生命！",
+            "【南工风采】每一个铁路人都是\"特种兵\"",
+            "【聚焦媒体】中原男儿好气势！ “集中修战队”顺利“起航”"};
 
     public HomePresenter(Context context, HomeContact.View view) {
         mContext = context;
@@ -66,27 +84,35 @@ public class HomePresenter implements HomeContact.Presenter {
 
         switch (type){
             case "0":
-                for(int i = 0; i<10;i++){
+                for(int i = 0; i<4;i++){
 
                     NewsBean bean  = new NewsBean(titles[i],imageIds[i],urls[i]);
                     data.add(bean);
                 }
                 break;
             case "1":
-            case "2":
-            case "3":
-                for(int i = 0; i<10;i++){
+                for(int i = 4; i<8;i++){
 
-                    int j = new Random().nextInt(6);
-                    NewsBean bean  = new NewsBean(titles[j],imageIds[j],urls[j]);
+                    NewsBean bean  = new NewsBean(titles[i],imageIds[i],urls[i]);
+                    data.add(bean);
+                }
+                break;
+            case "2":
+                for(int i = 8; i<12;i++){
+
+                    NewsBean bean  = new NewsBean(titles[i],imageIds[i],urls[i]);
+                    data.add(bean);
+                }
+                break;
+            case "3":
+                for(int i = 12; i<14;i++){
+
+                    NewsBean bean  = new NewsBean(titles[i],imageIds[i],urls[i]);
                     data.add(bean);
                 }
                 break;
 
         }
-
-
-
 
 
         mView.showData(data);

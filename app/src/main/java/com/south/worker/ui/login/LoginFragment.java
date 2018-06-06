@@ -1,18 +1,24 @@
 package com.south.worker.ui.login;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import com.baselib.utils.KeyBoardUtils;
+import com.baselib.utils.SharedPreferencesUtil;
 import com.baseres.ClearableEditText;
 import com.south.worker.R;
+import com.south.worker.constant.IntentConfig;
+import com.south.worker.constant.SharedPreferencesConfig;
 import com.south.worker.ui.BaseFragment;
 import com.south.worker.ui.main.MainActivity;
 
@@ -39,7 +45,7 @@ public class LoginFragment extends BaseFragment implements LoginContact.View {
     @BindView(R.id.btnLogin)
     Button btnLogin;
     Unbinder unbinder;
-
+    boolean isTokenRunOut;
 
     public static LoginFragment newInstance() {
 
@@ -57,7 +63,24 @@ public class LoginFragment extends BaseFragment implements LoginContact.View {
         View rootView = inflater.inflate(R.layout.fragment_login, container, false);
         unbinder = ButterKnife.bind(this, rootView);
 
+        //显示登录超时
+        if (getActivity().getIntent() != null && getActivity().getIntent().getExtras() != null) {
+            isTokenRunOut = "tokenRunOut".equals(getActivity().getIntent().getExtras().getString(IntentConfig.INTENT_KEY_LOGIN));
+            if (isTokenRunOut) {
+                showToast(getString(R.string.login_token_out));
+            }
+        }
 
+        if (SharedPreferencesUtil.getBoolean(getContext(),SharedPreferencesConfig.SHARED_KEY_REMEMBER_PASSWORD,false)){
+            checkboxRememberPassword.setChecked(true);
+        }else{
+            checkboxRememberPassword.setChecked(false);
+        }
+
+        String userName = SharedPreferencesUtil.getString(getContext(),SharedPreferencesConfig.SHARED_KEY_USER_NAME,"");
+        String password = SharedPreferencesUtil.getString(getContext(),SharedPreferencesConfig.SHARED_KEY_USER_PASSWORD,"");
+        edtUserName.setText(userName);
+        edtPassword.setText(password);
 
         return rootView;
     }
@@ -76,20 +99,40 @@ public class LoginFragment extends BaseFragment implements LoginContact.View {
 
     @OnClick({R.id.checkboxRememberPassword, R.id.btnLogin, R.id.tvContactManager})
     public void onViewClicked(View view) {
+        KeyBoardUtils.closeKeybord(edtPassword,getContext());
         switch (view.getId()) {
             case R.id.checkboxRememberPassword:
-                KeyBoardUtils.closeKeybord(edtPassword,getContext());
                 break;
             case R.id.btnLogin:
+                String userName = edtUserName.getText().toString();
+                String password = edtPassword.getText().toString();
 
-                KeyBoardUtils.closeKeybord(edtPassword,getContext());
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-                getActivity().finish();
-
+                if(TextUtils.isEmpty(userName)){
+                    showTipDialog(getString(R.string.login_username_tint));
+                }else  if(TextUtils.isEmpty(password)){
+                    showTipDialog(getString(R.string.login_password_tint));
+                }else{
+                    mPresenter.login(userName,password);
+                }
                 break;
             case R.id.tvContactManager:
+                String phone = "15888888888";
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+phone));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 break;
         }
+    }
+
+    @Override
+    public void goHome() {
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        startActivity(intent);
+        getActivity().finish();
+    }
+
+    @Override
+    public boolean isRememberPassword() {
+        return checkboxRememberPassword.isChecked();
     }
 }

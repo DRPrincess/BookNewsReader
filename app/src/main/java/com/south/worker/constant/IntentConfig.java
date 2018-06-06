@@ -9,8 +9,6 @@ package com.south.worker.constant;
 
 public class IntentConfig {
 
-    //webview加载页面
-    public static final String Intent_Key_CommmonWeb = "common_web";
     //登录页面
     public static final String INTENT_KEY_LOGIN = "login_come_from";
 

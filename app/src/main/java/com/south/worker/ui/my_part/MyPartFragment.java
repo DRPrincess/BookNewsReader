@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
-import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -171,17 +170,28 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
             }
         });
 
+
         //本地图片数据（资源文件）
         List<Integer> images = new ArrayList<>();
-        images.add(R.drawable.show_data_news5);
-        images.add(R.drawable.show_data_news6);
-        images.add(R.drawable.show_data_news7);
+        images.add(R.drawable.show_data_news_weixin4);
+        images.add(R.drawable.show_data_news_weixin11);
+        images.add(R.drawable.show_data_news_weixin7);
+
+
+        titles.add("六一“铁娃”说爸妈");
+        titles.add("风里雨里 线路上等你");
+        titles.add("天气很“任性”，他们从不“Care”");
+
+        linkUrls.add("https://mp.weixin.qq.com/s/_zH6d6VwIwwabXVEQPpYgw");
+        linkUrls.add("https://mp.weixin.qq.com/s/Ca50q6yUPWRv3z62GycWFw");
+        linkUrls.add("https://mp.weixin.qq.com/s/MeZpX-3X-wr4gokRDVOW8g");
+
 
         //设置图片集合
         banner.setImages(images);
 
         //设置轮播图片间隔时间（单位毫秒，默认为2000）
-        banner.setDelayTime(5000);
+        banner.setDelayTime(3000);
 
         //点击事件
         banner.setOnBannerListener(new OnBannerListener() {
@@ -190,7 +200,7 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
 
                 //跳转链接为空时，不跳转
 //                if(!TextUtils.isEmpty(linkUrls.get(position))){
-                    CommonWebActivity.startWebActivity(getContext(),"人民党建云","http://news.12371.cn/2018/05/28/ARTI1527511342851253.shtml");
+                CommonWebActivity.startWebActivity(getContext(),titles.get(position),linkUrls.get(position));
 
 //                }
 

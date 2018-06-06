@@ -10,5 +10,6 @@ package com.south.worker.ui;
 
 public interface BaseView<T> {
     void setPresenter(T presenter);
-//    void showTipDialog(String message);
+    void showTipDialog(String message);
+    void showToast(String message);
 }

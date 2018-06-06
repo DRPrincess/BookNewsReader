@@ -2,6 +2,14 @@ package com.south.worker.data;
 
 import android.support.annotation.NonNull;
 
+import com.south.worker.data.bean.UserLoginBean;
+import com.south.worker.data.network.NetHelper;
+import com.south.worker.data.remote.UserRemoteDataSource;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
 import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
 
 /**
@@ -13,22 +21,27 @@ import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
 public class UserRepository  implements UserDataSource{
 
     private static UserRepository instance;
-    @NonNull
-    private final UserDataSource mUserRemoteDataSource;
 
-    private UserRepository(@NonNull UserDataSource userRemoteDataSource) {
-        mUserRemoteDataSource = checkNotNull(userRemoteDataSource);
+    private UserRepository() {
 
     }
 
-    public static UserRepository getInstance(@NonNull UserDataSource userRemoteDataSource) {
+    public static UserRepository getInstance() {
         if (instance == null) {
             synchronized (UserRepository.class) {
                 if (instance == null) {
-                    instance = new UserRepository(userRemoteDataSource);
+                    instance = new UserRepository();
                 }
             }
         }
         return instance;
+    }
+
+    @Override
+    public Observable<UserLoginBean> login(String userName, String password) {
+      return NetHelper.createService(UserRemoteDataSource.class)
+                .login(userName, password)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 }

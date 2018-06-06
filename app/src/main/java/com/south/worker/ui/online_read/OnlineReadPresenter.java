@@ -77,19 +77,6 @@ public class OnlineReadPresenter implements OnlineReadContact.Presenter {
 
     }
 
-    @Override
-    public void getMyOnlineBook(int page, int pageNum, String searchContent) {
-        ArrayList<OnlineReadBean> data = new ArrayList<>();
-
-
-        for (int i = 0; i < 4; i++) {
-            OnlineBookBean bookBean = new OnlineBookBean(imageIds[i],urls[i]);
-            OnlineReadBean onlineReadBean = new OnlineReadBean("0",bookBean);
-            data.add(onlineReadBean);
-        }
-
-        mView.showMyOnlineBookList(data);
-    }
 
     @Override
     public void getMyReadRecord(int page, int pageNum, String searchContent) {

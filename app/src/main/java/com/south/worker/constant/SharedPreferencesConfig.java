@@ -16,12 +16,16 @@ public class SharedPreferencesConfig {
     public static final String SHARED_KEY_USER_MOBILE = "user_mobile";
     //用户名称
     public static final String SHARED_KEY_USER_NAME = "user_name";
-    //检测师ID
+    //用户ID
     public static final String SHARED_KEY_USER_ID = "user_id";
+    //用户党支部ID
+    public static final String SHARED_KEY_USER_PART_ID = "part_id";
     //用户头像
     public static final String SHARED_KEY_USER_HEADER_IMG = "header_img";
-    //用户登录的Token
-    public static final String SHARED_KEY_USER_TOKEN = "token";
+    //是否记住密码
+    public static final String SHARED_KEY_REMEMBER_PASSWORD = "remember_password";
+    //用户密码
+    public static final String SHARED_KEY_USER_PASSWORD = "user_password";
 
 
 }

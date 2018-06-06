@@ -13,8 +13,12 @@ public class LoginContact {
 
     static interface Presenter extends BasePresenter {
 
+        void login(String userName,String userPassword);
+
     }
     static interface View extends BaseView<Presenter> {
 
+        void goHome();
+        boolean isRememberPassword();
     }
 }

@@ -11,6 +11,8 @@ package com.south.worker.constant;
 public class NetConfig {
 
 
+    public static String BASE_URL = "http://47.94.11.200:8081/";
+
     //图片上传的阿里云地址
     public static String endpoint = "http://oss-cn-hangzhou.aliyuncs.com";
 

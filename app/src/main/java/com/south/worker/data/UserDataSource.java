@@ -1,5 +1,10 @@
 package com.south.worker.data;
 
+import com.south.worker.data.bean.UserLoginBean;
+
+import io.reactivex.Observable;
+
+
 /**
  * 描述   ：用户模块
  * <p>
@@ -7,4 +12,6 @@ package com.south.worker.data;
  */
 
 public interface UserDataSource  {
+
+    Observable<UserLoginBean> login(String userName,String password);
 }

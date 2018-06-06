@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
         app:ratio="0.5"
-        tools:src="@drawable/show_data_news1"/>
+        tools:src="@drawable/show_data_news_weixin10"/>
     
     <TextView
         android:id="@+id/tvNewsTitle"

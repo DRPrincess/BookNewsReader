@@ -137,34 +137,6 @@
             android:layout_alignParentTop="true">
         </com.github.jdsjlzx.recyclerview.LRecyclerView>
 
-        <LinearLayout
-            android:id="@+id/layoutMyReadList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/recyclerViewContents"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="我的阅读排行"
-                android:textColor="@color/red"
-                android:textSize="@dimen/font_normal"/>
-
-
-            <com.github.jdsjlzx.recyclerview.LRecyclerView
-                android:id="@+id/recyclerViewMyReadList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20dp">
-            </com.github.jdsjlzx.recyclerview.LRecyclerView>
-
-
-        </LinearLayout>
-
 
         <RelativeLayout
             android:id="@+id/layoutRankingList"
