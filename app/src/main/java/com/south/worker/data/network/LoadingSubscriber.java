@@ -50,14 +50,14 @@ public abstract class LoadingSubscriber<T> implements Observer<T> {
         if (dialog != null) {
             dialog.dismiss();
         }
-//        if (e instanceof RequestException){
-//            onSubscriberError(e.getMessage());
-//        }else {
-//            e.printStackTrace();
-//            onSubscriberError("接口访问失败，请检查网络连接情况");
-//        }
+        if (e instanceof RequestException){
+            onSubscriberError(e.getMessage());
+        }else {
+            e.printStackTrace();
+            onSubscriberError("很抱歉，操作失败");
+        }
 
-        onSubscriberError("接口访问失败，请检查网络连接情况");
+
 
 
     }

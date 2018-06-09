@@ -32,7 +32,7 @@ public class LoginPresenter implements LoginContact.Presenter {
     }
 
     @Override
-    public void login(String userName, final String userPassword) {
+    public void login(final String userName, final String userPassword) {
         UserRepository.getInstance()
                 .login(userName,userPassword)
                 .subscribe(new LoadingSubscriber<UserLoginBean>(mContext,mContext.getString(R.string.msg_loading),true) {
@@ -44,6 +44,8 @@ public class LoginPresenter implements LoginContact.Presenter {
                             SharedPreferencesUtil.saveData(mContext, SharedPreferencesConfig.SHARED_KEY_USER_ID,userLoginBean.Id);
                             SharedPreferencesUtil.saveData(mContext, SharedPreferencesConfig.SHARED_KEY_USER_PART_ID,userLoginBean.BranchId);
                             SharedPreferencesUtil.saveData(mContext, SharedPreferencesConfig.SHARED_KEY_USER_NAME,userLoginBean.UserName);
+                            SharedPreferencesUtil.saveData(mContext, SharedPreferencesConfig.SHARED_KEY_USER_MOBILE,userName);
+
 
                             if (mView.isRememberPassword()){
                                 SharedPreferencesUtil.saveData(mContext, SharedPreferencesConfig.SHARED_KEY_USER_PASSWORD,userPassword);

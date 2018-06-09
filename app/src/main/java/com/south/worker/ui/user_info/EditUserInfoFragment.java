@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.jaeger.library.StatusBarUtil;
 import com.south.worker.R;
+import com.south.worker.data.bean.UserInfoBean;
 import com.south.worker.ui.BaseFragment;
 
 import butterknife.BindView;
@@ -26,9 +27,10 @@ import butterknife.Unbinder;
  * 作者   ：Created by DR on 2018/6/2.
  */
 
-public class EditUserInfoFragment extends BaseFragment {
+public class EditUserInfoFragment extends BaseFragment  implements EditUserInfoContact.View{
 
 
+    EditUserInfoContact.Presenter mPresenter;
     @BindView(R.id.tvMidTitle)
     TextView tvMidTitle;
     @BindView(R.id.ivHeadImg)
@@ -69,11 +71,13 @@ public class EditUserInfoFragment extends BaseFragment {
 
         tvMidTitle.setText("修改资料");
 
+        mPresenter.getUserInfo(getUserId());
+
 
         edtUserName.setText("王爱国");
         edtSex.setText("男");
-        edtBirth.setText("1970.2.15");
-        edtIntoPart.setText("1988.3.6");
+        edtBirth.setText("1970-02-15");
+        edtIntoPart.setText("1988-03-06");
         edtEducation.setText("研究生");
         edtHoppy.setText("阅读，篮球");
         edtPhone.setText("15356871263");
@@ -98,10 +102,46 @@ public class EditUserInfoFragment extends BaseFragment {
                 break;
             case R.id.btnSubmit:
 
-                Toast.makeText(getContext(), "修改成功", Toast.LENGTH_SHORT).show();
+                UserInfoBean bean = new UserInfoBean();
+
+                bean.RealName = edtUserName.getText().toString();
+                bean.Hobby = edtHoppy.getText().toString();
+                bean.EducationName = edtEducation.getText().toString();
+                bean.BirthTime = edtBirth.getText().toString();
+                bean.PartyTime = edtIntoPart.getText().toString();
+                bean.Gender = 1;
+                bean.WeChat = edtWeixin.getText().toString();
+                bean.Phone = edtPhone.getText().toString();
+
+
+
+               mPresenter.editUserInfo(bean);
 
 
                 break;
         }
+    }
+
+    @Override
+    public void setPresenter(EditUserInfoContact.Presenter presenter) {
+
+        mPresenter = presenter;
+
+    }
+
+    @Override
+    public void showUserInfo(UserInfoBean bean) {
+
+        edtUserName.setText(bean.RealName);
+        edtHoppy.setText(bean.Hobby);
+        edtEducation.setText(bean.EducationName);
+        edtBirth.setText(bean.BirthTime);
+        edtIntoPart.setText(bean.PartyTime);
+//        edtSex.setText(bean.Gender);
+        edtPhone.setText(bean.Phone);
+        edtWeixin.setText(bean.WeChat);
+
+
+
     }
 }

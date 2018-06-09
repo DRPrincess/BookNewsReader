@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import com.baselib.utils.ActivityUtils;
 import com.south.worker.R;
+import com.south.worker.ui.login.LoginFragment;
+import com.south.worker.ui.login.LoginPresenter;
 
 public class EditUserInfoActivity extends AppCompatActivity {
 
@@ -13,7 +15,12 @@ public class EditUserInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), EditUserInfoFragment.newInstance(), R.id.fragment_container);
+
+        EditUserInfoFragment fragment =EditUserInfoFragment.newInstance() ;
+        ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.fragment_container);
+        EditUserInfoPresenter presenter = new EditUserInfoPresenter( this,fragment);
+        fragment.setPresenter(presenter);
+
 
     }
 }

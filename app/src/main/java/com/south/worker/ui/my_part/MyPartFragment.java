@@ -79,7 +79,7 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
 
     int page;
     int pageNum = 10;
-    String type;
+    int type;
 
     public static MyPartFragment newInstance() {
         
@@ -98,7 +98,15 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
         StatusBarUtil.setColor(getActivity(), getResources().getColor(R.color.grey_light));
 
         initView();
+
+
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        recyclerViewContents.forceToRefresh();
+        super.onResume();
     }
 
     private void initView() {
@@ -110,13 +118,13 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
                 switch (checkedId){
 
                     case R.id.rbtnNews:
-                        type = "0";
+                        type = 0;
                         break;
                     case R.id.rbtnMonthlyNews:
-                        type = "1";
+                        type = 1;
                         break;
                     case R.id.rbtnPartStar:
-                        type = "2";
+                        type = 2;
                         break;
 
                 }
@@ -150,6 +158,13 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
 
 
         rbtnNews.setChecked(true);
+    }
+
+
+    private void initData(){
+        page = 1;
+        mPresenter.getBanner(getPartId());
+        mPresenter.getData(page,pageNum,type,edtSearch.getText().toString());
     }
 
 
@@ -237,9 +252,8 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
         recyclerViewContents.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
-                page = 1;
-                mPresenter.getData(page, pageNum, type,edtSearch.getText().toString());
                 KeyBoardUtils.closeKeybord(edtSearch,getContext());
+                initData();
 
             }
         });
@@ -298,5 +312,23 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
             emptyView.setVisibility(View.GONE);
         }
 
+    }
+
+    @Override
+    public void startWebActivity(String title, String url) {
+        CommonWebActivity.startWebActivity(getContext(),title,url);
+    }
+
+    @Override
+    public void showBanner(List<String> imgUrls, List<String> titles, List<String> linkUrls) {
+        this.imgUrls.clear();
+        this.titles.clear();
+        this.linkUrls.clear();
+
+        this.imgUrls.addAll(imgUrls);
+        this.titles.addAll(titles);
+        this.linkUrls.addAll(linkUrls);
+
+        banner.update(imgUrls);
     }
 }

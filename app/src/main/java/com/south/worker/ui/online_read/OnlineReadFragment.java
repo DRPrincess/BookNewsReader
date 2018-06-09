@@ -71,9 +71,7 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
     String type;
 
     LRecyclerViewAdapter mAdapter;
-    LRecyclerViewAdapter mMyBookAdapter;
     List<OnlineReadBean> mDatas = new ArrayList<>();
-    List<OnlineReadBean> mMyOnlineDatas = new ArrayList<>();
 
 
     public static OnlineReadFragment newInstance() {
@@ -250,7 +248,9 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
 //                        CommonWebActivity.startWebActivity(getContext(), "习近平谈治国理政", bean.mOnlineBookBean.url);
 //                        break;
                     case "2":
-                        EditActivity.startEditThinking(getContext(), bean.mReadThinkingBean.content);
+
+
+                        EditActivity.startEditThinking(getContext(), bean.mReadThinkingBean.Content,bean.mReadThinkingBean.BookId,bean.mReadThinkingBean.BookName);
                         break;
                 }
             }

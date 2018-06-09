@@ -77,7 +77,7 @@ public class LoginFragment extends BaseFragment implements LoginContact.View {
             checkboxRememberPassword.setChecked(false);
         }
 
-        String userName = SharedPreferencesUtil.getString(getContext(),SharedPreferencesConfig.SHARED_KEY_USER_NAME,"");
+        String userName = SharedPreferencesUtil.getString(getContext(),SharedPreferencesConfig.SHARED_KEY_USER_MOBILE,"");
         String password = SharedPreferencesUtil.getString(getContext(),SharedPreferencesConfig.SHARED_KEY_USER_PASSWORD,"");
         edtUserName.setText(userName);
         edtPassword.setText(password);

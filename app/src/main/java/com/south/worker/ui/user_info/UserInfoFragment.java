@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.jaeger.library.StatusBarUtil;
 import com.south.worker.R;
+import com.south.worker.data.bean.UserInfoBean;
 import com.south.worker.ui.BaseFragment;
 import com.south.worker.ui.EditActivity;
 import com.south.worker.ui.login.LoginActivity;
@@ -102,5 +103,10 @@ public class UserInfoFragment extends BaseFragment implements UserInfoContact.Vi
     @Override
     public void setPresenter(UserInfoContact.Presenter presenter) {
         mPresenter = presenter;
+    }
+
+    @Override
+    public void showUserInfo(UserInfoBean bean) {
+
     }
 }

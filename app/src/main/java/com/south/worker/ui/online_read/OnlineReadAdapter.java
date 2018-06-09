@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.south.worker.R;
 import com.south.worker.data.bean.MyBookBean;
 import com.south.worker.data.bean.OnlineBookBean;
@@ -83,7 +84,7 @@ public class OnlineReadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             case 0:
 
                 OnlineBookBean bookBean = bean.mOnlineBookBean;
-                ((OnlineBookViewHolder) holder).ivBooks.setImageResource(bookBean.image);
+                Glide.with(mContext).load(bookBean.BookPic).into( ((OnlineBookViewHolder) holder).ivBooks);
 
                 break;
 

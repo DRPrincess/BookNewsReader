@@ -13,8 +13,10 @@ public class ResetPasswordContact {
 
     static interface Presenter extends BasePresenter {
 
+        void changePassord(int userId,String password,String newPassword);
+
     }
     static interface View extends BaseView<Presenter> {
-
+        void LoginAgain();
     }
 }

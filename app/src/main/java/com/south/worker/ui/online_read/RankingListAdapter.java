@@ -84,8 +84,13 @@ public class RankingListAdapter extends BaseAdapter {
         ReadRankingBean bean = mDatas.get(position);
 
         if(bean != null){
-            holder.tvOrder.setText(bean.order);
-            holder.tvUserName.setText(bean.userName);
+            holder.tvOrder.setText(String.valueOf(position+1));
+            if(!TextUtils.isEmpty(bean.userName)){
+                holder.tvUserName.setText(bean.userName);
+            }else {
+                holder.tvUserName.setText(bean.BranchName);
+            }
+
             holder.tvUserReadTime.setText(bean.readTime);
 
             if(TextUtils.isEmpty(bean.userAvater)){

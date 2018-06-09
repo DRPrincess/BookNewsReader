@@ -2,7 +2,12 @@ package com.south.worker.ui.online_read;
 
 import android.content.Context;
 
+import com.south.worker.R;
+import com.south.worker.data.BookReposity;
+import com.south.worker.data.bean.MyBookBean;
+import com.south.worker.data.bean.OnlineReadBean;
 import com.south.worker.data.bean.ReadRankingBean;
+import com.south.worker.data.network.LoadingSubscriber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +29,56 @@ public class RankingListPresenter  implements RankingListContact.Presenter{
     }
 
     @Override
-    public void getData(String type, String period) {
+    public void getData(int type, int period) {
 
+        if(type == 0){
+            getPeopleReadRankList(type);
+        }else if(type  == 1) {
+            getPartReadRankList(period);
+        }
+
+
+    }
+
+    private void getPartReadRankList(int period){
+        BookReposity.getInstance()
+                .getPartReadRankList(period)
+                .subscribe(new LoadingSubscriber<List<ReadRankingBean>>(mContext,mContext.getString(R.string.msg_loading),true) {
+
+                    @Override
+                    public void onNext(List<ReadRankingBean> readRankingBeans) {
+
+                        mView.showData(readRankingBeans);
+
+                    }
+                    @Override
+                    public void onSubscriberError(String errorMsg) {
+                        mView.showToast(errorMsg);
+                    }
+
+                });
+    }
+
+    private void getPeopleReadRankList(int peroid){
+        BookReposity.getInstance()
+                .getPeopleReadRankList(peroid)
+                .subscribe(new LoadingSubscriber<List<ReadRankingBean>>(mContext,mContext.getString(R.string.msg_loading),true) {
+
+                    @Override
+                    public void onNext(List<ReadRankingBean> readRankingBeans) {
+
+                        mView.showData(readRankingBeans);
+
+                    }
+                    @Override
+                    public void onSubscriberError(String errorMsg) {
+                        mView.showToast(errorMsg);
+                    }
+
+                });
+    }
+
+    private void getDefaultdata() {
         List<ReadRankingBean> readRankingBeans = new ArrayList<>();
 
         readRankingBeans.add(new ReadRankingBean("1","王爱国",null,"285分钟"));

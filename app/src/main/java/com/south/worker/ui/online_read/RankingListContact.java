@@ -18,7 +18,7 @@ public class RankingListContact {
 
     static interface Presenter extends BasePresenter {
 
-        void getData(String type,String period);
+        void getData(int type,int period);
 
     }
     static interface View extends BaseView<Presenter> {

@@ -2,6 +2,8 @@ package com.south.worker.ui.user_info;
 
 import android.content.Context;
 
+import com.south.worker.data.bean.UserInfoBean;
+
 /**
  * 描述   ：
  * <p>
@@ -16,5 +18,15 @@ public class UserInfoPresenter implements UserInfoContact.Presenter {
     public UserInfoPresenter(Context context, UserInfoContact.View view) {
         mContext = context;
         mView = view;
+    }
+
+    @Override
+    public void getUserInfo(int userId) {
+
+    }
+
+    @Override
+    public void editUserInfo(UserInfoBean bean) {
+
     }
 }

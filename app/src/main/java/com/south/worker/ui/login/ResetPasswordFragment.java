@@ -4,14 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baselib.utils.SharedPreferencesUtil;
 import com.baseres.ClearableEditText;
 import com.south.worker.R;
+import com.south.worker.constant.SharedPreferencesConfig;
 import com.south.worker.ui.BaseFragment;
 
 import butterknife.BindView;
@@ -82,11 +85,45 @@ public class ResetPasswordFragment extends BaseFragment implements ResetPassword
                 getActivity().onBackPressed();
                 break;
             case R.id.btnSubmit:
-                Toast.makeText(getContext(), "修改密码成功,请重新登录", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getContext(),LoginActivity.class);
-                startActivity(intent);
-                getActivity().finish();
+
+                String  oldPassword = edtOldPassword.getText().toString();
+                String  newPassword = edtNewPassword.getText().toString();
+                String  newPasswordAgain = edtNewPasswordAgain.getText().toString();
+
+                if(TextUtils.isEmpty(oldPassword)){
+                    showTipDialog("请输入当前密码");
+                    return;
+                }
+
+                if(TextUtils.isEmpty(newPassword)){
+                    showTipDialog("请输入新密码");
+                    return;
+                }
+
+                if(TextUtils.isEmpty(newPasswordAgain)){
+                    showTipDialog("请再次输入新密码");
+                    return;
+                }
+
+                if(!newPassword.equals(newPasswordAgain)){
+                    showTipDialog("两次输入的新密码不一致，请检查");
+                    return;
+                }
+
+                mPresenter.changePassord(getUserId(),oldPassword,newPassword);
+
                 break;
         }
+    }
+
+
+    @Override
+    public void LoginAgain() {
+        SharedPreferencesUtil.clearData(getActivity(), SharedPreferencesConfig.SHARED_KEY_USER_ID);
+        SharedPreferencesUtil.clearData(getActivity(),SharedPreferencesConfig.SHARED_KEY_USER_PART_ID);
+        SharedPreferencesUtil.clearData(getActivity(),SharedPreferencesConfig.SHARED_KEY_USER_HEADER_IMG);
+        Intent intent = new Intent(getContext(),LoginActivity.class);
+        startActivity(intent);
+        getActivity().finish();
     }
 }

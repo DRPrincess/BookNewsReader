@@ -65,8 +65,8 @@ public class RankingListFragment extends BaseFragment  implements RankingListCon
     List<ReadRankingBean> mDatas;
 
 
-    String type;
-    String period;
+    int type;
+    int period;
 
     public static RankingListFragment newInstance() {
         
@@ -113,12 +113,13 @@ public class RankingListFragment extends BaseFragment  implements RankingListCon
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId){
                     case R.id.rbtnPeople:
-                        type = "0";
+                        type = 0;
                         break;
                     case R.id.rbtnPart:
-                        type = "1";
+                        type = 1;
                         break;
                 }
+                mPresenter.getData(type,period);
             }
         });
 
@@ -128,15 +129,16 @@ public class RankingListFragment extends BaseFragment  implements RankingListCon
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId){
                     case R.id.rbtnWeekly:
-                        period="0";
+                        period=0;
                         break;
                     case R.id.rbtnMonthly:
-                        period="1";
+                        period=1;
                         break;
                     case R.id.rbtnQuarterly:
-                        period="2";
+                        period=2;
                         break;
                 }
+                mPresenter.getData(type,period);
             }
         });
 
@@ -144,12 +146,6 @@ public class RankingListFragment extends BaseFragment  implements RankingListCon
         rbtnWeekly.setChecked(true);
         rbtnPeople.setChecked(true);
     }
-
-
-
-
-
-
 
 
     @Override

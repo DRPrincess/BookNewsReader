@@ -7,11 +7,10 @@ package com.south.worker.data.bean;
  */
 
 public class OnlineBookBean {
-    public int image;
-    public String url;
+    public String BookName;
+    public String BookPic;
+    public String BookUrl;
+    public String BookImg;
+    public int Id;
 
-    public OnlineBookBean(int image, String url) {
-        this.image = image;
-        this.url = url;
-    }
 }

@@ -14,7 +14,8 @@ import com.south.worker.ui.user_info.EditSignFragment;
 
 public class EditActivity extends BaseActivity {
 
-
+    private final static String Intent_BOOK_ID = "bookId";
+    private final static String Intent_BOOK_NAME = "bookName";
     public  final static String  Intent_Key_Type = "type";
     public  final static String  Intent_Key_TEXT = "text";
 
@@ -29,6 +30,8 @@ public class EditActivity extends BaseActivity {
 
         String type = getIntent().getStringExtra(Intent_Key_Type);
         String text = getIntent().getStringExtra(Intent_Key_TEXT);
+        int bookId = getIntent().getIntExtra(Intent_BOOK_ID,0);
+        String bookName = getIntent().getStringExtra(Intent_BOOK_NAME);
 
         Fragment fragment = null;
 
@@ -40,7 +43,7 @@ public class EditActivity extends BaseActivity {
                 fragment = EditSignFragment.newInstance(text);
                 break;
             case "thinking":
-                fragment = EditReadThinkingFragment.newInstance(text);
+                fragment = EditReadThinkingFragment.newInstance(text,bookId,bookName);
                 break;
             case "suggustion":
                 fragment = AddSuggestFragment.newInstance();
@@ -60,11 +63,13 @@ public class EditActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
-    public static void startEditThinking(Context context,String text){
+    public static void startEditThinking(Context context,String text,int bookId,String bookName){
 
         Intent intent = new Intent();
         intent.putExtra(Intent_Key_Type,"thinking");
         intent.putExtra(Intent_Key_TEXT,text);
+        intent.putExtra(Intent_BOOK_ID,bookId);
+        intent.putExtra(Intent_BOOK_NAME,bookName);
         intent.setClass(context,EditActivity.class);
         context.startActivity(intent);
     }

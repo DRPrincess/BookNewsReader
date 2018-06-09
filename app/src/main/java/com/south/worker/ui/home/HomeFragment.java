@@ -27,6 +27,7 @@ import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.jaeger.library.StatusBarUtil;
 import com.south.worker.R;
+import com.south.worker.data.bean.BannerBean;
 import com.south.worker.data.bean.NewsBean;
 import com.south.worker.ui.BaseFragment;
 import com.south.worker.ui.CommonWebActivity;
@@ -85,7 +86,7 @@ public class HomeFragment extends BaseFragment implements HomeContact.View {
 
     int page;
     int pageNum = 10;
-    String type;
+    int type;
 
 
     public static HomeFragment newInstance() {
@@ -107,12 +108,22 @@ public class HomeFragment extends BaseFragment implements HomeContact.View {
 
         initView();
 
-        page = 1;
-        type = "0";
-        recyclerViewContents.forceToRefresh();
 
+        mPresenter.getNewsUrl(1);
 
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        recyclerViewContents.forceToRefresh();
+        super.onResume();
+    }
+
+    private void initData(){
+        page = 1;
+        mPresenter.getBanner();
+        mPresenter.getData(page,pageNum,type,edtSearch.getText().toString());
     }
 
     private void initView() {
@@ -123,16 +134,16 @@ public class HomeFragment extends BaseFragment implements HomeContact.View {
                 switch (checkedId){
 
                     case R.id.rbtnNews:
-                        type = "0";
+                        type = 0;
                         break;
                     case R.id.rbtnNotices:
-                        type = "1";
+                        type = 1;
                         break;
                     case R.id.rbtnPartActivities:
-                        type = "2";
+                        type = 2;
                         break;
                     case R.id.rbtnOnlinePartClasses:
-                        type = "3";
+                        type = 3;
                         break;
 
                 }
@@ -184,6 +195,9 @@ public class HomeFragment extends BaseFragment implements HomeContact.View {
             public void displayImage(Context context, Object path, ImageView imageView) {
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 Glide.with(context).load(path).into(imageView);
+
+                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
             }
         });
 
@@ -249,9 +263,8 @@ public class HomeFragment extends BaseFragment implements HomeContact.View {
         recyclerViewContents.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
-                page = 1;
-                mPresenter.getData(page, pageNum, type,edtSearch.getText().toString());
                 KeyBoardUtils.closeKeybord(edtSearch,getContext());
+                initData();
 
             }
         });
@@ -266,11 +279,9 @@ public class HomeFragment extends BaseFragment implements HomeContact.View {
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                NewsBean bean = mDatas.get(position);
 
-                if(bean != null){
-                    CommonWebActivity.startWebActivity(getContext(),getString(R.string.app_name),bean.url);
-                }
+
+                mPresenter.getNewsUrl(1);
             }
         });
 
@@ -322,4 +333,23 @@ public class HomeFragment extends BaseFragment implements HomeContact.View {
         }
 
     }
+
+    @Override
+    public void startWebActivity(String title, String url) {
+        CommonWebActivity.startWebActivity(getContext(),title,url);
+    }
+
+    @Override
+    public void showBanner(List<String> imgUrls, List<String> titles, List<String> linkUrls) {
+        this.imgUrls.clear();
+        this.titles.clear();
+        this.linkUrls.clear();
+
+        this.imgUrls.addAll(imgUrls);
+        this.titles.addAll(titles);
+        this.linkUrls.addAll(linkUrls);
+
+        banner.update(imgUrls);
+    }
+
 }
