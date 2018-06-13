@@ -4,6 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    tools:layout_height="100dp"
     android:padding="10dp">
 
     <ImageView
@@ -20,7 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivImage"
-        android:layout_centerVertical="true"
+        android:layout_alignParentBottom="true"
+        android:gravity="bottom"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:textColor="@color/black_secondary"
@@ -44,6 +46,23 @@
         android:ellipsize="end"
         />
 
+
+
+
+
+    <TextView
+        android:id="@+id/tvlikeNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivImage"
+        android:gravity="bottom"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/red"
+        android:textSize="@dimen/font_small"
+        tools:text="4人点赞"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
 
 
 

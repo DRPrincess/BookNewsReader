@@ -130,11 +130,20 @@
         android:layout_height="match_parent">
 
 
+        <include
+            android:id="@+id/emptyView"
+            layout="@layout/layout_no_data"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+
+
         <com.github.jdsjlzx.recyclerview.LRecyclerView
             android:id="@+id/recyclerViewContents"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true">
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/layoutRankingList"
+           >
         </com.github.jdsjlzx.recyclerview.LRecyclerView>
 
 
@@ -149,17 +158,47 @@
                 android:id="@+id/btnRankingList"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="15dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/bg_rectangle_solid_red_corner5"
                 android:text="查看我的阅读排行"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_normal"
                 />
 
+
+
+
         </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/layoutAddThinking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white">
+
+            <Button
+                android:id="@+id/btnAddThinking"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_rectangle_solid_red_corner5"
+                android:text="记录我的心得"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_normal"
+                />
+
+        </RelativeLayout>
+
+
+
 
     </RelativeLayout>
 

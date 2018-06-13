@@ -28,6 +28,6 @@ public class HomeContact {
 
         void showData(List<NewsBean> newsBeans);
         void startWebActivity(String title,String url);
-        void showBanner(List<String> imageUrl,List<String> titles,List<String> linkUrls);
+        void showBanner(List<String> imageUrl,List<BannerBean> bannerBeans);
     }
 }

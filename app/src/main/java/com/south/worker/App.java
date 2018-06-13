@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 
+import com.igexin.sdk.PushManager;
+import com.south.worker.push.MyGTIntentService;
+import com.south.worker.push.PushService;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +21,6 @@ public class App extends Application{
 
     private static App INSTANCE;
 
-    private App(){}
-
     public static App  getInstance(){
         return INSTANCE;
     }
@@ -26,7 +28,18 @@ public class App extends Application{
     public void onCreate() {
         super.onCreate();
         INSTANCE = this;
+
+        PushManager.getInstance().initialize(this.getApplicationContext(), PushService.class);
+        PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), MyGTIntentService.class);
+
+
+
     }
+
+
+
+
+
 
     List<Activity> mActivities = new ArrayList<>();
     public void add(Activity activity) {

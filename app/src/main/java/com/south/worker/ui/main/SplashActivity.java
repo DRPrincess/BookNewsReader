@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import com.baselib.utils.SharedPreferencesUtil;
 import com.jaeger.library.StatusBarUtil;
 import com.south.worker.R;
+import com.south.worker.constant.IntentConfig;
 import com.south.worker.constant.SharedPreferencesConfig;
 import com.south.worker.ui.BaseActivity;
 import com.south.worker.ui.login.LoginActivity;
@@ -51,7 +52,11 @@ public class SplashActivity extends BaseActivity {
         finish();
     }
     private void goMain() {
+
         Intent intent = new Intent(this, MainActivity.class);
+        if(getIntent() != null && getIntent().getIntExtra(IntentConfig.INTENT_KEY_PUSH_NEWS_ID,-1) != -1){
+            intent.putExtra(IntentConfig.INTENT_KEY_PUSH_NEWS_ID,getIntent().getIntExtra(IntentConfig.INTENT_KEY_PUSH_NEWS_ID,-1));
+        }
         startActivity(intent);
         finish();
     }

@@ -17,5 +17,6 @@ public class RespondBean {
     public JsonElement Result;
     public JsonElement data;
     public JsonElement Data;
+    public JsonElement item;
 
 }

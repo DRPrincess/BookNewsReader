@@ -40,6 +40,7 @@ public class CommonWebActivity extends BaseActivity {
 
     public static final String URL = "url";
     public static final String TITLE = "title";
+    public static final String Content = "content";
     Context mContext;
     @BindView(R.id.ivBack)
     ImageView ivBack;
@@ -62,10 +63,20 @@ public class CommonWebActivity extends BaseActivity {
     private boolean loadSuccess;
     private String url;
     private String title;
+    private String content;
 
-    public static void startWebActivity(Context context, String title, String url) {
+    public static void startUrlWebActivity(Context context, String title, String url) {
         Intent intent = new Intent();
         intent.putExtra(CommonWebActivity.URL, url);
+        intent.putExtra(CommonWebActivity.TITLE, title);
+        intent.setClass(context, CommonWebActivity.class);
+        context.startActivity(intent);
+    }
+
+
+    public static void startWebActivity(Context context, String title, String Content) {
+        Intent intent = new Intent();
+        intent.putExtra(CommonWebActivity.Content, Content);
         intent.putExtra(CommonWebActivity.TITLE, title);
         intent.setClass(context, CommonWebActivity.class);
         context.startActivity(intent);
@@ -80,6 +91,7 @@ public class CommonWebActivity extends BaseActivity {
         mContext = this;
         url = getIntent().getStringExtra(URL);
         title = getIntent().getStringExtra(TITLE);
+        content = getIntent().getStringExtra(Content);
 
         //初始化View
         initView();
@@ -107,7 +119,7 @@ public class CommonWebActivity extends BaseActivity {
     }
 
     private void initView() {
-        if ( TextUtils.isEmpty(url)) {
+        if ( TextUtils.isEmpty(url) && TextUtils.isEmpty(content) ) {
             Toast.makeText(mContext, "数据异常，请稍后再试", Toast.LENGTH_SHORT).show();
             finish();
         }
@@ -195,7 +207,16 @@ public class CommonWebActivity extends BaseActivity {
             }
         });
 
-        webview.loadUrl(url);
+        if(!TextUtils.isEmpty(url)){
+            webview.loadUrl(url);
+        }
+
+        if(!TextUtils.isEmpty(content)){
+            webview.loadData(content, "text/html; charset=UTF-8", null);
+//            webview.loadData(content,"text/html","utf-8");
+        }
+
+
 
 
     }

@@ -3,13 +3,16 @@ package com.south.worker.ui.my_part;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.south.worker.R;
+import com.south.worker.constant.NetConfig;
 import com.south.worker.data.bean.PartActivityBean;
 
 import java.util.List;
@@ -49,9 +52,17 @@ public class MyPartAdapter extends RecyclerView.Adapter<MyPartAdapter.ViewHolder
         PartActivityBean bean = mDatas.get(position);
 
         if(bean != null){
-            holder.tvTitle.setText(bean.title);
-            holder.tvContent.setText(bean.content);
-            holder.ivImage.setImageResource(bean.image);
+            holder.tvTitle.setText(bean.Title);
+            holder.tvContent.setText(bean.ViceTitle);
+
+
+            if (!TextUtils.isEmpty(bean.Pic)) {
+                bean.Pic = NetConfig.IMAGE_PREFIXX + bean.Pic;
+                Glide.with(mContext).load(bean.Pic).into(holder.ivImage);
+
+            } else {
+                holder.ivImage.setImageResource(R.drawable.list_default);
+            }
         }
     }
 

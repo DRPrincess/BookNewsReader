@@ -25,10 +25,20 @@ public class LogUtils {
             android.util.Log.v(TAG, msg, t);
     }
 
+    public static void v(String tag,String msg) {
+        if (logSwitch)
+            android.util.Log.v(tag, msg);
+    }
+
     public static void d(String log){
         if(logSwitch){
             Log.d(TAG, log);
         }
+    }
+
+    public static void d(String tag,String msg) {
+        if (logSwitch)
+            android.util.Log.d(tag, msg);
     }
 
     public static void i(String msg) {
@@ -41,6 +51,11 @@ public class LogUtils {
             android.util.Log.i(TAG, msg, t);
     }
 
+    public static void i(String tag,String msg) {
+        if (logSwitch)
+            android.util.Log.i(tag, msg);
+    }
+
     public static void w(String msg) {
         if (logSwitch)
             android.util.Log.w(TAG, msg);
@@ -51,9 +66,20 @@ public class LogUtils {
             android.util.Log.w(TAG, msg, t);
     }
 
+    public static void w(String tag,String msg) {
+        if (logSwitch)
+            android.util.Log.w(tag, msg);
+    }
+
+
     public static void e(String msg) {
         if (logSwitch)
             android.util.Log.e(TAG, msg);
+    }
+
+    public static void e(String tag,String msg) {
+        if (logSwitch)
+            android.util.Log.e(tag, msg);
     }
 
     public static void e(String msg, Throwable t) {

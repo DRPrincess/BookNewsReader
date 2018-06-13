@@ -83,6 +83,7 @@
 
         </TableRow>
         <TableRow
+            android:id="@+id/layoutGender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -102,8 +103,8 @@
                 android:text="性别"
                 />
 
-            <EditText
-                android:id="@+id/edtSex"
+            <TextView
+                android:id="@+id/tvSex"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="100dp"
@@ -118,6 +119,7 @@
 
         </TableRow>
         <TableRow
+            android:id="@+id/layoutBirth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -137,8 +139,8 @@
                 android:text="出生年月"
                 />
 
-            <EditText
-                android:id="@+id/edtBirth"
+            <TextView
+                android:id="@+id/tvBirth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="100dp"
@@ -153,6 +155,7 @@
 
         </TableRow>
         <TableRow
+            android:id="@+id/layoutIntoPart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -172,8 +175,8 @@
                 android:text="入党时间"
                 />
 
-            <EditText
-                android:id="@+id/edtIntoPart"
+            <TextView
+                android:id="@+id/tvIntoPart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="100dp"
@@ -188,6 +191,7 @@
 
         </TableRow>
         <TableRow
+            android:id="@+id/layoutEducation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -207,8 +211,8 @@
                 android:text="学历"
                 />
 
-            <EditText
-                android:id="@+id/edtEducation"
+            <TextView
+                android:id="@+id/tvEducation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="100dp"

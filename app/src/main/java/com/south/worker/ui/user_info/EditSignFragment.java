@@ -12,6 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.south.worker.R;
+import com.south.worker.data.BookReposity;
+import com.south.worker.data.UserRepository;
+import com.south.worker.data.bean.ReadThinkingBean;
+import com.south.worker.data.bean.RespondBean;
+import com.south.worker.data.network.LoadingSubscriber;
 import com.south.worker.ui.BaseFragment;
 
 import butterknife.BindView;
@@ -84,9 +89,32 @@ public class EditSignFragment extends BaseFragment {
                 getActivity().onBackPressed();
                 break;
             case R.id.btnSubmit:
-                Toast.makeText(getContext(), "提交成功", Toast.LENGTH_SHORT).show();
+                editSign();
 
                 break;
         }
     }
+
+    private void editSign(){
+        UserRepository.getInstance()
+                .editSign(getUserId(),edtSign.getText().toString())
+                .subscribe(new LoadingSubscriber<RespondBean>(getContext(),getActivity().getString(R.string.msg_loading),true) {
+
+                    @Override
+                    public void onNext(RespondBean respondBean) {
+                        showTipDialog(respondBean.Msg);
+                        if (respondBean.IsOk){
+                            getActivity().onBackPressed();
+                        }
+
+                    }
+                    @Override
+                    public void onSubscriberError(String errorMsg) {
+                        showTipDialog(errorMsg);
+                    }
+
+                });
+
+    }
+
 }

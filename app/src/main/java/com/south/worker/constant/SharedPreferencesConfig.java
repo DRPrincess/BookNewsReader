@@ -26,6 +26,8 @@ public class SharedPreferencesConfig {
     public static final String SHARED_KEY_REMEMBER_PASSWORD = "remember_password";
     //用户密码
     public static final String SHARED_KEY_USER_PASSWORD = "user_password";
+    //开始读书的时间
+    public static final String SHARED_KEY_USER_READ_BOOK_START_TIME = "user_read_start_time";
 
 
 }

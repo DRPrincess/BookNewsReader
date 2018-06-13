@@ -1,7 +1,9 @@
 package com.south.worker.ui.online_read;
 
+import com.south.worker.data.bean.OnlineBookBean;
 import com.south.worker.data.bean.OnlineReadBean;
 import com.south.worker.data.bean.PartActivityBean;
+import com.south.worker.data.bean.ReadBookTimeBean;
 import com.south.worker.ui.BasePresenter;
 import com.south.worker.ui.BaseView;
 
@@ -15,22 +17,33 @@ import java.util.List;
 
 public class OnlineReadContact {
 
-    static interface Presenter extends BasePresenter {
+    public  static interface Presenter extends BasePresenter {
         void getOnlineBook(int page, int pageNum,String searchContent);
-        void getMyReadRecord(int page, int pageNum,String searchContent);
-        void getMyThinking(int page, int pageNum,String searchContent);
-         //DateTime时间格式要求传入时间只传今天的时间
-        void addReadBook(int useId, int bookId,String totalTime);
-        void addMyBook(int userId,  int bookId, String bookName);
-        void deleteMyBook(int userId,int bookId,String bookName);
+
+        void getMyReadRecord(int userId, int page, int pageNum, String searchContent);
+
+        void getMyThinking(int userId, int page, int pageNum, String searchContent);
+
+        void addReadBook(ReadBookTimeBean bookTimeBean);
+
+        void addMyBook(int userId, int bookId, String bookName, String url);
+
+        void likeReadThinking( int userId,  int thinkingid, int num);
 
     }
-    static interface View extends BaseView<Presenter> {
+    public static interface View extends BaseView<Presenter> {
         void showOnlineBookList(List<OnlineReadBean> newsBeans);
 
         void showMyReadRecordList(List<OnlineReadBean> newsBeans);
 
         void showMyThinkingList(List<OnlineReadBean> newsBeans);
 
+        void startWebActivity(String title, String url,int bookId,int type);
+
+    }
+
+
+    public static interface AllBookView extends BaseView<Presenter> {
+        void showOnlineBookList(List<OnlineBookBean> newsBeans);
     }
 }

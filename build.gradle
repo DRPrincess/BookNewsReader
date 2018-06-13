@@ -19,6 +19,7 @@ allprojects {
         jcenter()
         maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
         maven { url "https://jitpack.io" }
+        maven { url "http://mvn.gt.igexin.com/nexus/content/repositories/releases/" }
     }
 }
 
@@ -31,7 +32,7 @@ ext {
     compileSdkVersion = 26
     minSdkVersion = 17
     targetSdkVersion = 26
-    versionCode = 10
+    versionCode = 11
     versionName = "1.0.0"
     supportLibraryVersion = '27.1.1'
     junitVersion='4.2'

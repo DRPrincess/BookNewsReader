@@ -13,18 +13,13 @@ public class NetConfig {
 
     public static String BASE_URL = "http://47.94.11.200:8081/";
 
-    //图片上传的阿里云地址
-    public static String endpoint = "http://oss-cn-hangzhou.aliyuncs.com";
-
-    //图片上传的阿里云仓库名称
-    public static final String ALIYUN_BUCKET_NAME = "cars-img";
-
-    //图片上传的阿里云仓库中的文件夹名称
-    public static final String ALIYUN_DIR_NAME = "cars/";
+    //服务区图片访问前缀
+    public static final String IMAGE_PREFIXX= BASE_URL+"Content/素材文件/";
 
 
-    //上传到阿里云后的访问前缀
-    public static final String ALIYUN_IMAGE_PREFIXX= "https://img1.dongdalou.com/";
+
+
+
 
 
 

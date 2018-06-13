@@ -40,6 +40,48 @@ public class RankingListPresenter  implements RankingListContact.Presenter{
 
     }
 
+    @Override
+    public void getMyData(int userId, int period) {
+        BookReposity.getInstance()
+                .getMyReadRankList(userId,period)
+                .subscribe(new LoadingSubscriber<ReadRankingBean>(mContext,mContext.getString(R.string.msg_loading),true) {
+
+                    @Override
+                    public void onNext(ReadRankingBean bean) {
+                        if (bean != null){
+                            mView.showRank(bean.readTime,bean.Num);
+                        }
+                    }
+                    @Override
+                    public void onSubscriberError(String errorMsg) {
+                        mView.showToast(errorMsg);
+                    }
+
+                });
+    }
+
+    @Override
+    public void getMyPartData(int partId, int period) {
+        BookReposity.getInstance()
+                .getMyPartReadRankList(partId,period)
+                .subscribe(new LoadingSubscriber<ReadRankingBean>(mContext,mContext.getString(R.string.msg_loading),true) {
+
+                    @Override
+                    public void onNext(ReadRankingBean bean) {
+
+                        if (bean != null){
+                            mView.showRank(bean.readTime,bean.Num);
+                        }
+
+                    }
+                    @Override
+                    public void onSubscriberError(String errorMsg) {
+                        mView.showToast(errorMsg);
+                    }
+
+                });
+    }
+
     private void getPartReadRankList(int period){
         BookReposity.getInstance()
                 .getPartReadRankList(period)
@@ -78,16 +120,4 @@ public class RankingListPresenter  implements RankingListContact.Presenter{
                 });
     }
 
-    private void getDefaultdata() {
-        List<ReadRankingBean> readRankingBeans = new ArrayList<>();
-
-        readRankingBeans.add(new ReadRankingBean("1","王爱国",null,"285分钟"));
-        readRankingBeans.add(new ReadRankingBean("2","唐柔",null,"207分钟"));
-        readRankingBeans.add(new ReadRankingBean("3","陈果",null,"190分钟"));
-        readRankingBeans.add(new ReadRankingBean("4","李建军",null,"163分钟"));
-        readRankingBeans.add(new ReadRankingBean("5","叶霰",null,"160分钟"));
-        readRankingBeans.add(new ReadRankingBean("6","甄迦",null,"104分钟"));
-
-        mView.showData(readRankingBeans);
-    }
 }

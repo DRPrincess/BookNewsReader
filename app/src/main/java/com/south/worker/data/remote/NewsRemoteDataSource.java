@@ -4,6 +4,8 @@ import com.south.worker.data.bean.BannerBean;
 import com.south.worker.data.bean.NewUrlBean;
 import com.south.worker.data.bean.NewsBean;
 import com.south.worker.data.bean.PartActivityBean;
+import com.south.worker.data.bean.RespondBean;
+import com.south.worker.data.bean.RespondPageListBean;
 import com.south.worker.data.bean.UserLoginBean;
 
 import java.util.List;
@@ -24,20 +26,20 @@ public interface NewsRemoteDataSource {
     //首页新闻
     @FormUrlEncoded
     @POST("NewsApi/List")
-    Observable<List<NewsBean>> getNews(@Field("NumPerPage") int pageNum, @Field("PageNum") int page,@Field("Id") int Id);
+    Observable<RespondPageListBean> getNews(@Field("NumPerPage") int pageNum, @Field("PageNum") int page, @Field("TypeId") int Id, @Field("name") String name);
 
     //支部新闻
     @FormUrlEncoded
     @POST("NewsApi/BranchsList")
-    Observable<List<PartActivityBean>> getPartNews(@Field("NumPerPage") int pageNum, @Field("PageNum") int page,@Field("Id") int Id);
+    Observable<RespondPageListBean> getPartNews(@Field("NumPerPage") int pageNum, @Field("PageNum") int page,@Field("Id") int partId,@Field("TypeId") int type,@Field("name") String name);
 
     //首页banner
     @POST("NewsApi/BannerList")
-    Observable<List<BannerBean>> getNewsBanner();
+    Observable<RespondBean> getNewsBanner();
     @FormUrlEncoded
     //支部Banner
     @POST("NewsApi/BranchsBanner")
-    Observable<List<BannerBean>> getPartBanner(@Field("Id") int Id);
+    Observable<RespondBean> getPartBanner(@Field("Id") int Id);
 
     //查看新闻
     @FormUrlEncoded

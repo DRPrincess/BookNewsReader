@@ -7,15 +7,15 @@ package com.south.worker.data.bean;
  */
 
 public class PartActivityBean {
-    public String title;
-    public String content;
-    public int image;
-    public String url;
 
-    public PartActivityBean(String title, String content, int image, String url) {
-        this.title = title;
-        this.content = content;
-        this.image = image;
-        this.url = url;
-    }
+
+    public int Id;
+    public String Title;
+    public String ViceTitle;
+    public String Content;
+    public int BranchId;
+    public String BranchName;
+    public String Pic;
+    public String Url;
+
 }

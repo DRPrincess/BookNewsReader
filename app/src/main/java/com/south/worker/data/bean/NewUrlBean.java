@@ -7,4 +7,7 @@ package com.south.worker.data.bean;
  */
 
 public class NewUrlBean {
+
+    public String Title;
+    public String Content;
 }

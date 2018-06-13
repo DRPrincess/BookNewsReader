@@ -13,15 +13,9 @@ public class ReadThinkingBean {
     public int UserId;
     public String UserName;
     public String Content;
+    public int Num;
+    public int Id;
+    public boolean isAleadyAdd = true;
 
-    public String title;
-    public String content;
 
-    public ReadThinkingBean(){
-
-    }
-    public ReadThinkingBean(String title, String content) {
-        this.title = title;
-        this.content = content;
-    }
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.jaeger.library.StatusBarUtil;
 import com.south.worker.R;
 import com.south.worker.data.bean.UserInfoBean;
@@ -51,13 +53,20 @@ public class UserInfoFragment extends BaseFragment implements UserInfoContact.Vi
         return fragment;
     }
 
+    @Override
+    public void onResume() {
+        mPresenter.getUserInfo(getUserId());
+        super.onResume();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_user_info, container, false);
         unbinder = ButterKnife.bind(this, rootView);
-//        StatusBarUtil.setTransparentForImageViewInFragment(getActivity(),ivHeadImg);
         StatusBarUtil.setColor(getActivity(), getResources().getColor(R.color.red));
+
+        mPresenter.getUserInfo(getUserId());
 
 
         return rootView;
@@ -76,7 +85,7 @@ public class UserInfoFragment extends BaseFragment implements UserInfoContact.Vi
 
         switch (view.getId()) {
             case R.id.llSign:
-                EditActivity.startEditSign(getContext(),"");
+                EditActivity.startEditSign(getContext(),tvSign.getText().toString());
                 break;
             case R.id.llEditInfo:
                 intent = new Intent(getActivity(),EditUserInfoActivity.class);
@@ -107,6 +116,12 @@ public class UserInfoFragment extends BaseFragment implements UserInfoContact.Vi
 
     @Override
     public void showUserInfo(UserInfoBean bean) {
+
+        if(!TextUtils.isEmpty(bean.HeadPortrait)){
+            Glide.with(getContext()).load(bean.HeadPortrait).into(ivHeadImg);
+        }
+        tvSign.setText(bean.Autograph);
+        tvUserName.setText(bean.RealName +"  " + bean.GenderName +"  "+ bean.EducationName);
 
     }
 }

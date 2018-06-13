@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,12 +19,15 @@ import android.widget.TextView;
 
 import com.baselib.utils.KeyBoardUtils;
 import com.bumptech.glide.Glide;
+import com.github.jdsjlzx.interfaces.OnItemClickListener;
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
 import com.github.jdsjlzx.interfaces.OnRefreshListener;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.jaeger.library.StatusBarUtil;
 import com.south.worker.R;
+import com.south.worker.data.bean.BannerBean;
+import com.south.worker.data.bean.NewsBean;
 import com.south.worker.data.bean.PartActivityBean;
 import com.south.worker.ui.BaseFragment;
 import com.south.worker.ui.CommonWebActivity;
@@ -73,8 +77,7 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
 
 
     ArrayList<String> imgUrls;
-    ArrayList<String> titles;
-    ArrayList<String> linkUrls;
+    ArrayList<BannerBean> mBannerBeans;
 
 
     int page;
@@ -164,7 +167,7 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
     private void initData(){
         page = 1;
         mPresenter.getBanner(getPartId());
-        mPresenter.getData(page,pageNum,type,edtSearch.getText().toString());
+        mPresenter.getData(page,pageNum,getPartId(),type,edtSearch.getText().toString());
     }
 
 
@@ -174,8 +177,7 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
     private  void initBanner(){
 
         imgUrls = new ArrayList<>();
-        titles = new ArrayList<>();
-        linkUrls = new ArrayList<>();
+        mBannerBeans = new ArrayList<>();
         //设置图片加载器
         banner.setImageLoader(new ImageLoader() {
             @Override
@@ -188,19 +190,7 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
 
         //本地图片数据（资源文件）
         List<Integer> images = new ArrayList<>();
-        images.add(R.drawable.show_data_news_weixin4);
-        images.add(R.drawable.show_data_news_weixin11);
-        images.add(R.drawable.show_data_news_weixin7);
-
-
-        titles.add("六一“铁娃”说爸妈");
-        titles.add("风里雨里 线路上等你");
-        titles.add("天气很“任性”，他们从不“Care”");
-
-        linkUrls.add("https://mp.weixin.qq.com/s/_zH6d6VwIwwabXVEQPpYgw");
-        linkUrls.add("https://mp.weixin.qq.com/s/Ca50q6yUPWRv3z62GycWFw");
-        linkUrls.add("https://mp.weixin.qq.com/s/MeZpX-3X-wr4gokRDVOW8g");
-
+        images.add(R.drawable.banner_default);
 
         //设置图片集合
         banner.setImages(images);
@@ -212,12 +202,11 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
         banner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
+                BannerBean bannerBean = mBannerBeans.get(position);
 
-                //跳转链接为空时，不跳转
-//                if(!TextUtils.isEmpty(linkUrls.get(position))){
-                CommonWebActivity.startWebActivity(getContext(),titles.get(position),linkUrls.get(position));
-
-//                }
+                if(bannerBean != null){
+                    mPresenter.getNewsUrl(bannerBean.NewsId);
+                }
 
             }
         });
@@ -240,7 +229,7 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
         recyclerViewContents.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerViewContents.setAdapter(mAdapter);
         recyclerViewContents.setPullRefreshEnabled(true);
-        recyclerViewContents.setLoadMoreEnabled(false);
+        recyclerViewContents.setLoadMoreEnabled(true);
 
         mAdapter.addHeaderView(headView);
 
@@ -261,7 +250,18 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
             @Override
             public void onLoadMore() {
                 page++;
-                mPresenter.getData(page, pageNum, type,edtSearch.getText().toString());
+                mPresenter.getData(page, pageNum, getPartId(), type,edtSearch.getText().toString());
+            }
+        });
+        mAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+                PartActivityBean bean = mDatas.get(position);
+                if(bean == null){
+                    return;
+                }
+                mPresenter.getNewsUrl(bean.Id);
             }
         });
 
@@ -320,15 +320,17 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
     }
 
     @Override
-    public void showBanner(List<String> imgUrls, List<String> titles, List<String> linkUrls) {
+    public void showBanner(List<String> imgUrls, List<BannerBean> bannerBeans) {
         this.imgUrls.clear();
-        this.titles.clear();
-        this.linkUrls.clear();
+        this.mBannerBeans.clear();
 
         this.imgUrls.addAll(imgUrls);
-        this.titles.addAll(titles);
-        this.linkUrls.addAll(linkUrls);
+        this.mBannerBeans.addAll(bannerBeans);
 
-        banner.update(imgUrls);
+        if(imgUrls != null && !imgUrls.isEmpty()){
+            banner.update(imgUrls);
+        }
+
+
     }
 }

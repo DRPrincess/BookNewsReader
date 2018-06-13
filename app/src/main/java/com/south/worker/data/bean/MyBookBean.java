@@ -9,15 +9,25 @@ package com.south.worker.data.bean;
 public class MyBookBean {
 
 
-    public int image;
-    public String number;
-    public String readTime;
-    public String url;
+    /**
+     * BookName : 毛泽东真伟大
+     * UserId : 9
+     * BookId : 1
+     * Lengthof : 639
+     * Pic : 2018_06_06_14_52_0912363537590.jpg
+     * Url : dadsaddasd
+     * Num : 0
+     * Id : 6
+     * SysCreateTime : /Date(1528726243378)/
+     */
 
-    public MyBookBean(int image, String number, String readTime, String url) {
-        this.image = image;
-        this.number = number;
-        this.readTime = readTime;
-        this.url = url;
-    }
+    public String BookName;
+    public int UserId;
+    public int BookId;
+    public int Lengthof;
+    public String Pic;
+    public String Url;
+    public int Num;
+    public int Id;
+    public String SysCreateTime;
 }

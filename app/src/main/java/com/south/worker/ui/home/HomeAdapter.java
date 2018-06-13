@@ -3,6 +3,7 @@ package com.south.worker.ui.home;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.south.worker.R;
+import com.south.worker.constant.NetConfig;
 import com.south.worker.data.bean.NewsBean;
 
 import java.util.List;
@@ -48,8 +51,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
         NewsBean bean = mDatas.get(position);
         if(bean != null){
-            holder.tvNewsTitle.setText(bean.title);
-            holder.ivNewsImage.setImageResource(bean.image);
+            holder.tvNewsTitle.setText(bean.Title);
+
+            if(!TextUtils.isEmpty(bean.Pic)){
+                bean.Pic = NetConfig.IMAGE_PREFIXX+bean.Pic;
+                Glide.with(mContext).load(bean.Pic).into(holder.ivNewsImage);
+            }else{
+                holder.ivNewsImage.setImageResource(R.drawable.banner_default);
+            }
         }
 
     }

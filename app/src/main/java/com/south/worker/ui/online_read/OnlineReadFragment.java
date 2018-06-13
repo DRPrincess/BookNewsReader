@@ -6,18 +6,22 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.baselib.utils.ActivityUtils;
 import com.baselib.utils.KeyBoardUtils;
 import com.baselib.utils.LogUtils;
+import com.baselib.utils.SharedPreferencesUtil;
+import com.baselib.utils.StringUtils;
+import com.baselib.utils.TimeUtils;
 import com.github.jdsjlzx.interfaces.OnItemClickListener;
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
 import com.github.jdsjlzx.interfaces.OnRefreshListener;
@@ -25,10 +29,16 @@ import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.jaeger.library.StatusBarUtil;
 import com.south.worker.R;
+import com.south.worker.constant.SharedPreferencesConfig;
 import com.south.worker.data.bean.OnlineReadBean;
+import com.south.worker.data.bean.ReadBookTimeBean;
+import com.south.worker.data.bean.ReadThinkingBean;
 import com.south.worker.ui.BaseFragment;
 import com.south.worker.ui.CommonWebActivity;
-import com.south.worker.ui.EditActivity;
+import com.south.worker.ui.online_read.read_thinking.AddReadThinkingActivity;
+import com.south.worker.ui.online_read.read_thinking.AddReadThinkingFragment;
+import com.south.worker.ui.online_read.read_thinking.ReadThinkingDetailActivity;
+import com.south.worker.ui.online_read.read_thinking.ReadThinkingDetailFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +57,7 @@ import butterknife.Unbinder;
 public class OnlineReadFragment extends BaseFragment implements OnlineReadContact.View {
 
     private static final String TAG = "OnlineReadFragment";
+    private static final int REQUEST_CODE_READ = 0x01;
     @BindView(R.id.edtSearch)
     EditText edtSearch;
     @BindView(R.id.btnSearch)
@@ -63,6 +74,12 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
     LRecyclerView recyclerViewContents;
     @BindView(R.id.layoutRankingList)
     RelativeLayout layoutRankingList;
+    @BindView(R.id.layoutAddThinking)
+    RelativeLayout layoutAddThinking;
+    @BindView(R.id.emptyView)
+    View emptyView;
+
+
     Unbinder unbinder;
     OnlineReadContact.Presenter mPresenter;
 
@@ -72,7 +89,7 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
 
     LRecyclerViewAdapter mAdapter;
     List<OnlineReadBean> mDatas = new ArrayList<>();
-
+    ReadBookTimeBean bookTimeBean = new ReadBookTimeBean();
 
     public static OnlineReadFragment newInstance() {
 
@@ -81,6 +98,13 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
         OnlineReadFragment fragment = new OnlineReadFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        recyclerViewContents.forceToRefresh();
     }
 
     @Nullable
@@ -113,20 +137,23 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
                 switch (checkedId) {
                     case R.id.rbtnAllBooks:
                         layoutRankingList.setVisibility(View.VISIBLE);
+                        layoutAddThinking.setVisibility(View.GONE);
                         type = "0";
                         break;
                     case R.id.rbtnMyBooks:
                         layoutRankingList.setVisibility(View.VISIBLE);
+                        layoutAddThinking.setVisibility(View.GONE);
                         type = "1";
                         break;
                     case R.id.rbtnMyThinkings:
                         layoutRankingList.setVisibility(View.GONE);
+                        layoutAddThinking.setVisibility(View.VISIBLE);
                         type = "2";
 
                         break;
                 }
                 switchTopListView();
-                initData();
+                recyclerViewContents.forceToRefresh();
 
             }
         });
@@ -140,17 +167,18 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
      * 初始化数据
      */
     private void initData() {
-        page = 1;
         KeyBoardUtils.closeKeybord(edtSearch, getContext());
+        page = 1;
+        mDatas.clear();
         switch (type) {
             case "0":
                 mPresenter.getOnlineBook(page, pageNum, edtSearch.getText().toString());
                 break;
             case "1":
-                mPresenter.getMyReadRecord(page, pageNum, edtSearch.getText().toString());
+                mPresenter.getMyReadRecord(getUserId(),page, pageNum, edtSearch.getText().toString());
                 break;
             case "2":
-                mPresenter.getMyThinking(page, pageNum, edtSearch.getText().toString());
+                mPresenter.getMyThinking(getUserId(),page, pageNum, edtSearch.getText().toString());
                 break;
         }
     }
@@ -168,21 +196,21 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
             case "0":
                 recyclerViewContents.setLayoutManager(new GridLayoutManager(getContext(), 4));
                 recyclerViewContents.setAdapter(mAdapter);
-                recyclerViewContents.setPullRefreshEnabled(false);
-                recyclerViewContents.setLoadMoreEnabled(false);
+                recyclerViewContents.setPullRefreshEnabled(true);
+                recyclerViewContents.setLoadMoreEnabled(true);
                 break;
             case "1":
                 recyclerViewContents.setLayoutManager(new GridLayoutManager(getContext(), 2));
                 recyclerViewContents.setAdapter(mAdapter);
-                recyclerViewContents.setPullRefreshEnabled(false);
-                recyclerViewContents.setLoadMoreEnabled(false);
+                recyclerViewContents.setPullRefreshEnabled(true);
+                recyclerViewContents.setLoadMoreEnabled(true);
                 break;
 
             case "2":
                 recyclerViewContents.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
                 recyclerViewContents.setAdapter(mAdapter);
-                recyclerViewContents.setPullRefreshEnabled(false);
-                recyclerViewContents.setLoadMoreEnabled(false);
+                recyclerViewContents.setPullRefreshEnabled(true);
+                recyclerViewContents.setLoadMoreEnabled(true);
                 break;
         }
 
@@ -223,10 +251,10 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
                         mPresenter.getOnlineBook(page, pageNum, edtSearch.getText().toString());
                         break;
                     case "1":
-                        mPresenter.getMyReadRecord(page, pageNum, edtSearch.getText().toString());
+                        mPresenter.getMyReadRecord(getUserId(),page, pageNum, edtSearch.getText().toString());
                         break;
                     case "2":
-                        mPresenter.getMyThinking(page, pageNum, edtSearch.getText().toString());
+                        mPresenter.getMyThinking(getUserId(),page, pageNum, edtSearch.getText().toString());
                         break;
                 }
             }
@@ -241,16 +269,29 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
 
                 switch (type) {
                     case "0":
-                    case "1":
 
-                        CommonWebActivity.startWebActivity(getContext(), "实现中国梦", "http://cpc.people.com.cn/n1/2016/0420/c64094-28289029.html");
+                        if(TextUtils.isEmpty(bean.mOnlineBookBean.BookName) || StringUtils.isHttpUrl(bean.mOnlineBookBean.BookUrl)){
+                            showTipDialog("该图书链接无效");
+                            return;
+                        }else {
+                            mPresenter.addMyBook(getUserId(),bean.mOnlineBookBean.Id,bean.mOnlineBookBean.BookName,bean.mOnlineBookBean.BookUrl);
+                        }
                         break;
-//                        CommonWebActivity.startWebActivity(getContext(), "习近平谈治国理政", bean.mOnlineBookBean.url);
-//                        break;
+
+                    case "1":
+                        if(TextUtils.isEmpty(bean.mMyBookBean.Url) || StringUtils.isHttpUrl(bean.mMyBookBean.Url)){
+                            showTipDialog("该图书链接无效");
+                            return;
+                        }else{
+
+                            startWebActivity(bean.mMyBookBean.BookName,bean.mMyBookBean.Url,bean.mMyBookBean.BookId,1);
+                        }
+
+                        break;
                     case "2":
+                        ReadThinkingBean thinkingBean = bean.mReadThinkingBean;
+                        ReadThinkingDetailActivity.startReadThinkingDetailActivity(getContext(),thinkingBean.Id,thinkingBean.BookName,thinkingBean.Content);
 
-
-                        EditActivity.startEditThinking(getContext(), bean.mReadThinkingBean.Content,bean.mReadThinkingBean.BookId,bean.mReadThinkingBean.BookName);
                         break;
                 }
             }
@@ -268,7 +309,7 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
     private void solveTopList(List<OnlineReadBean> datas) {
         recyclerViewContents.refreshComplete(pageNum);
 
-        if ((mDatas == null || mDatas.size() <= 0) && page > 1) {
+        if (mDatas == null || mDatas.isEmpty()){
             recyclerViewContents.setNoMore(true);
         } else {
             if (mDatas == null) {
@@ -280,11 +321,21 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
         }
         mDatas.addAll(datas);
         mAdapter.notifyDataSetChanged();
+
+
+        if(mDatas.size()==0){
+            recyclerViewContents.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        }else{
+            recyclerViewContents.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
     }
 
     @Override
     public void showOnlineBookList(List<OnlineReadBean> datas) {
         solveTopList(datas);
+
     }
 
 
@@ -299,18 +350,62 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
         solveTopList(datas);
     }
 
-    @OnClick({R.id.btnSearch, R.id.btnRankingList})
+    @OnClick({R.id.btnSearch, R.id.btnRankingList,R.id.btnAddThinking})
     public void onViewClicked(View view) {
+
+        Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.btnSearch:
                 recyclerViewContents.forceToRefresh();
                 break;
             case R.id.btnRankingList:
-                Intent intent = new Intent();
                 intent.setClass(getContext(), RankingListActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.btnAddThinking:
+                intent.setClass(getContext(), AddReadThinkingActivity.class);
+                startActivity(intent);
+
+                break;
         }
     }
+
+    @Override
+    public void startWebActivity(String title, String url,int bookId,int type) {
+
+        bookTimeBean.BookId = bookId;
+        bookTimeBean.Type = type;
+
+        SharedPreferencesUtil.saveData(getContext(),SharedPreferencesConfig.SHARED_KEY_USER_READ_BOOK_START_TIME,TimeUtils.getCurrentDate());
+        Intent intent = new Intent();
+        intent.putExtra(CommonWebActivity.URL, url);
+        intent.putExtra(CommonWebActivity.TITLE, title);
+        intent.setClass(getContext(), CommonWebActivity.class);
+        startActivityForResult(intent,REQUEST_CODE_READ);
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE_READ){
+
+            String currentTime = TimeUtils.getCurrentDate();
+            String startTime = SharedPreferencesUtil.getString(getContext(), SharedPreferencesConfig.SHARED_KEY_USER_READ_BOOK_START_TIME,currentTime);
+            long readingTimeMinute = TimeUtils.getMinuteBetweenTwoDate(startTime,currentTime);
+
+
+            bookTimeBean.UserId = getUserId();
+            bookTimeBean.BranchId = getPartId();
+            bookTimeBean.LengthofReadingTime = readingTimeMinute;
+            bookTimeBean.Time = TimeUtils.getCurrentDate();
+
+            mPresenter.addReadBook(bookTimeBean);
+
+        }
+
+    }
+
+
 
 }

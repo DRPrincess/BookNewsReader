@@ -27,6 +27,7 @@ import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.jaeger.library.StatusBarUtil;
 import com.south.worker.R;
+import com.south.worker.constant.IntentConfig;
 import com.south.worker.data.bean.BannerBean;
 import com.south.worker.data.bean.NewsBean;
 import com.south.worker.ui.BaseFragment;
@@ -80,8 +81,7 @@ public class HomeFragment extends BaseFragment implements HomeContact.View {
 
 
     ArrayList<String> imgUrls;
-    ArrayList<String> titles;
-    ArrayList<String> linkUrls;
+    ArrayList<BannerBean> mBannerBeans;
 
 
     int page;
@@ -109,7 +109,16 @@ public class HomeFragment extends BaseFragment implements HomeContact.View {
         initView();
 
 
-        mPresenter.getNewsUrl(1);
+        //推送过来的消息
+        if(getActivity().getIntent() != null){
+            Intent intent = getActivity().getIntent();
+            int newsId = intent.getIntExtra(IntentConfig.INTENT_KEY_PUSH_NEWS_ID,-1);
+            if(newsId != -1){
+                mPresenter.getNewsUrl(newsId);
+            }
+        }
+
+
 
         return rootView;
     }
@@ -187,8 +196,7 @@ public class HomeFragment extends BaseFragment implements HomeContact.View {
     private  void initBanner(){
 
         imgUrls = new ArrayList<>();
-        titles = new ArrayList<>();
-        linkUrls = new ArrayList<>();
+        mBannerBeans = new ArrayList<>();
         //设置图片加载器
         banner.setImageLoader(new ImageLoader() {
             @Override
@@ -203,17 +211,7 @@ public class HomeFragment extends BaseFragment implements HomeContact.View {
 
         //本地图片数据（资源文件）
         List<Integer> images = new ArrayList<>();
-        images.add(R.drawable.show_data_news_weixin15);
-        images.add(R.drawable.show_data_news_weixin16);
-        images.add(R.drawable.show_data_news_weixin17);
-
-        titles.add("驾驶史诗级的机车 写着新时代的传奇");
-        titles.add("为梦想不负芳华");
-        titles.add("这句话咱铁路人都知道，竟然出自这里");
-
-        linkUrls.add("https://mp.weixin.qq.com/s/OFZd9zRnQIG_wpFa7awHoA");
-        linkUrls.add("https://mp.weixin.qq.com/s/nhphJjy-LA9X3564jcKGew");
-        linkUrls.add("https://mp.weixin.qq.com/s/3QDBT7UPeVFxXRPjt-PNzA");
+        images.add(R.drawable.banner_default);
 
         //设置图片集合
         banner.setImages(images);
@@ -226,7 +224,12 @@ public class HomeFragment extends BaseFragment implements HomeContact.View {
             @Override
             public void OnBannerClick(int position) {
 
-                CommonWebActivity.startWebActivity(getContext(),titles.get(position),linkUrls.get(position));
+                BannerBean bannerBean = mBannerBeans.get(position);
+
+                if(bannerBean != null){
+                    mPresenter.getNewsUrl(bannerBean.NewsId);
+                }
+
 
             }
         });
@@ -250,7 +253,7 @@ public class HomeFragment extends BaseFragment implements HomeContact.View {
         recyclerViewContents.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerViewContents.setAdapter(mAdapter);
         recyclerViewContents.setPullRefreshEnabled(true);
-        recyclerViewContents.setLoadMoreEnabled(false);
+        recyclerViewContents.setLoadMoreEnabled(true);
 
         mAdapter.addHeaderView(headView);
 
@@ -280,8 +283,11 @@ public class HomeFragment extends BaseFragment implements HomeContact.View {
             @Override
             public void onItemClick(View view, int position) {
 
-
-                mPresenter.getNewsUrl(1);
+                NewsBean bean = mDatas.get(position);
+                if(bean == null){
+                    return;
+                }
+                mPresenter.getNewsUrl(bean.Id);
             }
         });
 
@@ -340,16 +346,18 @@ public class HomeFragment extends BaseFragment implements HomeContact.View {
     }
 
     @Override
-    public void showBanner(List<String> imgUrls, List<String> titles, List<String> linkUrls) {
+    public void showBanner(List<String> imgUrls, List<BannerBean> bannerBeans) {
         this.imgUrls.clear();
-        this.titles.clear();
-        this.linkUrls.clear();
+        this.mBannerBeans.clear();
 
         this.imgUrls.addAll(imgUrls);
-        this.titles.addAll(titles);
-        this.linkUrls.addAll(linkUrls);
+        this.mBannerBeans.addAll(bannerBeans);
 
-        banner.update(imgUrls);
+        if(imgUrls != null && !imgUrls.isEmpty()){
+            banner.update(imgUrls);
+        }
+
+
     }
 
 }

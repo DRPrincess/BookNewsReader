@@ -91,7 +91,7 @@ public class RankingListAdapter extends BaseAdapter {
                 holder.tvUserName.setText(bean.BranchName);
             }
 
-            holder.tvUserReadTime.setText(bean.readTime);
+            holder.tvUserReadTime.setText(bean.readTime +"分钟");
 
             if(TextUtils.isEmpty(bean.userAvater)){
                 holder.ivUserAvatar.setImageResource(R.drawable.head1);

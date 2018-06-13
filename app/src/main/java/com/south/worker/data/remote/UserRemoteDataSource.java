@@ -49,7 +49,7 @@ public interface UserRemoteDataSource {
     //用户头像修改
     @FormUrlEncoded
     @POST("Home/EditPic")
-    Observable<UserLoginBean> changeAvatar(@Field("Id") int userId, @Field("pic") String pic);
+    Observable<RespondBean> changeAvatar(@Field("Id") int userId, @Field("pic") String pic);
 
     @FormUrlEncoded
     //查询用户密码是否匹配
@@ -59,7 +59,18 @@ public interface UserRemoteDataSource {
     @FormUrlEncoded
     //获取用户信息
     @POST("User/GetUser")
-    Observable<UserInfoBean> getUserInfo(@Field("Id") int userId);
+    Observable<RespondBean> getUserInfo(@Field("Id") int userId);
+
+
+    //获取学历列表
+    @POST("User/EducationList")
+    Observable<RespondBean> getEducationList();
+
+
+    @FormUrlEncoded
+    //获取学历列表
+    @POST("User/EditAutograph")
+    Observable<RespondBean> editSign(@Field("Id") int userId,@Field("Autograph") String signStr);
 
 
     //修改密码

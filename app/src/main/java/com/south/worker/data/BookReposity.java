@@ -5,6 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
 import com.south.worker.data.bean.MyBookBean;
 import com.south.worker.data.bean.OnlineBookBean;
+import com.south.worker.data.bean.ReadBookTimeBean;
 import com.south.worker.data.bean.ReadRankingBean;
 import com.south.worker.data.bean.ReadThinkingBean;
 import com.south.worker.data.bean.RespondBean;
@@ -46,9 +47,9 @@ public class BookReposity implements BookDataSource{
     }
 
     @Override
-    public Observable<List<OnlineBookBean>> getAllBooks(int pageNum, int page) {
+    public Observable<List<OnlineBookBean>> getAllBooks(int pageNum, int page,String searchContent) {
         return NetHelper.createService(BookRemoteDataSource.class)
-                .getAllBooks(pageNum,page)
+                .getAllBooks(pageNum,page,searchContent)
                 .map(new Function<RespondPageListBean, List<OnlineBookBean>>() {
                     @Override
                     public List<OnlineBookBean> apply(RespondPageListBean bean) throws Exception {
@@ -67,17 +68,42 @@ public class BookReposity implements BookDataSource{
     }
 
     @Override
-    public Observable<List<MyBookBean>> getMyBooks(int pageNum, int page) {
+    public Observable<List<MyBookBean>> getMyBooks(int userId,int pageNum, int page,String searchContent) {
         return NetHelper.createService(BookRemoteDataSource.class)
-                .getMyBooks(pageNum,page)
+                .getMyBooks(userId,pageNum,page,searchContent)
+                .map(new Function<RespondPageListBean, List<MyBookBean>>() {
+                    @Override
+                    public List<MyBookBean> apply(RespondPageListBean bean) throws Exception {
+
+                        List<MyBookBean> datas = new ArrayList<>();
+                        if(bean != null &&  bean.Result != null &&  bean.Result.Items !=null){
+                            datas = new Gson().fromJson(bean.Result.Items,new TypeToken<List<MyBookBean>>(){}.getType());
+                        }
+
+                        return datas;
+                    }
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override
-    public Observable<List<ReadThinkingBean>> getMyReadThinkings(int pageNum, int page) {
+    public Observable<List<ReadThinkingBean>> getMyReadThinkings(int userId,int pageNum, int page) {
         return NetHelper.createService(BookRemoteDataSource.class)
-                .getMyReadThinkings(pageNum,page)
+                .getMyReadThinkings(userId,pageNum,page)
+                .map(new Function<RespondBean, List<ReadThinkingBean>>() {
+                    @Override
+                    public List<ReadThinkingBean> apply(RespondBean bean) throws Exception {
+
+                        List<ReadThinkingBean> datas = new ArrayList<>();
+                        if(bean != null &&  bean.item != null){
+                            datas = new Gson().fromJson(bean.item,new TypeToken<List<ReadThinkingBean>>(){}.getType());
+
+                        }
+
+                        return datas;
+                    }
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
@@ -85,7 +111,7 @@ public class BookReposity implements BookDataSource{
     @Override
     public Observable<List<ReadRankingBean>> getPeopleReadRankList(int timePeriod) {
         return NetHelper.createService(BookRemoteDataSource.class)
-                .getPartReadRankList(timePeriod)
+                .getPeopleReadRankList(timePeriod)
                 .map(new Function<RespondBean, List<ReadRankingBean>>() {
                     @Override
                     public List<ReadRankingBean> apply(RespondBean bean) throws Exception {
@@ -123,9 +149,55 @@ public class BookReposity implements BookDataSource{
     }
 
     @Override
-    public Observable<RespondBean> addReadBook(int useId, int bookId, String totalTime) {
+    public Observable<RespondBean> addReadBook(ReadBookTimeBean bookTimeBean) {
         return NetHelper.createService(BookRemoteDataSource.class)
-                .addReadBook(useId,bookId,totalTime)
+                .addReadBook(bookTimeBean)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    @Override
+    public Observable<ReadRankingBean> getMyPartReadRankList(int id, int timePeriod) {
+        return NetHelper.createService(BookRemoteDataSource.class)
+                .getMyPartReadRankList(timePeriod,id)
+                .map(new Function<RespondBean, ReadRankingBean>() {
+                    @Override
+                    public ReadRankingBean apply(RespondBean bean) throws Exception {
+                        ReadRankingBean readRankingBean = new ReadRankingBean();
+                        if(bean != null && bean.Data != null){
+                            List<ReadRankingBean> datas = new Gson().fromJson(bean.Data,new TypeToken<List<ReadRankingBean>>(){}.getType());
+
+                            if(datas != null && datas.size() >0){
+                                readRankingBean = datas.get(0);
+                            }
+                        }
+
+                        return readRankingBean;
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    @Override
+    public Observable<ReadRankingBean> getMyReadRankList(int id, int timePeriod) {
+        return NetHelper.createService(BookRemoteDataSource.class)
+                .getMyReadRankList(id,timePeriod)
+                .map(new Function<RespondBean, ReadRankingBean>() {
+                    @Override
+                    public ReadRankingBean apply(RespondBean bean) throws Exception {
+                        ReadRankingBean readRankingBean = new ReadRankingBean();
+                        if(bean != null && bean.Data != null){
+                            List<ReadRankingBean> datas = new Gson().fromJson(bean.Data,new TypeToken<List<ReadRankingBean>>(){}.getType());
+
+                            if(datas != null && datas.size() >0){
+                                readRankingBean = datas.get(0);
+                            }
+                        }
+
+                        return readRankingBean;
+                    }
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
@@ -151,6 +223,14 @@ public class BookReposity implements BookDataSource{
     public Observable<RespondBean> addReadThinking(ReadThinkingBean bean) {
         return NetHelper.createService(BookRemoteDataSource.class)
                 .addReadThinking(bean)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    @Override
+    public Observable<RespondBean> likeReadThinking(int userId, int thinkingid, int num) {
+        return NetHelper.createService(BookRemoteDataSource.class)
+                .likeReadThinking(userId,thinkingid,num)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

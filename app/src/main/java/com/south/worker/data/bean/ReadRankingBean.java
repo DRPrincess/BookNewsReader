@@ -21,7 +21,11 @@ public class ReadRankingBean implements Serializable{
     public  int UserId;
     public  String BranchId;
     public  String BranchName;
+    public  int Num;
 
+
+    public ReadRankingBean() {
+    }
 
     public ReadRankingBean(String order, String userName, String userAvater, String readTime) {
         this.order = order;

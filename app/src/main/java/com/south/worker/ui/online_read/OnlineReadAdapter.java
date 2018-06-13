@@ -12,6 +12,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,6 +27,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.south.worker.constant.NetConfig.IMAGE_PREFIXX;
 
 /**
  * 描述   ：
@@ -84,38 +87,44 @@ public class OnlineReadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             case 0:
 
                 OnlineBookBean bookBean = bean.mOnlineBookBean;
-                Glide.with(mContext).load(bookBean.BookPic).into( ((OnlineBookViewHolder) holder).ivBooks);
+                ImageView ivBook = ((OnlineBookViewHolder) holder).ivBooks;
+                String url = IMAGE_PREFIXX + bookBean.BookPic;
+                Glide.with(mContext).load(url).into(ivBook);
+                ivBook.setScaleType(ImageView.ScaleType.FIT_XY);
 
                 break;
 
             case 1:
                 MyBookBean myBookBean = bean.mMyBookBean;
-
-                ((MyBookViewHolder) holder).ivBooks.setImageResource(myBookBean.image);
-
-                if (TextUtils.isEmpty(myBookBean.number)) {
-                    ((MyBookViewHolder) holder).tvNumber.setVisibility(View.GONE);
+                ImageView ivMyBook = ((MyBookViewHolder) holder).ivBooks;
+                String myBookUrl = null;
+                if (TextUtils.isEmpty(myBookBean.Pic)) {
+                    myBookUrl = IMAGE_PREFIXX + "2018_06_06_14_52_0912363537590.jpg";
                 } else {
-
-                    SpannableString s1 = new SpannableString("已读" + myBookBean.number + "次");
-                    s1.setSpan(new ForegroundColorSpan(Color.parseColor("#f53737")), 2, s1.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    ((MyBookViewHolder) holder).tvNumber.setText(s1);
+                    myBookUrl = IMAGE_PREFIXX + myBookBean.Pic;
                 }
-                if (TextUtils.isEmpty(myBookBean.readTime)) {
-                    ((MyBookViewHolder) holder).tvTimes.setVisibility(View.GONE);
-                } else {
-                    SpannableString s1 = new SpannableString(myBookBean.readTime + "分钟");
-                    s1.setSpan(new AbsoluteSizeSpan(17, true), 0, s1.length() - 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    s1.setSpan(new ForegroundColorSpan(Color.parseColor("#f53737")), 0, s1.length() - 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                Glide.with(mContext).load(myBookUrl).into(ivMyBook);
+                ivMyBook.setScaleType(ImageView.ScaleType.FIT_XY);
 
-                    ((MyBookViewHolder) holder).tvTimes.setText(s1);
-                }
+                SpannableString s1 = new SpannableString("已读" + myBookBean.Num + "次");
+                s1.setSpan(new ForegroundColorSpan(Color.parseColor("#f53737")), 2, s1.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                ((MyBookViewHolder) holder).tvNumber.setText(s1);
+
+
+                SpannableString s = new SpannableString(myBookBean.Lengthof + "分钟");
+                s.setSpan(new AbsoluteSizeSpan(18, true), 0, s.length() - 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                s.setSpan(new ForegroundColorSpan(Color.parseColor("#f53737")), 0, s.length() - 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                ((MyBookViewHolder) holder).tvTimes.setText(s);
 
                 break;
+
             case 2:
                 ReadThinkingBean readThinkingBean = bean.mReadThinkingBean;
-                ((MyThinkingViewHolder) holder).tvThingTitle.setText(readThinkingBean.title);
-                ((MyThinkingViewHolder) holder).tvThinkingContent.setText(readThinkingBean.content);
+                ((MyThinkingViewHolder) holder).tvThingTitle.setText(String.format("《%s》读后感", readThinkingBean.BookName));
+                ((MyThinkingViewHolder) holder).tvThinkingContent.setText(readThinkingBean.Content);
+                ((MyThinkingViewHolder) holder).tvlikeNum.setText(String.format("%s人点赞",readThinkingBean.Num));
+
+
                 break;
 
 
@@ -168,7 +177,8 @@ public class OnlineReadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         TextView tvThingTitle;
         @BindView(R.id.tvThinkingContent)
         TextView tvThinkingContent;
-
+        @BindView(R.id.tvlikeNum)
+        TextView tvlikeNum;
         public MyThinkingViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

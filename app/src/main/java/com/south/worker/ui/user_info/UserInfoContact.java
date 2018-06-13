@@ -19,13 +19,14 @@ public class UserInfoContact {
     static interface Presenter extends BasePresenter {
 
         void getUserInfo(int userId);
-        void editUserInfo(UserInfoBean bean);
 
 
     }
     static interface View extends BaseView<Presenter> {
 
         void showUserInfo(UserInfoBean bean);
+
+
 
     }
 }

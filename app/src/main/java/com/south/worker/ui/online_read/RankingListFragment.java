@@ -84,26 +84,30 @@ public class RankingListFragment extends BaseFragment  implements RankingListCon
         View rootView = inflater.inflate(R.layout.fragment_ranking_list, container, false);
         unbinder = ButterKnife.bind(this, rootView);
 
-
         initView();
-
-
-        mPresenter.getData(type,period);
-
 
         return rootView;
     }
 
+
+    private void initData(){
+
+        if(type == 0){
+            mPresenter.getMyData(getUserId(),period);
+
+        }else if(type == 1){
+            mPresenter.getMyPartData(getPartId(),period);
+
+        }
+        mPresenter.getData(type,period);
+
+
+    }
+
     private void initView() {
         tvMidTitle.setText(R.string.ranking_list_title);
-
-
-        SpannableString s1 = new SpannableString("285分钟");
-
-        s1.setSpan(new AbsoluteSizeSpan(19, true), 0, s1.length()-2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        tvScore.setText("第1名");
-        tvTime.setText(s1);
+        tvScore.setText("暂无数据");
+        tvTime.setText("暂无数据");
 
 
 
@@ -119,7 +123,8 @@ public class RankingListFragment extends BaseFragment  implements RankingListCon
                         type = 1;
                         break;
                 }
-                mPresenter.getData(type,period);
+
+                initData();
             }
         });
 
@@ -138,7 +143,7 @@ public class RankingListFragment extends BaseFragment  implements RankingListCon
                         period=2;
                         break;
                 }
-                mPresenter.getData(type,period);
+                initData();
             }
         });
 
@@ -170,6 +175,7 @@ public class RankingListFragment extends BaseFragment  implements RankingListCon
         if(mDatas == null){
             mDatas = new ArrayList<>();
         }
+        mDatas.clear();
         mDatas.addAll(readRankingBeans);
 
         if(mAdapter == null){
@@ -178,5 +184,15 @@ public class RankingListFragment extends BaseFragment  implements RankingListCon
         }else{
             mAdapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void showRank(String score, int num) {
+        SpannableString s1 = new SpannableString(score+"分钟");
+
+        s1.setSpan(new AbsoluteSizeSpan(19, true), 0, s1.length()-2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        tvScore.setText(String.format("第%s名",String.valueOf(num)));
+        tvTime.setText(s1);
     }
 }

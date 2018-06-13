@@ -20,10 +20,10 @@ import io.reactivex.Observable;
 public interface NewsDataSource {
 
     //首页新闻
-    Observable<List<NewsBean>> getNews(int pageNum, int page,int type);
+    Observable<List<NewsBean>> getNews(int pageNum, int page,int type,String searchContent);
 
     //支部新闻
-    Observable<List<PartActivityBean>> getPartNews(int pageNum, int page,int type);
+    Observable<List<PartActivityBean>> getPartNews(int pageNum, int page,int partId,int type,String searchContent);
 
     //首页banner
     Observable<List<BannerBean>> getNewsBanner();
