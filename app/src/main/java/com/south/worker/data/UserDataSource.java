@@ -25,5 +25,5 @@ public interface UserDataSource  {
     Observable<RespondBean> changePassword(int userId,String password,String newPassword);
     Observable<List<EducationBean>> getEducationList();
     Observable<RespondBean> editSign(int userId,String signStr);
-
+    Observable<RespondBean> uploadAvatar(int userId,String imageFilePath);
 }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.south.worker.R;
 import com.south.worker.data.bean.ReadRankingBean;
+import com.south.worker.ui.user_info.GlideApp;
 
 import java.util.List;
 
@@ -96,7 +97,7 @@ public class RankingListAdapter extends BaseAdapter {
             if(TextUtils.isEmpty(bean.userAvater)){
                 holder.ivUserAvatar.setImageResource(R.drawable.head1);
             }else{
-                Glide.with(mContext).load(bean.userAvater).into(holder.ivUserAvatar);
+                GlideApp.with(mContext).load(bean.userAvater).placeholder(R.drawable.list_default).error(R.drawable.list_default).into(holder.ivUserAvatar);
             }
         }
 

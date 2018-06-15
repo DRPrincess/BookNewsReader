@@ -127,6 +127,26 @@ public class EditUserInfoPresenter implements EditUserInfoContact.Presenter {
                 });
     }
 
+
+    @Override
+    public void uploadHeadImg(int userId, String imagePath) {
+
+        UserRepository.getInstance()
+                .uploadAvatar(userId,imagePath)
+                .subscribe(new LoadingSubscriber<RespondBean>(mContext,mContext.getString(R.string.msg_uploading),true) {
+                    @Override
+                    public void onSubscriberError(String errorMsg) {
+
+                    }
+
+                    @Override
+                    public void onNext(RespondBean bean) {
+                        mView.showTipDialog(bean.Msg);
+                    }
+                });
+
+    }
+
     @Override
     public void setBirthTime(String time) {
         mUserInfoBean.BirthTimeString = time;

@@ -1,11 +1,27 @@
 package com.south.worker.ui.user_info;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.south.worker.R;
 import com.south.worker.data.UserRepository;
+import com.south.worker.data.bean.RespondBean;
 import com.south.worker.data.bean.UserInfoBean;
 import com.south.worker.data.network.LoadingSubscriber;
+
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+
+import static android.provider.ContactsContract.CommonDataKinds.StructuredName.PREFIX;
+
 
 /**
  * 描述   ：
@@ -45,6 +61,32 @@ public class UserInfoPresenter implements UserInfoContact.Presenter {
 
 
                 });
+
+    }
+
+    @Override
+    public void uploadHeadImg(int userId, String imagePath) {
+
+        UserRepository.getInstance()
+                .uploadAvatar(userId,imagePath)
+                .subscribe(new LoadingSubscriber<RespondBean>(mContext,mContext.getString(R.string.msg_uploading),true) {
+                    @Override
+                    public void onSubscriberError(String errorMsg) {
+
+                    }
+
+                    @Override
+                    public void onNext(RespondBean bean) {
+                        mView.showTipDialog(bean.Msg);
+                    }
+                });
+
+
+
+
+
+
+
 
     }
 }

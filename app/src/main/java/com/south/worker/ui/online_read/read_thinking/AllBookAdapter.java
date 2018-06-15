@@ -13,6 +13,7 @@ import com.baseres.SquareImageView;
 import com.bumptech.glide.Glide;
 import com.south.worker.R;
 import com.south.worker.data.bean.OnlineBookBean;
+import com.south.worker.ui.user_info.GlideApp;
 
 import java.util.List;
 
@@ -61,7 +62,14 @@ public class AllBookAdapter extends RecyclerView.Adapter<AllBookAdapter.ViewHold
 
 
         String url = IMAGE_PREFIXX + bookBean.BookPic;
-        Glide.with(mContext).load(url).into(holder.ivBooks);
+        GlideApp
+                .with(mContext)
+                .load(url)
+                .placeholder(R.drawable.list_default)
+                .error(R.drawable.list_default)
+                .into(holder.ivBooks);
+
+
         holder.ivBooks.setScaleType(ImageView.ScaleType.FIT_XY);
         holder.tvBookName.setText(String.format("《%s》",bookBean.BookName));
 

@@ -22,9 +22,8 @@ public class EditUserInfoContact {
         void setIntoPartTime(String time);
         void setGender(int time);
         void setEducation(int time);
-
         void editUserInfo(int userId,int partId);
-
+        void uploadHeadImg(int userId,String imagePath);
 
 
     }

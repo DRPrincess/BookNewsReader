@@ -20,6 +20,8 @@ public class UserInfoContact {
 
         void getUserInfo(int userId);
 
+        void uploadHeadImg(int userId,String imagePath);
+
 
     }
     static interface View extends BaseView<Presenter> {

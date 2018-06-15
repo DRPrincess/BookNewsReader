@@ -1,5 +1,8 @@
 package com.south.worker.data;
 
+import android.graphics.Bitmap;
+
+import com.baselib.utils.BitmapUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.south.worker.data.bean.EducationBean;
@@ -11,6 +14,9 @@ import com.south.worker.data.network.NetHelper;
 import com.south.worker.data.network.RequestException;
 import com.south.worker.data.remote.UserRemoteDataSource;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +25,9 @@ import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 /**
  * 描述   ：用户模块
@@ -127,6 +136,30 @@ public class UserRepository  implements UserDataSource{
     public Observable<RespondBean> editSign(int userId, String signStr) {
         return NetHelper.createService(UserRemoteDataSource.class)
                 .editSign(userId,signStr)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    @Override
+    public Observable<RespondBean> uploadAvatar(int userId, String imageFilePath) {
+
+        Bitmap bitmap = BitmapUtils.convertToBitmap(imageFilePath);
+        bitmap = BitmapUtils.compressBitmapToLimitSize(bitmap, 200);
+        if (bitmap == null) {
+            return null;
+        }
+        File file = new File(imageFilePath);
+        try {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(file));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("pic", file.getName(), requestFile);
+        return  NetHelper.createService(UserRemoteDataSource.class)
+                .uploadAvatar(userId,body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

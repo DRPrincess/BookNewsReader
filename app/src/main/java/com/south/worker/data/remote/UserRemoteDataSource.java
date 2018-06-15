@@ -18,6 +18,7 @@ import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -27,7 +28,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 /**
  * 描述   ：用户模块
@@ -50,6 +53,14 @@ public interface UserRemoteDataSource {
     @FormUrlEncoded
     @POST("Home/EditPic")
     Observable<RespondBean> changeAvatar(@Field("Id") int userId, @Field("pic") String pic);
+
+
+    //用户头像修改
+    @Multipart
+    @POST("Home/EditPic")
+    Observable<RespondBean> uploadAvatar(@Part("Id") int userId, @Part MultipartBody.Part picfile );
+
+
 
     @FormUrlEncoded
     //查询用户密码是否匹配

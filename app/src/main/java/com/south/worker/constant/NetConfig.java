@@ -16,6 +16,9 @@ public class NetConfig {
     //服务区图片访问前缀
     public static final String IMAGE_PREFIXX= BASE_URL+"Content/素材文件/";
 
+    //服务区图片访问前缀
+    public static final String IMAGE_HEADIMG_PREFIXX= BASE_URL+"Content/Wide/";
+
 
 
 

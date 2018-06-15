@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.south.worker.R;
 import com.south.worker.constant.NetConfig;
 import com.south.worker.data.bean.PartActivityBean;
+import com.south.worker.ui.user_info.GlideApp;
 
 import java.util.List;
 
@@ -58,7 +59,12 @@ public class MyPartAdapter extends RecyclerView.Adapter<MyPartAdapter.ViewHolder
 
             if (!TextUtils.isEmpty(bean.Pic)) {
                 bean.Pic = NetConfig.IMAGE_PREFIXX + bean.Pic;
-                Glide.with(mContext).load(bean.Pic).into(holder.ivImage);
+                GlideApp
+                        .with(mContext)
+                        .load(bean.Pic)
+                        .placeholder(R.drawable.banner_default)
+                        .error(R.drawable.banner_default)
+                        .into(holder.ivImage);
 
             } else {
                 holder.ivImage.setImageResource(R.drawable.list_default);

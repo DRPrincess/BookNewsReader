@@ -22,6 +22,7 @@ import com.south.worker.data.bean.MyBookBean;
 import com.south.worker.data.bean.OnlineBookBean;
 import com.south.worker.data.bean.OnlineReadBean;
 import com.south.worker.data.bean.ReadThinkingBean;
+import com.south.worker.ui.user_info.GlideApp;
 
 import java.util.List;
 
@@ -89,7 +90,13 @@ public class OnlineReadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 OnlineBookBean bookBean = bean.mOnlineBookBean;
                 ImageView ivBook = ((OnlineBookViewHolder) holder).ivBooks;
                 String url = IMAGE_PREFIXX + bookBean.BookPic;
-                Glide.with(mContext).load(url).into(ivBook);
+
+                GlideApp
+                        .with(mContext)
+                        .load(url)
+                        .placeholder(R.drawable.list_default)
+                        .error(R.drawable.list_default)
+                        .into(ivBook);
                 ivBook.setScaleType(ImageView.ScaleType.FIT_XY);
 
                 break;
@@ -103,7 +110,14 @@ public class OnlineReadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 } else {
                     myBookUrl = IMAGE_PREFIXX + myBookBean.Pic;
                 }
-                Glide.with(mContext).load(myBookUrl).into(ivMyBook);
+
+                GlideApp
+                        .with(mContext)
+                        .load(myBookUrl)
+                        .placeholder(R.drawable.list_default)
+                        .error(R.drawable.list_default)
+                        .into(ivMyBook);
+
                 ivMyBook.setScaleType(ImageView.ScaleType.FIT_XY);
 
                 SpannableString s1 = new SpannableString("已读" + myBookBean.Num + "次");

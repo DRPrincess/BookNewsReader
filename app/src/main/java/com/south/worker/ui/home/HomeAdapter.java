@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.south.worker.R;
 import com.south.worker.constant.NetConfig;
 import com.south.worker.data.bean.NewsBean;
+import com.south.worker.ui.user_info.GlideApp;
 
 import java.util.List;
 
@@ -55,7 +56,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
             if(!TextUtils.isEmpty(bean.Pic)){
                 bean.Pic = NetConfig.IMAGE_PREFIXX+bean.Pic;
-                Glide.with(mContext).load(bean.Pic).into(holder.ivNewsImage);
+                GlideApp
+                        .with(mContext)
+                        .load(bean.Pic)
+                        .placeholder(R.drawable.banner_default)
+                        .error(R.drawable.banner_default)
+                        .into(holder.ivNewsImage);
+
+
             }else{
                 holder.ivNewsImage.setImageResource(R.drawable.banner_default);
             }

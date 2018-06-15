@@ -31,6 +31,7 @@ import com.south.worker.data.bean.NewsBean;
 import com.south.worker.data.bean.PartActivityBean;
 import com.south.worker.ui.BaseFragment;
 import com.south.worker.ui.CommonWebActivity;
+import com.south.worker.ui.user_info.GlideApp;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
@@ -182,10 +183,16 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
         banner.setImageLoader(new ImageLoader() {
             @Override
             public void displayImage(Context context, Object path, ImageView imageView) {
-                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                Glide.with(context).load(path).into(imageView);
+                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                GlideApp
+                        .with(context)
+                        .load(path)
+                        .placeholder(R.drawable.banner_default)
+                        .error(R.drawable.banner_default)
+                        .into(imageView);
             }
         });
+
 
 
         //本地图片数据（资源文件）
