@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.south.worker.R;
+import com.south.worker.constant.NetConfig;
 import com.south.worker.data.bean.MyBookBean;
 import com.south.worker.data.bean.OnlineBookBean;
 import com.south.worker.data.bean.OnlineReadBean;
@@ -89,36 +90,61 @@ public class OnlineReadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
                 OnlineBookBean bookBean = bean.mOnlineBookBean;
                 ImageView ivBook = ((OnlineBookViewHolder) holder).ivBooks;
-                String url = IMAGE_PREFIXX + bookBean.BookPic;
 
-                GlideApp
-                        .with(mContext)
-                        .load(url)
-                        .placeholder(R.drawable.list_default)
-                        .error(R.drawable.list_default)
-                        .into(ivBook);
-                ivBook.setScaleType(ImageView.ScaleType.FIT_XY);
+                if(!TextUtils.isEmpty(bookBean.BookPic)){
+
+                    String picUrl = null;
+                    if (ivBook.getTag() == null) {
+                        picUrl = NetConfig.IMAGE_PREFIXX + bookBean.BookPic;
+
+                    } else {
+                        picUrl = (String) ivBook.getTag();
+                    }
+
+                    ivBook.setTag(null);
+                    GlideApp
+                            .with(mContext)
+                            .load(picUrl)
+                            .placeholder(R.drawable.list_default)
+                            .error(R.drawable.list_default)
+                            .dontAnimate()
+                            .into(ivBook);
+
+                    ivBook.setTag(picUrl);
+
+                }else{
+                    ivBook.setImageResource(R.drawable.list_default);
+                }
 
                 break;
 
             case 1:
                 MyBookBean myBookBean = bean.mMyBookBean;
                 ImageView ivMyBook = ((MyBookViewHolder) holder).ivBooks;
-                String myBookUrl = null;
-                if (TextUtils.isEmpty(myBookBean.Pic)) {
-                    myBookUrl = IMAGE_PREFIXX + "2018_06_06_14_52_0912363537590.jpg";
-                } else {
-                    myBookUrl = IMAGE_PREFIXX + myBookBean.Pic;
+                if(!TextUtils.isEmpty(myBookBean.Pic)){
+
+                    String picUrl = null;
+                    if (ivMyBook.getTag() == null) {
+                        picUrl = NetConfig.IMAGE_PREFIXX + myBookBean.Pic;
+
+                    } else {
+                        picUrl = (String) ivMyBook.getTag();
+                    }
+
+                    ivMyBook.setTag(null);
+                    GlideApp
+                            .with(mContext)
+                            .load(picUrl)
+                            .placeholder(R.drawable.list_default)
+                            .error(R.drawable.list_default)
+                            .dontAnimate()
+                            .into(ivMyBook);
+
+                    ivMyBook.setTag(picUrl);
+
+                }else{
+                    ivMyBook.setImageResource(R.drawable.list_default);
                 }
-
-                GlideApp
-                        .with(mContext)
-                        .load(myBookUrl)
-                        .placeholder(R.drawable.list_default)
-                        .error(R.drawable.list_default)
-                        .into(ivMyBook);
-
-                ivMyBook.setScaleType(ImageView.ScaleType.FIT_XY);
 
                 SpannableString s1 = new SpannableString("已读" + myBookBean.Num + "次");
                 s1.setSpan(new ForegroundColorSpan(Color.parseColor("#f53737")), 2, s1.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

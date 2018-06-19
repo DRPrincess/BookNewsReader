@@ -3,7 +3,9 @@ package com.south.worker.ui.user_info;
 import android.content.Context;
 import android.util.Log;
 
+import com.baselib.utils.SharedPreferencesUtil;
 import com.south.worker.R;
+import com.south.worker.constant.SharedPreferencesConfig;
 import com.south.worker.data.UserRepository;
 import com.south.worker.data.bean.RespondBean;
 import com.south.worker.data.bean.UserInfoBean;
@@ -49,6 +51,9 @@ public class UserInfoPresenter implements UserInfoContact.Presenter {
                     public void onNext(UserInfoBean bean) {
 
                         if(bean != null){
+                            SharedPreferencesUtil.saveData(mContext, SharedPreferencesConfig.SHARED_KEY_USER_PART_ID,bean.BranchId);
+                            SharedPreferencesUtil.saveData(mContext, SharedPreferencesConfig.SHARED_KEY_USER_NAME,bean.RealName);
+
                             bean.GenderName = bean.Gender== 0?"女":"男";
                             mView.showUserInfo(bean);
                         }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
+import android.widget.FrameLayout;
 
 /**
  *
@@ -12,21 +13,21 @@ import android.util.AttributeSet;
  *作者   ：Created by DR on 2018/6/4.
  */
 
-public class SquareImageView extends AppCompatImageView {
+public class SquareFrameLayout extends FrameLayout {
 
     private float aspectRatio = 1f;
 
-    public SquareImageView(Context context, AttributeSet attrs, int defStyle) {
+    public SquareFrameLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         applyConfig(context, attrs);
     }
 
-    public SquareImageView(Context context, AttributeSet attrs) {
+    public SquareFrameLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         applyConfig(context, attrs);
     }
 
-    public SquareImageView(Context context) {
+    public SquareFrameLayout(Context context) {
         super(context);
     }
 

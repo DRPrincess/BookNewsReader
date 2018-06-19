@@ -55,14 +55,27 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
             holder.tvNewsTitle.setText(bean.Title);
 
             if(!TextUtils.isEmpty(bean.Pic)){
-                bean.Pic = NetConfig.IMAGE_PREFIXX+bean.Pic;
+
+
+                String picUrl = null;
+
+                if (holder.ivNewsImage.getTag() == null) {
+                    picUrl = NetConfig.IMAGE_PREFIXX + bean.Pic;
+
+                } else {
+                    picUrl = (String) holder.ivNewsImage.getTag();
+                }
+
+                holder.ivNewsImage.setTag(null);
                 GlideApp
                         .with(mContext)
-                        .load(bean.Pic)
+                        .load(picUrl)
                         .placeholder(R.drawable.banner_default)
                         .error(R.drawable.banner_default)
+                        .dontAnimate()
                         .into(holder.ivNewsImage);
 
+                holder.ivNewsImage.setTag(picUrl);
 
             }else{
                 holder.ivNewsImage.setImageResource(R.drawable.banner_default);

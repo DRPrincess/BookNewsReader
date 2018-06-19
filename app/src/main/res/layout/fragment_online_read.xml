@@ -143,6 +143,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_above="@+id/layoutRankingList"
+            android:focusableInTouchMode="true"
            >
         </com.github.jdsjlzx.recyclerview.LRecyclerView>
 

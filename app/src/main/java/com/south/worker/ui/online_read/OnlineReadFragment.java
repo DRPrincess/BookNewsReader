@@ -169,7 +169,6 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
     private void initData() {
         KeyBoardUtils.closeKeybord(edtSearch, getContext());
         page = 1;
-        mDatas.clear();
         switch (type) {
             case "0":
                 mPresenter.getOnlineBook(page, pageNum, edtSearch.getText().toString());
@@ -309,7 +308,7 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
     private void solveTopList(List<OnlineReadBean> datas) {
         recyclerViewContents.refreshComplete(pageNum);
 
-        if (mDatas == null || mDatas.isEmpty()){
+        if ((datas == null || datas.isEmpty())&& page >1 ){
             recyclerViewContents.setNoMore(true);
         } else {
             if (mDatas == null) {

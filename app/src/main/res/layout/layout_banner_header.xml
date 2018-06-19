@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<com.baseres.SquareFrameLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    app:ratio="0.5">
 
     <com.youth.banner.Banner
         android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="140dp">
-
+        android:layout_height="match_parent">
     </com.youth.banner.Banner>
 
-</RelativeLayout>
+</com.baseres.SquareFrameLayout>

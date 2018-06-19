@@ -298,7 +298,7 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
 
         recyclerViewContents.refreshComplete(pageNum);
 
-        if((mDatas == null || mDatas.size() <= 0) && page>1 ){
+        if((newsBeans == null || newsBeans.size() <= 0) && page>1 ){
             recyclerViewContents.setNoMore(true);
         }else{
             if (mDatas == null) {

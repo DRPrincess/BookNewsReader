@@ -32,7 +32,7 @@ ext {
     compileSdkVersion = 26
     minSdkVersion = 17
     targetSdkVersion = 26
-    versionCode = 12
+    versionCode = 16
     versionName = "1.0.0"
     supportLibraryVersion = '27.1.1'
     junitVersion='4.2'

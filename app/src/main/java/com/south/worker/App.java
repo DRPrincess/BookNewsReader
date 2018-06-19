@@ -38,9 +38,6 @@ public class App extends Application{
 
 
 
-
-
-
     List<Activity> mActivities = new ArrayList<>();
     public void add(Activity activity) {
         if (!mActivities.contains(activity))

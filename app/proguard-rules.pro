@@ -124,3 +124,10 @@
 }
 # Ignore annotation used for build tooling.
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+
+
+#----个推混淆配置-----
+-dontwarn com.igexin.**
+-keep class com.igexin.** { *; }
+-keep class org.json.** { *; }
+-keep class com.south.worker.push.** { *; }

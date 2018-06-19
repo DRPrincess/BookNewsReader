@@ -57,16 +57,28 @@ public class MyPartAdapter extends RecyclerView.Adapter<MyPartAdapter.ViewHolder
             holder.tvContent.setText(bean.ViceTitle);
 
 
-            if (!TextUtils.isEmpty(bean.Pic)) {
-                bean.Pic = NetConfig.IMAGE_PREFIXX + bean.Pic;
+            if(!TextUtils.isEmpty(bean.Pic)){
+
+                String picUrl = null;
+                if (holder.ivImage.getTag() == null) {
+                    picUrl = NetConfig.IMAGE_PREFIXX + bean.Pic;
+
+                } else {
+                    picUrl = (String) holder.ivImage.getTag();
+                }
+
+                holder.ivImage.setTag(null);
                 GlideApp
                         .with(mContext)
-                        .load(bean.Pic)
-                        .placeholder(R.drawable.banner_default)
-                        .error(R.drawable.banner_default)
+                        .load(picUrl)
+                        .placeholder(R.drawable.list_default)
+                        .error(R.drawable.list_default)
+                        .dontAnimate()
                         .into(holder.ivImage);
 
-            } else {
+                holder.ivImage.setTag(picUrl);
+
+            }else{
                 holder.ivImage.setImageResource(R.drawable.list_default);
             }
         }
