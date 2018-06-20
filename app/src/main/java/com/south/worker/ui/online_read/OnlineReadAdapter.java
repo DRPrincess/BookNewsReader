@@ -74,6 +74,23 @@ public class OnlineReadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     }
 
+
+    @Override
+    public void onViewRecycled(@NonNull RecyclerView.ViewHolder holder) {
+
+        if (holder != null && holder instanceof OnlineBookViewHolder)
+        {
+            GlideApp.with(mContext).clear(((OnlineBookViewHolder)holder).ivBooks);
+
+        }else if (holder != null && holder instanceof MyBookViewHolder)
+        {
+            GlideApp.with(mContext).clear(((MyBookViewHolder)holder).ivBooks);
+
+        }
+        super.onViewRecycled(holder);
+
+    }
+
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 

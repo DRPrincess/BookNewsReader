@@ -63,6 +63,8 @@ public class UserInfoFragment extends BaseFragment implements UserInfoContact.Vi
     TextView tvSign;
     Unbinder unbinder;
 
+    String sign = "";
+
     UserInfoContact.Presenter mPresenter;
 
     String tempImageFilePath;
@@ -108,8 +110,7 @@ public class UserInfoFragment extends BaseFragment implements UserInfoContact.Vi
 
         switch (view.getId()) {
             case R.id.llSign:
-
-                EditActivity.startEditSign(getContext(),tvSign.getText().toString());
+                EditActivity.startEditSign(getContext(),sign);
                 break;
             case R.id.llEditInfo:
                 intent = new Intent(getActivity(),EditUserInfoActivity.class);
@@ -170,6 +171,7 @@ public class UserInfoFragment extends BaseFragment implements UserInfoContact.Vi
     @Override
     public void showUserInfo(UserInfoBean bean) {
 
+        sign = bean.Autograph;
         if(!TextUtils.isEmpty(bean.HeadPortrait)){
             String imageUrl = NetConfig.IMAGE_HEADIMG_PREFIXX + bean.HeadPortrait;
             GlideApp.with(getContext())
@@ -179,6 +181,7 @@ public class UserInfoFragment extends BaseFragment implements UserInfoContact.Vi
                     .fitCenter()
                     .into(ivHeadImg);
         }
+
         tvSign.setText(bean.Autograph);
         tvUserName.setText(bean.RealName +"  " + bean.GenderName +"  "+ bean.EducationName);
 

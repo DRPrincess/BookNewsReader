@@ -14,6 +14,6 @@ public class ReadBookTimeBean {
     public long LengthofReadingTime;
     public String Time;
     public int  Type; //1 是收藏读书 0 是大众图书
-    public int  Num;
+    public int  Num = 1;
 
 }

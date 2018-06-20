@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.south.worker.R;
 import com.south.worker.constant.NetConfig;
 import com.south.worker.data.bean.PartActivityBean;
+import com.south.worker.ui.home.HomeAdapter;
 import com.south.worker.ui.user_info.GlideApp;
 
 import java.util.List;
@@ -48,6 +49,16 @@ public class MyPartAdapter extends RecyclerView.Adapter<MyPartAdapter.ViewHolder
     }
 
     @Override
+    public void onViewRecycled(@NonNull ViewHolder holder) {
+
+        if (holder != null)
+        {
+            GlideApp.with(mContext).clear(holder.ivImage);
+        }
+        super.onViewRecycled(holder);
+    }
+
+    @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         PartActivityBean bean = mDatas.get(position);
@@ -59,15 +70,7 @@ public class MyPartAdapter extends RecyclerView.Adapter<MyPartAdapter.ViewHolder
 
             if(!TextUtils.isEmpty(bean.Pic)){
 
-                String picUrl = null;
-                if (holder.ivImage.getTag() == null) {
-                    picUrl = NetConfig.IMAGE_PREFIXX + bean.Pic;
-
-                } else {
-                    picUrl = (String) holder.ivImage.getTag();
-                }
-
-                holder.ivImage.setTag(null);
+                String picUrl = NetConfig.IMAGE_PREFIXX + bean.Pic;;
                 GlideApp
                         .with(mContext)
                         .load(picUrl)
@@ -75,8 +78,6 @@ public class MyPartAdapter extends RecyclerView.Adapter<MyPartAdapter.ViewHolder
                         .error(R.drawable.list_default)
                         .dontAnimate()
                         .into(holder.ivImage);
-
-                holder.ivImage.setTag(picUrl);
 
             }else{
                 holder.ivImage.setImageResource(R.drawable.list_default);

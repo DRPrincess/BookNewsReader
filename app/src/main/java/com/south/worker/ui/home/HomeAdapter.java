@@ -47,6 +47,17 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         return new ViewHolder(convertView);
     }
 
+
+    @Override
+    public void onViewRecycled(@NonNull ViewHolder holder) {
+
+        if (holder != null)
+        {
+            GlideApp.with(mContext).clear(holder.ivNewsImage);
+        }
+        super.onViewRecycled(holder);
+    }
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
@@ -57,16 +68,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
             if(!TextUtils.isEmpty(bean.Pic)){
 
 
-                String picUrl = null;
-
-                if (holder.ivNewsImage.getTag() == null) {
-                    picUrl = NetConfig.IMAGE_PREFIXX + bean.Pic;
-
-                } else {
-                    picUrl = (String) holder.ivNewsImage.getTag();
-                }
-
-                holder.ivNewsImage.setTag(null);
+                String picUrl =  NetConfig.IMAGE_PREFIXX + bean.Pic;
                 GlideApp
                         .with(mContext)
                         .load(picUrl)
@@ -74,8 +76,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                         .error(R.drawable.banner_default)
                         .dontAnimate()
                         .into(holder.ivNewsImage);
-
-                holder.ivNewsImage.setTag(picUrl);
 
             }else{
                 holder.ivNewsImage.setImageResource(R.drawable.banner_default);

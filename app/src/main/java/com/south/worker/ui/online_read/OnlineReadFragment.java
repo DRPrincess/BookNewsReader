@@ -398,7 +398,6 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
             bookTimeBean.BranchId = getPartId();
             bookTimeBean.LengthofReadingTime = readingTimeMinute;
             bookTimeBean.Time = TimeUtils.getCurrentDate();
-
             mPresenter.addReadBook(bookTimeBean);
 
         }

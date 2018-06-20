@@ -69,6 +69,7 @@ public class EditSignFragment extends BaseFragment {
         unbinder = ButterKnife.bind(this, rootView);
 
         edtSign.setText(text);
+        edtSign.setSelection(text.length());
 
         tvMidTitle.setText("设置签名");
 

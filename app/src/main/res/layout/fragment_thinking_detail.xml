@@ -11,39 +11,50 @@
     <include layout="@layout/title_common"/>
 
 
-    <TextView
-        android:id="@+id/tvBookName"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="书籍信息："
-        android:textColor="@color/black_primary"
-        android:textSize="@dimen/font_large"
-        android:gravity="center"/>
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
 
+            <TextView
+                android:id="@+id/tvBookName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="书籍信息："
+                android:textColor="@color/black_primary"
+                android:textSize="@dimen/font_large"/>
 
-    <TextView
-        android:id="@+id/tvConent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:gravity="start"
-        android:hint="@string/msg_please_input"
-        android:textColor="@color/black"
-        android:textSize="@dimen/font_normal"
-        />
+
+            <TextView
+                android:id="@+id/tvConent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:gravity="start"
+                android:hint="@string/msg_please_input"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_normal"
+                />
 
 
-    <ImageView
-        android:id="@+id/ivAddLike"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/icon_liked"
-        android:padding="10dp"/>
+            <ImageView
+                android:id="@+id/ivAddLike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:padding="10dp"
+                android:src="@drawable/icon_liked"/>
 
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

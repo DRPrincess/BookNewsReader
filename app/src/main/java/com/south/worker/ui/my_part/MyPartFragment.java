@@ -194,13 +194,8 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
         });
 
 
-
-        //本地图片数据（资源文件）
-        List<Integer> images = new ArrayList<>();
-        images.add(R.drawable.banner_default);
-
         //设置图片集合
-        banner.setImages(images);
+        banner.setImages(imgUrls);
 
         //设置轮播图片间隔时间（单位毫秒，默认为2000）
         banner.setDelayTime(3000);
@@ -209,6 +204,11 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
         banner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
+
+                if(mBannerBeans == null || mBannerBeans.size() <=position){
+                    return;
+                }
+
                 BannerBean bannerBean = mBannerBeans.get(position);
 
                 if(bannerBean != null){
