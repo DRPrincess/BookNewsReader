@@ -25,6 +25,9 @@ import android.widget.Toast;
 import com.baselib.utils.LogUtils;
 import com.south.worker.R;
 import com.south.worker.constant.IntentConfig;
+import com.south.worker.data.NewsReposity;
+import com.south.worker.data.bean.NewUrlBean;
+import com.south.worker.data.network.LoadingSubscriber;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +44,7 @@ public class CommonWebActivity extends BaseActivity {
     public static final String URL = "url";
     public static final String TITLE = "title";
     public static final String Content = "content";
+    public static final String NEWSID = "news_id";
     Context mContext;
     @BindView(R.id.ivBack)
     ImageView ivBack;
@@ -64,6 +68,8 @@ public class CommonWebActivity extends BaseActivity {
     private String url;
     private String title;
     private String content;
+    private int newsId = -1;
+
 
     public static void startUrlWebActivity(Context context, String title, String url) {
         Intent intent = new Intent();
@@ -73,6 +79,12 @@ public class CommonWebActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
+    public static void startWebActivity(Context context, int newsId) {
+        Intent intent = new Intent();
+        intent.putExtra(CommonWebActivity.NEWSID, newsId);
+        intent.setClass(context, CommonWebActivity.class);
+        context.startActivity(intent);
+    }
 
     public static void startWebActivity(Context context, String title, String Content) {
         Intent intent = new Intent();
@@ -92,15 +104,21 @@ public class CommonWebActivity extends BaseActivity {
         url = getIntent().getStringExtra(URL);
         title = getIntent().getStringExtra(TITLE);
         content = getIntent().getStringExtra(Content);
+        newsId = getIntent().getIntExtra(NEWSID,-1);
 
         //初始化View
         initView();
 
-        //进度条初始化
-        initProgressBar();
+        if(newsId >-1){
+            getNewsUrl(newsId);
+        }else{
+            //进度条初始化
+            initProgressBar();
+            //webview初始化
+            initWebView();
+        }
 
-        //webview初始化
-        initWebView();
+
 
     }
 
@@ -119,16 +137,10 @@ public class CommonWebActivity extends BaseActivity {
     }
 
     private void initView() {
-        if ( TextUtils.isEmpty(url) && TextUtils.isEmpty(content) ) {
-            Toast.makeText(mContext, "数据异常，请稍后再试", Toast.LENGTH_SHORT).show();
-            finish();
-        }
-        tvTitle.setText(title);
+        tvTitle.setText(TextUtils.isEmpty(title)?"标题正在加载":title);
+
         webview.setVisibility(View.VISIBLE);
         llRetry.setVisibility(View.GONE);
-
-        LogUtils.d("url->" + url);
-
 
     }
 
@@ -138,13 +150,24 @@ public class CommonWebActivity extends BaseActivity {
     }
 
     private void initWebView() {
-
+        if ( TextUtils.isEmpty(url) && TextUtils.isEmpty(content) ) {
+            Toast.makeText(mContext, "数据异常，请稍后再试", Toast.LENGTH_SHORT).show();
+            finish();
+        }
 
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setAllowFileAccess(true);
         webview.getSettings().setPluginState(WebSettings.PluginState.ON);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setDomStorageEnabled(true);
+        webview.getSettings().setDefaultTextEncodingName("UTF-8") ;
+        //控制webView不要出现横向滚动条
+        webview.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webview.getSettings().setBuiltInZoomControls(false); // 设置显示缩放按钮
+        webview.getSettings().setSupportZoom(false); // 支持缩放
+        webview.setVerticalScrollBarEnabled(false);
+        webview.setHorizontalScrollBarEnabled(false);
+
         webview.setWebViewClient(new WebViewClient() {
 
             @Override
@@ -211,12 +234,41 @@ public class CommonWebActivity extends BaseActivity {
             webview.loadUrl(url);
         }
 
+
         if(!TextUtils.isEmpty(content)){
-            webview.loadData(content, "text/html; charset=UTF-8", null);
-//            webview.loadData(content,"text/html","utf-8");
+
+
+
+
+            String css = "<style type=\"text/css\"> img {" +
+                    "width:100%;" +//限定图片宽度填充屏幕
+                    "height:auto;" +//限定图片高度自动
+                    "}" +
+                    "body {" +
+                    "word-wrap:break-word;"+//允许自动换行(汉字网页应该不需要这一属性,这个用来强制英文单词换行,类似于word/wps中的西文换行)
+                    "}" +
+                    "</style>";
+
+
+
+            String str1 = "<!DOCTYPE html>\n" +
+                    "<html>\n" +
+                    "\t<head>\n" +
+                    "\t\t<meta charset=\"utf-8\">\n" + "<style>img{max-width:360px !important;}</style>" +
+                    "\t\t<meta name=\"viewport\" content=\"width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1, user-scalable=no\"></head><body>\n";
+            String str2 = "</body><html>";
+
+
+            String html = "<html><header>" + css + "</header>" + content + "</html>";
+
+            StringBuffer str = new StringBuffer();
+            str.append(str1)
+                    .append(content)
+                    .append(str2);
+            webview.loadDataWithBaseURL(null,html, "text/html",  "utf-8", null);
+//            webview.loadData(str.toString(), "text/html; charset=UTF-8", null);
+
         }
-
-
 
 
     }
@@ -263,5 +315,37 @@ public class CommonWebActivity extends BaseActivity {
                 webview.reload();
                 break;
         }
+    }
+
+
+    /**
+     * 通过新闻ID获取新闻内容
+     * @param newsId
+     */
+    public void getNewsUrl(final int newsId) {
+        NewsReposity.getInstance()
+                .getNewsUrl(newsId)
+                .subscribe(new LoadingSubscriber<NewUrlBean>(mContext,mContext.getString(R.string.msg_loading),false) {
+
+                    @Override
+                    public void onNext(NewUrlBean bean) {
+
+                        content = bean.Content;
+                        title = bean.Title;
+                        tvTitle.setText(title);
+                        //进度条初始化
+                        initProgressBar();
+                        //webview初始化
+                        initWebView();
+
+                    }
+                    @Override
+                    public void onSubscriberError(String errorMsg)
+                    {
+                        Toast.makeText(mContext, "errorMsg", Toast.LENGTH_SHORT).show();
+                    }
+
+
+                });
     }
 }

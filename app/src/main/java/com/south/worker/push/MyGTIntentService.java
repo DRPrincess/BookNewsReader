@@ -65,6 +65,13 @@ public class MyGTIntentService extends GTIntentService {
 
         if(ApplicationUtils.isAppAlive(context,getPackageName())){
 
+            Intent intent = new Intent();
+            intent.putExtra(CommonWebActivity.NEWSID,Integer.valueOf(message));
+            intent.setClass(context, CommonWebActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+            /*
             NewsReposity.getInstance()
                     .getNewsUrl(Integer.valueOf(message))
                     .subscribe(new Observer<NewUrlBean>() {
@@ -96,6 +103,7 @@ public class MyGTIntentService extends GTIntentService {
 
                         }
                     });
+                    */
 
         }else{
             Intent launchIntent = context.getPackageManager().

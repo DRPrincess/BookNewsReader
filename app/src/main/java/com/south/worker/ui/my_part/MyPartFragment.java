@@ -211,9 +211,10 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
 
                 BannerBean bannerBean = mBannerBeans.get(position);
 
-                if(bannerBean != null){
-                    mPresenter.getNewsUrl(bannerBean.NewsId);
-                }
+                CommonWebActivity.startWebActivity(getActivity(),bannerBean.NewsId);
+//                if(bannerBean != null){
+//                    mPresenter.getNewsUrl(bannerBean.NewsId);
+//                }
 
             }
         });
@@ -268,7 +269,10 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
                 if(bean == null){
                     return;
                 }
-                mPresenter.getNewsUrl(bean.Id);
+
+//                mPresenter.getNewsUrl(bean.Id);
+
+                CommonWebActivity.startWebActivity(getActivity(),bean.Id);
             }
         });
 
