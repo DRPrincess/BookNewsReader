@@ -110,15 +110,7 @@ public class OnlineReadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
                 if(!TextUtils.isEmpty(bookBean.BookPic)){
 
-                    String picUrl = null;
-                    if (ivBook.getTag() == null) {
-                        picUrl = NetConfig.IMAGE_PREFIXX + bookBean.BookPic;
-
-                    } else {
-                        picUrl = (String) ivBook.getTag();
-                    }
-
-                    ivBook.setTag(null);
+                    String picUrl = NetConfig.IMAGE_PREFIXX + bookBean.BookPic;
                     GlideApp
                             .with(mContext)
                             .load(picUrl)
@@ -126,8 +118,6 @@ public class OnlineReadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                             .error(R.drawable.list_default)
                             .dontAnimate()
                             .into(ivBook);
-
-                    ivBook.setTag(picUrl);
 
                 }else{
                     ivBook.setImageResource(R.drawable.list_default);
@@ -139,16 +129,7 @@ public class OnlineReadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 MyBookBean myBookBean = bean.mMyBookBean;
                 ImageView ivMyBook = ((MyBookViewHolder) holder).ivBooks;
                 if(!TextUtils.isEmpty(myBookBean.Pic)){
-
-                    String picUrl = null;
-                    if (ivMyBook.getTag() == null) {
-                        picUrl = NetConfig.IMAGE_PREFIXX + myBookBean.Pic;
-
-                    } else {
-                        picUrl = (String) ivMyBook.getTag();
-                    }
-
-                    ivMyBook.setTag(null);
+                    String picUrl = NetConfig.IMAGE_PREFIXX + myBookBean.Pic;
                     GlideApp
                             .with(mContext)
                             .load(picUrl)
@@ -157,7 +138,6 @@ public class OnlineReadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                             .dontAnimate()
                             .into(ivMyBook);
 
-                    ivMyBook.setTag(picUrl);
 
                 }else{
                     ivMyBook.setImageResource(R.drawable.list_default);

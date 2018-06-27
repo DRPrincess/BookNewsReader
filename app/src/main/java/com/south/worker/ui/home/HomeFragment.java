@@ -30,6 +30,7 @@ import com.south.worker.R;
 import com.south.worker.constant.IntentConfig;
 import com.south.worker.data.bean.BannerBean;
 import com.south.worker.data.bean.NewsBean;
+import com.south.worker.data.bean.PartActivityBean;
 import com.south.worker.ui.BaseFragment;
 import com.south.worker.ui.CommonWebActivity;
 import com.south.worker.ui.user_info.GlideApp;
@@ -157,6 +158,15 @@ public class HomeFragment extends BaseFragment implements HomeContact.View {
                         break;
 
                 }
+
+                if(mDatas != null){
+                    mDatas.clear();
+                    if(mAdapter != null){
+                        mAdapter.notifyDataSetChanged();
+                    }
+                }
+
+
 
                 recyclerViewContents.scrollToPosition(0);
                 recyclerViewContents.forceToRefresh();
@@ -367,6 +377,11 @@ public class HomeFragment extends BaseFragment implements HomeContact.View {
         }
 
 
+    }
+
+    @Override
+    public void noData() {
+        showData(new ArrayList<NewsBean>());
     }
 
 }

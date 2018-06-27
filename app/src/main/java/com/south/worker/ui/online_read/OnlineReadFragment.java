@@ -191,6 +191,15 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
 
 
     private void switchTopListView(){
+
+        if(mDatas != null){
+            mDatas.clear();
+            if(mAdapter != null){
+                mAdapter.notifyDataSetChanged();
+            }
+        }
+
+
         switch (type) {
             case "0":
                 recyclerViewContents.setLayoutManager(new GridLayoutManager(getContext(), 4));

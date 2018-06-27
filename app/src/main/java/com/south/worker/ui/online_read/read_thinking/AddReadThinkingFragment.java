@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.baselib.utils.ActivityUtils;
+import com.baselib.utils.KeyBoardUtils;
 import com.south.worker.R;
 import com.south.worker.data.BookReposity;
 import com.south.worker.data.bean.ReadThinkingBean;
@@ -84,10 +85,11 @@ public class AddReadThinkingFragment extends BaseFragment{
                 getActivity().onBackPressed();
                 break;
             case R.id.btnSubmit:
+                KeyBoardUtils.closeKeybord(edtContent,getContext());
                 addReadThinking();
                 break;
             case R.id.lladdBook:
-
+                KeyBoardUtils.closeKeybord(edtContent,getContext());
                 AllBookFragment fragment = AllBookFragment.newInstance();
                 OnlineReadPresenter presenter = new OnlineReadPresenter(getContext(),fragment);
                 fragment.setPresenter(presenter);

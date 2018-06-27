@@ -51,6 +51,7 @@ public class MyPartPresenter implements MyPartContact.Presenter {
                     @Override
                     public void onSubscriberError(String errorMsg) {
                         mView.showToast(errorMsg);
+                        mView.noData();
                     }
 
                 });
@@ -75,6 +76,7 @@ public class MyPartPresenter implements MyPartContact.Presenter {
                     @Override
                     public void onSubscriberError(String errorMsg) {
                         mView.showToast(errorMsg);
+
                     }
 
 
@@ -104,6 +106,7 @@ public class MyPartPresenter implements MyPartContact.Presenter {
                     @Override
                     public void onSubscriberError(String errorMsg) {
                         mView.showToast(errorMsg);
+                        mView.noData();
                     }
 
                 });

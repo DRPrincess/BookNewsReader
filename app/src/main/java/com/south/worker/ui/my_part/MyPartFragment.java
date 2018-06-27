@@ -133,6 +133,13 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
 
                 }
 
+                if(mDatas != null){
+                    mDatas.clear();
+                    if(mAdapter != null){
+                        mAdapter.notifyDataSetChanged();
+                    }
+                }
+
                 recyclerViewContents.scrollToPosition(0);
                 recyclerViewContents.forceToRefresh();
             }
@@ -343,5 +350,10 @@ public class MyPartFragment extends BaseFragment implements MyPartContact.View {
         }
 
 
+    }
+
+    @Override
+    public void noData() {
+        showData(new ArrayList<PartActivityBean>());
     }
 }

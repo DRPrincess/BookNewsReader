@@ -52,6 +52,7 @@ public class HomePresenter implements HomeContact.Presenter {
                     @Override
                     public void onSubscriberError(String errorMsg) {
                         mView.showToast(errorMsg);
+                        mView.noData();
                     }
 
 
@@ -106,6 +107,7 @@ public class HomePresenter implements HomeContact.Presenter {
                     @Override
                     public void onSubscriberError(String errorMsg) {
                         mView.showToast(errorMsg);
+                        mView.noData();
                     }
 
                 });

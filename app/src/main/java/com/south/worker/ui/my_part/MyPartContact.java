@@ -23,10 +23,13 @@ public class MyPartContact {
         void getNewsUrl(int newsId);
         void getBanner(int partId);
 
+
     }
     static interface View extends BaseView<Presenter> {
 
         void showData(List<PartActivityBean> newsBeans);
         void startWebActivity(String title,String url);
-        void showBanner(List<String> imageUrl,List<BannerBean> bannerBeans);    }
+        void showBanner(List<String> imageUrl,List<BannerBean> bannerBeans);
+        void noData();
+    }
 }

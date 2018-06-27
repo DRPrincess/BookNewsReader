@@ -13,6 +13,7 @@ import com.baseres.SquareImageView;
 import com.bumptech.glide.Glide;
 import com.south.worker.R;
 import com.south.worker.data.bean.OnlineBookBean;
+import com.south.worker.ui.home.HomeAdapter;
 import com.south.worker.ui.user_info.GlideApp;
 
 import java.util.List;
@@ -37,6 +38,16 @@ public class AllBookAdapter extends RecyclerView.Adapter<AllBookAdapter.ViewHold
     public AllBookAdapter(Context context, List<OnlineBookBean> datas) {
         mContext = context;
         mDatas = datas;
+    }
+
+    @Override
+    public void onViewRecycled(@NonNull ViewHolder holder) {
+
+        if (holder != null)
+        {
+            GlideApp.with(mContext).clear(holder.ivBooks);
+        }
+        super.onViewRecycled(holder);
     }
 
     @NonNull
