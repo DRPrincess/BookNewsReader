@@ -11,7 +11,10 @@ package com.south.worker.constant;
 public class NetConfig {
 
 
-    public static String BASE_URL = "http://47.94.11.200:8081/";
+//    public static String BASE_URL = "http://47.94.11.200:8081/";
+
+    public static String BASE_URL = "http://ruiyuanxinxi.com:8090/";
+
 
     //服务区图片访问前缀
     public static final String IMAGE_PREFIXX= BASE_URL+"Content/素材文件/";
