@@ -144,7 +144,7 @@ public class EditUserInfoFragment extends BaseFragment  implements EditUserInfoC
                 tvBirth.setText(text);
                 mPresenter.setBirthTime(text);
             }
-        }).setRange(1999, Calendar.getInstance().get(Calendar.YEAR)).setType(TimePickerView.Type.YEAR_MONTH_DAY).build();
+        }).setRange(1900, Calendar.getInstance().get(Calendar.YEAR)).setType(TimePickerView.Type.YEAR_MONTH_DAY).build();
 
 
         intoPartPickerView = new TimePickerView.Builder(getContext(), new TimePickerView.OnTimeSelectListener() {
@@ -154,7 +154,7 @@ public class EditUserInfoFragment extends BaseFragment  implements EditUserInfoC
                 tvIntoPart.setText(text);
                 mPresenter.setIntoPartTime(text);
             }
-        }).setRange(1999, Calendar.getInstance().get(Calendar.YEAR)).setType(TimePickerView.Type.YEAR_MONTH_DAY).build();
+        }).setRange(1900, Calendar.getInstance().get(Calendar.YEAR)).setType(TimePickerView.Type.YEAR_MONTH_DAY).build();
 
 
 
