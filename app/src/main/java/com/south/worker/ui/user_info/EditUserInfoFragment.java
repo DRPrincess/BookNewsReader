@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.baselib.utils.LogUtils;
 import com.baselib.utils.TimeUtils;
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
@@ -32,6 +34,7 @@ import com.south.worker.ui.BaseFragment;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -51,7 +54,7 @@ import permissions.dispatcher.RuntimePermissions;
  */
 
 @RuntimePermissions
-public class EditUserInfoFragment extends BaseFragment  implements EditUserInfoContact.View{
+public class EditUserInfoFragment extends BaseFragment implements EditUserInfoContact.View {
 
     public static final int REQUEST_CODE_START_CAMERA = 0x01;
     private static final int REQUEST_CODE_FORM_PICK = 0x02;
@@ -140,24 +143,30 @@ public class EditUserInfoFragment extends BaseFragment  implements EditUserInfoC
         birthPickerView = new TimePickerView.Builder(getContext(), new TimePickerView.OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
-                String text = (date.getYear() + 1900) + "-" + (date.getMonth() + 1)+ "-" + (date.getDay());
-                tvBirth.setText(text);
-                mPresenter.setBirthTime(text);
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String dateStr = sdf.format(date);
+                tvBirth.setText(dateStr);
+                mPresenter.setBirthTime(dateStr);
             }
-        }).setRange(1900, Calendar.getInstance().get(Calendar.YEAR)).setType(TimePickerView.Type.YEAR_MONTH_DAY).build();
+        })
+                .setRange(1900, Calendar.getInstance().get(Calendar.YEAR))
+                .setType(TimePickerView.Type.YEAR_MONTH_DAY)
+                .build();
 
 
         intoPartPickerView = new TimePickerView.Builder(getContext(), new TimePickerView.OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
-                String text = (date.getYear() + 1900) + "-" + (date.getMonth() + 1)+ "-" + (date.getDay());
-                tvIntoPart.setText(text);
-                mPresenter.setIntoPartTime(text);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String dateStr = sdf.format(date);
+                tvIntoPart.setText(dateStr);
+
+                mPresenter.setIntoPartTime(dateStr);
             }
-        }).setRange(1900, Calendar.getInstance().get(Calendar.YEAR)).setType(TimePickerView.Type.YEAR_MONTH_DAY).build();
-
-
-
+        })
+                .setRange(1900, Calendar.getInstance().get(Calendar.YEAR))
+                .setType(TimePickerView.Type.YEAR_MONTH_DAY).build();
 
 
         return rootView;
@@ -177,30 +186,30 @@ public class EditUserInfoFragment extends BaseFragment  implements EditUserInfoC
                 break;
             case R.id.layoutGender:
 
-                if(genderPickerView != null){
+                if (genderPickerView != null) {
                     genderPickerView.show();
                 }
                 break;
             case R.id.layoutBirth:
 
-                if(birthPickerView != null){
+                if (birthPickerView != null) {
                     birthPickerView.show();
                 }
                 break;
             case R.id.layoutIntoPart:
-                if(intoPartPickerView != null){
+                if (intoPartPickerView != null) {
                     intoPartPickerView.show();
                 }
 
                 break;
             case R.id.layoutEducation:
-                if(educationPickerView != null){
+                if (educationPickerView != null) {
                     educationPickerView.show();
                 }
 
                 break;
             case R.id.btnSubmit:
-               mPresenter.editUserInfo(getUserId(),getPartId());
+                mPresenter.editUserInfo(getUserId(), getPartId());
                 break;
             case R.id.ivHeadImg:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -243,7 +252,7 @@ public class EditUserInfoFragment extends BaseFragment  implements EditUserInfoC
     @Override
     public void showUserInfo(UserInfoBean bean) {
 
-        if(!TextUtils.isEmpty(bean.HeadPortrait)){
+        if (!TextUtils.isEmpty(bean.HeadPortrait)) {
 
             String imageUrl = NetConfig.IMAGE_HEADIMG_PREFIXX + bean.HeadPortrait;
             GlideApp.with(getContext())
@@ -268,14 +277,12 @@ public class EditUserInfoFragment extends BaseFragment  implements EditUserInfoC
     public void showEducationList(final List<String> educationNames, final List<Integer> educationIds) {
         educationPickerView = new OptionsPickerView.Builder(getContext(), new OptionsPickerView.OnOptionsSelectListener() {
             @Override
-            public void onOptionsSelect(int options1, int option2, int options3 ,View v) {
+            public void onOptionsSelect(int options1, int option2, int options3, View v) {
                 tvEducation.setText(educationNames.get(options1));
                 mPresenter.setEducation(educationIds.get(options1));
             }
         }).build();
         educationPickerView.setPicker(educationNames);
-
-
 
 
     }

@@ -84,7 +84,7 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
     OnlineReadContact.Presenter mPresenter;
 
     int page;
-    int pageNum = 10;
+    int pageNum = 30;
     String type;
 
     LRecyclerViewAdapter mAdapter;
@@ -155,6 +155,8 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
                 switchTopListView();
                 recyclerViewContents.forceToRefresh();
 
+
+
             }
         });
 
@@ -203,24 +205,20 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
         switch (type) {
             case "0":
                 recyclerViewContents.setLayoutManager(new GridLayoutManager(getContext(), 4));
-                recyclerViewContents.setAdapter(mAdapter);
-                recyclerViewContents.setPullRefreshEnabled(true);
-                recyclerViewContents.setLoadMoreEnabled(true);
                 break;
             case "1":
                 recyclerViewContents.setLayoutManager(new GridLayoutManager(getContext(), 2));
-                recyclerViewContents.setAdapter(mAdapter);
-                recyclerViewContents.setPullRefreshEnabled(true);
-                recyclerViewContents.setLoadMoreEnabled(true);
                 break;
-
             case "2":
                 recyclerViewContents.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-                recyclerViewContents.setAdapter(mAdapter);
-                recyclerViewContents.setPullRefreshEnabled(true);
-                recyclerViewContents.setLoadMoreEnabled(true);
+
                 break;
         }
+
+
+        recyclerViewContents.setAdapter(mAdapter);
+        recyclerViewContents.setPullRefreshEnabled(true);
+        recyclerViewContents.setLoadMoreEnabled(true);
 
 
 
@@ -235,8 +233,9 @@ public class OnlineReadFragment extends BaseFragment implements OnlineReadContac
         mAdapter = new LRecyclerViewAdapter(myPartAdapter);
         recyclerViewContents.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerViewContents.setAdapter(mAdapter);
-        recyclerViewContents.setPullRefreshEnabled(false);
-        recyclerViewContents.setLoadMoreEnabled(false);
+        recyclerViewContents.setPullRefreshEnabled(true);
+        recyclerViewContents.setLoadMoreEnabled(true);
+
         //设置底部加载文字提示
         recyclerViewContents.setFooterViewHint("拼命加载中", "已经全部为你呈现了", "网络不给力啊，点击再试一次吧");
         //设置底部加载颜色

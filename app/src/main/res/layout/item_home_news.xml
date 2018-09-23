@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_marginTop="3dp"
+    android:layout_marginTop="10dp"
     >
     
     <com.baseres.SquareImageView
@@ -23,13 +23,14 @@
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:background="@color/black_transpart"
-        android:textSize="@dimen/font_small"
+        android:textSize="@dimen/font_normal"
         android:textColor="@color/white"
         android:ellipsize="end"
         android:maxLines="2"
         android:padding="3dp"
         tools:text="4月27日，中央和国家机关工委召开中央和国家机关各单位机关党
-委主要负责人会议，学习贯彻习近平总书记关于深化党和国家机……"/>
+委主要负责人会议，学习贯彻习近平总书记关于深化党和国家机……"
+        android:gravity="center_vertical"/>
 
 
 

@@ -1,6 +1,5 @@
 package com.south.worker.ui.online_read;
 
-import com.south.worker.data.bean.PartActivityBean;
 import com.south.worker.data.bean.ReadRankingBean;
 import com.south.worker.ui.BasePresenter;
 import com.south.worker.ui.BaseView;
@@ -28,6 +27,6 @@ public class RankingListContact {
 
         void showData(List<ReadRankingBean> readRankingBeans);
 
-        void showRank(String score,int num);
+        void showRank(String score, int num, String userName);
     }
 }

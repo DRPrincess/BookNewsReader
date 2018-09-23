@@ -4,12 +4,9 @@ import android.content.Context;
 
 import com.south.worker.R;
 import com.south.worker.data.BookReposity;
-import com.south.worker.data.bean.MyBookBean;
-import com.south.worker.data.bean.OnlineReadBean;
 import com.south.worker.data.bean.ReadRankingBean;
 import com.south.worker.data.network.LoadingSubscriber;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,7 +29,7 @@ public class RankingListPresenter  implements RankingListContact.Presenter{
     public void getData(int type, int period) {
 
         if(type == 0){
-            getPeopleReadRankList(type);
+            getPeopleReadRankList(period);
         }else if(type  == 1) {
             getPartReadRankList(period);
         }
@@ -49,7 +46,7 @@ public class RankingListPresenter  implements RankingListContact.Presenter{
                     @Override
                     public void onNext(ReadRankingBean bean) {
                         if (bean != null){
-                            mView.showRank(bean.readTime,bean.Num);
+                            mView.showRank(bean.readTime,bean.Num ,bean.userName);
                         }
                     }
                     @Override
@@ -70,7 +67,7 @@ public class RankingListPresenter  implements RankingListContact.Presenter{
                     public void onNext(ReadRankingBean bean) {
 
                         if (bean != null){
-                            mView.showRank(bean.readTime,bean.Num);
+                            mView.showRank(bean.readTime,bean.Num, bean.userName);
                         }
 
                     }

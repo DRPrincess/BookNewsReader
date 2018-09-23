@@ -1,6 +1,5 @@
 package com.south.worker.ui.online_read;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,8 +13,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.baselib.utils.SharedPreferencesUtil;
 import com.baseres.ScrollListView;
 import com.south.worker.R;
+import com.south.worker.constant.SharedPreferencesConfig;
 import com.south.worker.data.bean.ReadRankingBean;
 import com.south.worker.ui.BaseFragment;
 
@@ -49,6 +50,8 @@ public class RankingListFragment extends BaseFragment  implements RankingListCon
     TextView tvScore;
     @BindView(R.id.tvTime)
     TextView tvTime;
+    @BindView(R.id.tvUserName)
+    TextView tvUserName;
     @BindView(R.id.lvRank)
     ScrollListView lvRank;
     @BindView(R.id.rbtnWeekly)
@@ -108,6 +111,7 @@ public class RankingListFragment extends BaseFragment  implements RankingListCon
         tvMidTitle.setText(R.string.ranking_list_title);
         tvScore.setText("暂无数据");
         tvTime.setText("暂无数据");
+        tvUserName.setText(SharedPreferencesUtil.getString(getContext(),SharedPreferencesConfig.SHARED_KEY_USER_NAME,""));
 
 
 
@@ -187,11 +191,12 @@ public class RankingListFragment extends BaseFragment  implements RankingListCon
     }
 
     @Override
-    public void showRank(String score, int num) {
+    public void showRank(String score, int num, String userName) {
         SpannableString s1 = new SpannableString(score+"分钟");
 
         s1.setSpan(new AbsoluteSizeSpan(19, true), 0, s1.length()-2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
+        tvUserName.setText(userName);
         tvScore.setText(String.format("第%s名",String.valueOf(num)));
         tvTime.setText(s1);
     }

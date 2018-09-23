@@ -54,7 +54,6 @@ public class OnlineReadPresenter implements OnlineReadContact.Presenter {
                     @Override
                     public void onNext(List<OnlineBookBean> bookBeans) {
 
-
                         if(mAllBookView != null){
                             mAllBookView.showOnlineBookList(bookBeans);
                             return;
